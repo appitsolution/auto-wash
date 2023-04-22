@@ -1,50 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import footerMenu from "../assets/icons/footer-menu-sprite.svg";
+import Icon from "./hooks/Icon";
 
-const Footer = () => {
+const Footer = ({ current = "" }) => {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__block">
           <ul className="footer__menu">
             <li className="footer__menu-item">
-              <Link to="/" className="footer__menu-link active">
-                <svg className="footer__menu-link-icon">
-                  <use href={`${footerMenu}#house`}></use>
-                </svg>
+              <Link
+                to="/"
+                className={`footer__menu-link ${
+                  current === "home" ? "active" : ""
+                }`}
+              >
+                <Icon id="house" />
                 <p className="footer__menu-link-title">Головна</p>
               </Link>
             </li>
             <li className="footer__menu-item">
-              <a className="footer__menu-link " href="hoem">
-                <svg className="footer__menu-link-icon">
-                  <use href={`${footerMenu}#dis`}></use>
-                </svg>
+              <Link
+                to="/promotions"
+                className={`footer__menu-link ${
+                  current === "promotions" ? "active" : ""
+                }`}
+              >
+                <Icon id="dis" />
                 <p className="footer__menu-link-title">Акції</p>
-              </a>
+              </Link>
             </li>
             <li className="footer__menu-item">
-              <a className="footer__menu-link" href="hoem">
-                <svg className="footer__menu-link-icon">
-                  <use href={`${footerMenu}#car`}></use>
-                </svg>
+              <Link
+                to="/wash"
+                className={`footer__menu-link ${
+                  current === "wash" ? "active" : ""
+                }`}
+              >
+                <Icon id="car" />
                 <p className="footer__menu-link-title">Мийки</p>
-              </a>
+              </Link>
             </li>
             <li className="footer__menu-item">
               <a className="footer__menu-link" href="hoem">
-                <svg className="footer__menu-link-icon">
-                  <use href={`${footerMenu}#history`}></use>
-                </svg>
+                <Icon id="history" />
                 <p className="footer__menu-link-title">Історія</p>
               </a>
             </li>
             <li className="footer__menu-item">
               <a className="footer__menu-link" href="hoem">
-                <svg className="footer__menu-link-icon">
-                  <use href={`${footerMenu}#human`}></use>
-                </svg>
+                <Icon id="human" />
                 <p className="footer__menu-link-title">Профіль</p>
               </a>
             </li>

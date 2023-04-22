@@ -1,14 +1,16 @@
 import React from "react";
 import Footer from "../components/Footer";
 import OnlyMobile from "../components/OnlyMobile";
+import Page from "../components/Promotions/Page";
 
-const Home = () => {
+const Promotions = () => {
   return (
     <>
-      <Footer current="home" />
+      <Page />
+      <Footer current="promotions" />
       <OnlyMobile />
     </>
   );
 };
 
-export default Home;
+export default Promotions;
