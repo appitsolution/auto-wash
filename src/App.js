@@ -9,6 +9,9 @@ import WashItem from "./pages/wash-item";
 import HistoryOrder from "./pages/history-order";
 import Profile from "./pages/profile";
 import ProfileSettings from "./pages/profile-settings";
+import ProfileSupport from "./pages/profile-support";
+import ProfileQuestions from "./pages/profile-questions";
+import ProfileQuestionsItem from "./pages/profile-questions-item";
 
 const App = () => {
   return (
@@ -22,6 +25,9 @@ const App = () => {
       <Route path="/history-order" element={<HistoryOrder />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/settings" element={<ProfileSettings />} />
+      <Route path="/profile/support" element={<ProfileSupport />} />
+      <Route path="/profile/questions/:id" element={<ProfileQuestionsItem />} />
+      <Route path="/profile/questions" element={<ProfileQuestions />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

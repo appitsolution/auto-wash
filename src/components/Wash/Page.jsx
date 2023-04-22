@@ -42,7 +42,6 @@ const dataTest = [
   },
 ];
 
-console.dir(dataTest);
 const Page = () => {
   return (
     <section className="wash">

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import deleteProfile from "../../assets/profile/delete-profile.svg";
 import outProfile from "../../assets/profile/out-profile.svg";
 import back from "../../assets/profile/back.svg";
-import { Link } from "react-router-dom";
 
 const Settings = () => {
   const [outActive, setOutActive] = useState(false);

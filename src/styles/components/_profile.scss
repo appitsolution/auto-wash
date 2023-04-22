@@ -292,3 +292,183 @@
         }
     }
 }
+
+.profile__support {
+    padding: 22px 0;
+
+    &-title {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 35px;
+    }
+
+    &-back {
+        position: fixed;
+        top: 22px;
+        left: 22px;
+        width: 20px;
+        height: 20px;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        &-numbers {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 11px 20px;
+            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.35));
+
+            &-title {
+                font-family: "Montserrat";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+
+                color: #000000;
+                margin-bottom: 19px;
+            }
+
+            &-block {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                &-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &-number {
+                        font-family: "Montserrat";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 20px;
+                        line-height: 24px;
+
+                        color: #000000;
+                        padding: 10px;
+                        background: #dddddd;
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+
+        &-social {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 30px;
+            padding-right: 10px;
+            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.35));
+            background: #ffffff;
+            border-radius: 15px;
+
+            &-text {
+                font-family: "Montserrat";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 25px;
+                line-height: 30px;
+                display: flex;
+                align-items: center;
+
+                color: #000000;
+            }
+        }
+    }
+}
+
+.profile__questions {
+    padding: 22px 0;
+
+    &-title {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 35px;
+    }
+
+    &-back {
+        position: fixed;
+        top: 22px;
+        left: 22px;
+        width: 20px;
+        height: 20px;
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        &-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1px 10px 1px 15px;
+            background: #ffffff;
+            border-radius: 15px;
+            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.35));
+
+            &-content {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                max-width: 190px;
+
+                &-title {
+                    font-family: "Montserrat";
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 24px;
+                    display: flex;
+                    align-items: center;
+
+                    color: #000000;
+                }
+
+                &-desc {
+                    font-family: "Montserrat";
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 15px;
+                    line-height: 18px;
+                    display: flex;
+                    align-items: center;
+
+                    color: rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+    }
+
+    &-item {
+        padding: 80px 0;
+
+        &-description {
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+
+            color: #ffffff;
+            margin-top: 25px;
+        }
+    }
+}
