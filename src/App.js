@@ -6,6 +6,9 @@ import PromotionsItem from "./pages/promotions-item";
 import NotFound from "./pages/404";
 import Wash from "./pages/wash";
 import WashItem from "./pages/wash-item";
+import HistoryOrder from "./pages/history-order";
+import Profile from "./pages/profile";
+import ProfileSettings from "./pages/profile-settings";
 
 const App = () => {
   return (
@@ -16,6 +19,9 @@ const App = () => {
       <Route path="/promotions" element={<Promotions />} />
       <Route path="/wash/:id" element={<WashItem />} />
       <Route path="/wash" element={<Wash />} />
+      <Route path="/history-order" element={<HistoryOrder />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/settings" element={<ProfileSettings />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import slide1 from "../../assets/wash/sliders/1.png";
-import slide2 from "../../assets/wash/sliders/2.png";
-import slide3 from "../../assets/wash/sliders/3.png";
 import washIconRoad from "../../assets/wash/wash-item-icon.png";
 import backIcon from "../../assets/wash/back.svg";
 

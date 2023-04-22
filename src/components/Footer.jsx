@@ -42,16 +42,26 @@ const Footer = ({ current = "" }) => {
               </Link>
             </li>
             <li className="footer__menu-item">
-              <a className="footer__menu-link" href="hoem">
+              <Link
+                to="/history-order"
+                className={`footer__menu-link ${
+                  current === "history" ? "active" : ""
+                }`}
+              >
                 <Icon id="history" />
                 <p className="footer__menu-link-title">Історія</p>
-              </a>
+              </Link>
             </li>
             <li className="footer__menu-item">
-              <a className="footer__menu-link" href="hoem">
+              <Link
+                to="/profile"
+                className={`footer__menu-link ${
+                  current === "profile" ? "active" : ""
+                }`}
+              >
                 <Icon id="human" />
                 <p className="footer__menu-link-title">Профіль</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
