@@ -111,7 +111,11 @@ const Data = () => {
                 src={flag}
                 alt="change-icon"
               />
-              <input type="text" className="profile__data-change-edit-input" />
+              <input
+                type="text"
+                placeholder="Введіть новий номер"
+                className="profile__data-change-edit-input"
+              />
             </label>
             <p className="profile__data-change-text">
               Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
