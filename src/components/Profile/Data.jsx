@@ -7,6 +7,8 @@ import flag from "../../assets/profile/flag.png";
 
 const Data = () => {
   const [chagePhone, setChangePhone] = useState(false);
+  const [chageName, setChangeName] = useState(false);
+  const [chageEmail, setChangeEmail] = useState(false);
 
   return (
     <section className="profile__data">
@@ -49,7 +51,10 @@ const Data = () => {
                 <p className="profile__data-content-data-text">Тульчинський</p>
               </div>
             </div>
-            <button className="profile__data-content-correct">
+            <button
+              className="profile__data-content-correct"
+              onClick={() => setChangeName(true)}
+            >
               <img
                 className="profile__data-content-corrent-img"
                 src={correct}
@@ -70,7 +75,10 @@ const Data = () => {
                 </p>
               </div>
             </div>
-            <button className="profile__data-content-correct">
+            <button
+              className="profile__data-content-correct"
+              onClick={() => setChangeEmail(true)}
+            >
               <img
                 className="profile__data-content-corrent-img"
                 src={correct}
@@ -93,6 +101,8 @@ const Data = () => {
       <Link to="/profile" className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
+
+      {/* CHANGE PHONE */}
 
       <div
         className={`profile__data-change-phone ${chagePhone ? "active" : ""}`}
@@ -134,6 +144,105 @@ const Data = () => {
         <button
           className="profile__data-change-close"
           onClick={() => setChangePhone(false)}
+        >
+          <img className="profile__questions-back-icon" src={back} alt="back" />
+        </button>
+      </div>
+
+      {/* CHANGE NAME */}
+
+      <div
+        className={`profile__data-change-phone ${chageName ? "active" : ""}`}
+      >
+        <div className="container">
+          <div className="profile__data-change-block">
+            <h3 className="profile__data-change-title">Ваші дані</h3>
+
+            <p className="profile__data-change-text">
+              Введіть нові дані, щоб далі користуватися мийками
+            </p>
+
+            <h4 className="profile__data-change-second">І’мя</h4>
+
+            <label className="profile__data-change-edit">
+              <input
+                type="text"
+                placeholder="Введіть нове ім’я"
+                className="profile__data-change-edit-input"
+              />
+            </label>
+
+            <h4 className="profile__data-change-second">Прізвище</h4>
+
+            <label className="profile__data-change-edit">
+              <input
+                type="text"
+                placeholder="Введіть нове прізвище"
+                className="profile__data-change-edit-input"
+              />
+            </label>
+
+            <p className="profile__data-change-text">
+              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
+              з нашою Політикою конфеденційності.
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setChangeName(false)}
+          className="profile__data-change-accept"
+        >
+          Підтвердити
+        </button>
+
+        <button
+          className="profile__data-change-close"
+          onClick={() => setChangeName(false)}
+        >
+          <img className="profile__questions-back-icon" src={back} alt="back" />
+        </button>
+      </div>
+
+      {/* CHANGE EMAIL */}
+
+      <div
+        className={`profile__data-change-phone ${chageEmail ? "active" : ""}`}
+      >
+        <div className="container">
+          <div className="profile__data-change-block">
+            <h3 className="profile__data-change-title">Ваша пошта</h3>
+
+            <p className="profile__data-change-text">
+              Введіть нову адресу електронної пошти, щоб далі користуватися
+              мийками
+            </p>
+
+            <label className="profile__data-change-edit">
+              <input
+                type="text"
+                placeholder="Введіть нову пошту"
+                className="profile__data-change-edit-input"
+              />
+            </label>
+
+            <p className="profile__data-change-text">
+              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
+              з нашою Політикою конфеденційності.
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setChangeEmail(false)}
+          className="profile__data-change-accept"
+        >
+          Підтвердити
+        </button>
+
+        <button
+          className="profile__data-change-close"
+          onClick={() => setChangeEmail(false)}
         >
           <img className="profile__questions-back-icon" src={back} alt="back" />
         </button>
