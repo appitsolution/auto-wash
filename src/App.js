@@ -12,6 +12,7 @@ import ProfileSettings from "./pages/profile-settings";
 import ProfileSupport from "./pages/profile-support";
 import ProfileQuestions from "./pages/profile-questions";
 import ProfileQuestionsItem from "./pages/profile-questions-item";
+import ProfileData from "./pages/profile-data";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/wash" element={<Wash />} />
       <Route path="/history-order" element={<HistoryOrder />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/data" element={<ProfileData />} />
       <Route path="/profile/settings" element={<ProfileSettings />} />
       <Route path="/profile/support" element={<ProfileSupport />} />
       <Route path="/profile/questions/:id" element={<ProfileQuestionsItem />} />
