@@ -1,14 +1,14 @@
 import React from "react";
 import OnlyMobile from "../components/OnlyMobile";
-import CheckCode from "../components/SingIn/CheckCode";
+import Cars from "../components/Profile/Cars";
 
-const SignIn = () => {
+const ProfileDataCars = () => {
   return (
     <>
-      <CheckCode />
+      <Cars />
       <OnlyMobile />
     </>
   );
 };
 
-export default SignIn;
+export default ProfileDataCars;

@@ -42,7 +42,7 @@ const dataTest = [
   },
 ];
 
-const Page = () => {
+const Page = ({ data }) => {
   return (
     <section className="wash">
       <div className="promotions__notification">
@@ -58,14 +58,14 @@ const Page = () => {
       </div>
       <div className="container">
         <ul className="wash__list">
-          {dataTest.map((item) => (
+          {data.map((item) => (
             <li className="wash__item" key={item.id}>
               <Link to={`/wash/${item.id}`} className="wash__item-link">
                 <div className="wash__item-image">
                   <img
                     className="wash__item-image-img"
                     alt="content"
-                    src={item.images[0]}
+                    src={item.images[0].image.url}
                   />
                 </div>
                 <div className="wash__item-content">
@@ -74,7 +74,7 @@ const Page = () => {
                       {item.title}
                     </h2>
                     <p className="wash__item-content-info-address">
-                      {item.date}
+                      {item.address}
                     </p>
                   </div>
                   <div className="wash__item-content-addition">

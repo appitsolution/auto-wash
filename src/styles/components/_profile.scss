@@ -293,6 +293,25 @@
             }
         }
     }
+
+    &-cars {
+        &-block {
+            display: flex;
+            flex-direction: column;
+            gap: 27px;
+            padding-top: 80px;
+            padding-bottom: 125px;
+        }
+
+        &-list-item {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px 37px;
+        }
+    }
 }
 
 .profile__settings {

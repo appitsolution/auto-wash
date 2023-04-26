@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import OnlyMobile from "../components/OnlyMobile";
 import Page from "../components/Wash/Page";
+import axios from "axios";
 
 const Wash = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios(`${process.env.REACT_APP_SERVER}/api/wash`).then((res) => {
+      setData(res.data.docs);
+    });
+  }, []);
   return (
     <>
-      <Page />
+      <Page data={data} />
       <Footer current="wash" />
       <OnlyMobile />
     </>

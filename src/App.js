@@ -13,12 +13,27 @@ import ProfileSupport from "./pages/profile-support";
 import ProfileQuestions from "./pages/profile-questions";
 import ProfileQuestionsItem from "./pages/profile-questions-item";
 import ProfileData from "./pages/profile-data";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setToken } from "./redux/slice/sliceUser";
+import ProfileDataCars from "./pages/profile-data-cars";
+import Info from "./components/Info/Info";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tokenLocal = localStorage.getItem("token");
+    if (tokenLocal !== "") {
+      dispatch(setToken(tokenLocal));
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/signin" element={<SignIn />} />
+      <Route path="/info" element={<Info />} />
+      <Route path="/signin/:number" element={<SignIn />} />
       <Route path="/promotions/:id" element={<PromotionsItem />} />
       <Route path="/promotions" element={<Promotions />} />
       <Route path="/wash/:id" element={<WashItem />} />
@@ -26,6 +41,7 @@ const App = () => {
       <Route path="/history-order" element={<HistoryOrder />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/data" element={<ProfileData />} />
+      <Route path="/profile/data/cars" element={<ProfileDataCars />} />
       <Route path="/profile/settings" element={<ProfileSettings />} />
       <Route path="/profile/support" element={<ProfileSupport />} />
       <Route path="/profile/questions/:id" element={<ProfileQuestionsItem />} />

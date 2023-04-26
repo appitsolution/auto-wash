@@ -1,14 +1,102 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import correct from "../../assets/profile/correct.png";
 import car from "../../assets/profile/car.png";
 import flag from "../../assets/profile/flag.png";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Data = () => {
+  const [data, setData] = useState({
+    idUser: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    numbersCar: [],
+    balance: "0",
+    historyPayment: [],
+  });
   const [chagePhone, setChangePhone] = useState(false);
   const [chageName, setChangeName] = useState(false);
   const [chageEmail, setChangeEmail] = useState(false);
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+      .then((res) => setData(res.data));
+  }, [token]);
+
+  // CHANGE PHONE
+  const [acceptNumber, setAcceptNumber] = useState(false);
+  const [phoneValue, setPhoneValue] = useState("");
+  const [phoneValueCorrect, setPhoneValueCorrect] = useState("");
+
+  const changePhone = async () => {
+    if (acceptNumber) {
+      try {
+        const result = await axios.post(
+          `${process.env.REACT_APP_SERVER}/user/change-phone`,
+          {
+            idUser: data.idUser,
+            newPhone: phoneValueCorrect,
+          }
+        );
+        setData({ ...data, phone: phoneValueCorrect });
+
+        setChangePhone(false);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  // CHANGE NAME
+  const [firstNameValue, setFirstNameValue] = useState("");
+  const [lastNameValue, setLastNameValue] = useState("");
+
+  const changeName = async () => {
+    if (firstNameValue === "" || lastNameValue === "") return;
+
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/change-name`,
+        {
+          idUser: data.idUser,
+          firstName: firstNameValue,
+          lastName: lastNameValue,
+        }
+      );
+      setData({ ...data, firstName: firstNameValue, lastName: lastNameValue });
+      setChangeName(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // CHANGE EMAIL
+  const [emailValue, setEmailValue] = useState("");
+
+  const changeEmail = async () => {
+    if (emailValue === "") return;
+
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/change-email`,
+        {
+          idUser: data.idUser,
+          email: emailValue,
+        }
+      );
+      setData({ ...data, email: emailValue });
+      setChangeEmail(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className="profile__data">
@@ -22,9 +110,7 @@ const Data = () => {
                 <p className="profile__data-content-data-title">
                   Номер телефону
                 </p>
-                <p className="profile__data-content-data-text">
-                  +380 01 002 03 04{" "}
-                </p>
+                <p className="profile__data-content-data-text">{data.phone}</p>
               </div>
             </div>
             <button
@@ -44,11 +130,33 @@ const Data = () => {
             <div className="profile__data-content-data">
               <div className="profile__data-content-data-block">
                 <p className="profile__data-content-data-title">Ім’я</p>
-                <p className="profile__data-content-data-text">Олександр</p>
+                <p
+                  className="profile__data-content-data-text"
+                  style={
+                    data.firstName === ""
+                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
+                      : {}
+                  }
+                >
+                  {data.firstName === ""
+                    ? "Тут буде ваше Ім’я"
+                    : data.firstName}
+                </p>
               </div>
               <div className="profile__data-content-data-block">
                 <p className="profile__data-content-data-title">Прізвище</p>
-                <p className="profile__data-content-data-text">Тульчинський</p>
+                <p
+                  className="profile__data-content-data-text "
+                  style={
+                    data.lastName === ""
+                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
+                      : {}
+                  }
+                >
+                  {data.lastName === ""
+                    ? "Тут буде ваше Прізвище"
+                    : data.lastName}
+                </p>
               </div>
             </div>
             <button
@@ -70,8 +178,15 @@ const Data = () => {
                 <p className="profile__data-content-data-title">
                   Електронна пошта
                 </p>
-                <p className="profile__data-content-data-text">
-                  sashatylch@gmail.com
+                <p
+                  className="profile__data-content-data-text"
+                  style={
+                    !data.email
+                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
+                      : {}
+                  }
+                >
+                  {!data.email ? "Тут буде ваша пошта" : data.email}
                 </p>
               </div>
             </div>
@@ -87,14 +202,14 @@ const Data = () => {
               Змінити пошту
             </button>
           </div>
-          <button className="profile__data-content-correct">
+          <Link to="cars" className="profile__data-content-correct">
             <img
               className="profile__data-content-corrent-img"
               src={car}
               alt="correct"
             />
             Додати машину
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -123,6 +238,26 @@ const Data = () => {
               />
               <input
                 type="text"
+                onInput={({ target }) => {
+                  setPhoneValue(target.value.replace(/[^\d]/g, ""));
+
+                  const phoneNumber = target.value.replace(/[^\d]/g, "");
+
+                  const regex = /^(\+?3?8)?(0\d{9})$/;
+
+                  if (regex.test(phoneNumber)) {
+                    const formattedPhoneNumber = phoneNumber.replace(
+                      regex,
+                      "+38$2"
+                    );
+                    setPhoneValueCorrect(formattedPhoneNumber);
+                    setAcceptNumber(true);
+                  } else {
+                    console.log("Неверный формат номера телефона");
+                    setAcceptNumber(false);
+                  }
+                }}
+                value={phoneValue}
                 placeholder="Введіть новий номер"
                 className="profile__data-change-edit-input"
               />
@@ -134,10 +269,7 @@ const Data = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setChangePhone(false)}
-          className="profile__data-change-accept"
-        >
+        <button onClick={changePhone} className="profile__data-change-accept">
           Підтвердити
         </button>
 
@@ -167,6 +299,8 @@ const Data = () => {
             <label className="profile__data-change-edit">
               <input
                 type="text"
+                value={firstNameValue}
+                onInput={({ target }) => setFirstNameValue(target.value)}
                 placeholder="Введіть нове ім’я"
                 className="profile__data-change-edit-input"
               />
@@ -177,6 +311,8 @@ const Data = () => {
             <label className="profile__data-change-edit">
               <input
                 type="text"
+                value={lastNameValue}
+                onInput={({ target }) => setLastNameValue(target.value)}
                 placeholder="Введіть нове прізвище"
                 className="profile__data-change-edit-input"
               />
@@ -189,10 +325,7 @@ const Data = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setChangeName(false)}
-          className="profile__data-change-accept"
-        >
+        <button onClick={changeName} className="profile__data-change-accept">
           Підтвердити
         </button>
 
@@ -221,6 +354,8 @@ const Data = () => {
             <label className="profile__data-change-edit">
               <input
                 type="text"
+                value={emailValue}
+                onInput={({ target }) => setEmailValue(target.value)}
                 placeholder="Введіть нову пошту"
                 className="profile__data-change-edit-input"
               />
@@ -233,10 +368,7 @@ const Data = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setChangeEmail(false)}
-          className="profile__data-change-accept"
-        >
+        <button onClick={changeEmail} className="profile__data-change-accept">
           Підтвердити
         </button>
 

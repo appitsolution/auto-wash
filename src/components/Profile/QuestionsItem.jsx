@@ -3,29 +3,50 @@ import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 
 const QuestionsItem = ({ data }) => {
+  const parseDescription = () => {
+    if (Object.keys(data).length !== 0) {
+      const htmlElements = [];
+
+      data.answer.forEach((item, index) => {
+        htmlElements.push(item.children[0].text);
+        if (index === data.description.length) return;
+        htmlElements.push("<br/>");
+      });
+      console.log(data.description);
+      return htmlElements.join(" ");
+    }
+  };
+
   return (
     <section className="profile__questions-item">
-      <div className="container">
-        <div className="profile__questions-item-block">
-          <div className="profile__questions-list-link">
-            <div className="profile__questions-list-link-content">
-              <h2 className="profile__questions-list-link-content-title">
-                {data.title}
-              </h2>
-              <p className="profile__questions-list-link-content-desc">
-                {data.desc}
-              </p>
+      {Object.keys(data).length === 0 ? (
+        <></>
+      ) : (
+        <div className="container">
+          <div className="profile__questions-item-block">
+            <div className="profile__questions-list-link">
+              <div className="profile__questions-list-link-content">
+                <h2 className="profile__questions-list-link-content-title">
+                  {data.title}
+                </h2>
+                <p className="profile__questions-list-link-content-desc">
+                  {data.description}
+                </p>
+              </div>
+              <img
+                className="profile__questions-list-link-img"
+                alt="question-icon"
+                src={data.image.url}
+              />
             </div>
-            <img
-              className="profile__questions-list-link-img"
-              alt="question-icon"
-              src={data.image}
-            />
           </div>
-        </div>
 
-        <p className="profile__questions-item-description">{data.content}</p>
-      </div>
+          <p
+            dangerouslySetInnerHTML={{ __html: parseDescription() }}
+            className="profile__questions-item-description"
+          ></p>
+        </div>
+      )}
 
       <Link to="/profile/questions" className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />

@@ -1,11 +1,11 @@
 import React from "react";
-import Footer from "../components/Footer";
 import OnlyMobile from "../components/OnlyMobile";
+import NumberPhone from "../components/SingIn/NumberPhone";
 
 const Home = () => {
   return (
     <>
-      <Footer current="home" />
+      <NumberPhone />
       <OnlyMobile />
     </>
   );

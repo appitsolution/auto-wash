@@ -85,14 +85,14 @@ const dataTest = [
   },
 ];
 
-const Questions = () => {
+const Questions = ({ data }) => {
   return (
     <section className="profile__questions">
       <div className="container">
         <h1 className="profile__questions-title">Відповіді на запитання</h1>
 
         <ul className="profile__questions-list">
-          {dataTest.map((item) => (
+          {data.map((item) => (
             <li className="profile__questions-list-item" key={item.id}>
               <Link
                 to={`/profile/questions/${item.id}`}
@@ -103,13 +103,13 @@ const Questions = () => {
                     {item.title}
                   </h2>
                   <p className="profile__questions-list-link-content-desc">
-                    {item.desc}
+                    {item.description}
                   </p>
                 </div>
                 <img
                   className="profile__questions-list-link-img"
                   alt="question-icon"
-                  src={item.image}
+                  src={item.image.url}
                 />
               </Link>
             </li>

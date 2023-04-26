@@ -1,10 +1,27 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setToken } from "../../redux/slice/sliceUser.js";
 import deleteProfile from "../../assets/profile/delete-profile.svg";
 import outProfile from "../../assets/profile/out-profile.svg";
 import back from "../../assets/profile/back.svg";
 
 const Settings = () => {
+  const token = useSelector((state) => state.user.token);
+  const [data, setData] = useState();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+      .then((res) => {
+        setData(res.data);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
   const [outActive, setOutActive] = useState(false);
   const [deleteActive, setDeleteActive] = useState(false);
 
@@ -14,6 +31,23 @@ const Settings = () => {
 
   const deleteProfileFunc = () => {
     setDeleteActive(true);
+  };
+
+  const outProfileRequest = () => {
+    localStorage.removeItem("token");
+    dispatch(setToken(""));
+    navigate("/");
+  };
+
+  const deleteProfileRequest = async () => {
+    try {
+      await axios.post(`${process.env.REACT_APP_SERVER}/user/delete`, {
+        idUser: data.idUser,
+      });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -51,7 +85,10 @@ const Settings = () => {
           Ви дійсно бажаєте вийти з аккаунту ?
         </h3>
         <div className="profile__settings-accept-out-block">
-          <button className="profile__settings-accept-out-block-yes">
+          <button
+            onClick={outProfileRequest}
+            className="profile__settings-accept-out-block-yes"
+          >
             Так
           </button>
           <button
@@ -72,7 +109,10 @@ const Settings = () => {
           Ви дійсно бажаєте видалити аккаунт ?
         </h3>
         <div className="profile__settings-accept-delete-block">
-          <button className="profile__settings-accept-delete-block-yes">
+          <button
+            className="profile__settings-accept-delete-block-yes"
+            onClick={deleteProfileRequest}
+          >
             Так
           </button>
           <button

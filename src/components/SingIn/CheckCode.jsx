@@ -1,13 +1,107 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import logo from "../../assets/logo-cmb.png";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../redux/slice/sliceUser";
 
 const CheckCode = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [sendActive, setSendActive] = useState(false);
+
+  const [numberOneValue, setNumberOneValue] = useState("");
+  const [numberTwoValue, setNumberTwoValue] = useState("");
+  const [numberThreeValue, setNumberThreeValue] = useState("");
+  const [numberFourValue, setNumberFourValue] = useState("");
+
+  const numberOne = document.getElementById("numberOne");
+  const numberTwo = document.getElementById("numberTwo");
+  const numberThree = document.getElementById("numberThree");
+  const numberFour = document.getElementById("numberFour");
 
   const openSend = () => {
     setSendActive(!sendActive);
   };
+
+  // One Number
+  useEffect(() => {
+    if (numberOneValue !== "") {
+      numberTwo?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberOneValue]);
+
+  // Two Number
+  useEffect(() => {
+    if (numberTwoValue !== "") {
+      numberThree?.focus();
+    } else {
+      numberOne?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberTwoValue]);
+
+  // Three Number
+  useEffect(() => {
+    if (numberThreeValue !== "") {
+      numberFour?.focus();
+    } else {
+      numberTwo?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberThreeValue]);
+
+  // Four Number
+
+  useEffect(() => {
+    if (numberFourValue === "") {
+      numberThree?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberFourValue]);
+
+  const { number } = useParams();
+
+  const requestCode = async () => {
+    if (
+      !numberOneValue ||
+      !numberTwoValue ||
+      !numberThreeValue ||
+      !numberFourValue
+    ) {
+      return;
+    }
+
+    console.log(
+      numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
+    );
+
+    const result = await axios.post(
+      `${process.env.REACT_APP_SERVER}/user/login`,
+      {
+        number,
+        code: `${
+          numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
+        }`,
+      }
+    );
+
+    localStorage.setItem("token", result.data);
+    dispatch(setToken(result.data));
+    navigate("/profile");
+  };
+
+  const againSendCode = async () => {
+    await axios.post(`${process.env.REACT_APP_SERVER}/user/check-code`, {
+      number,
+    });
+
+    setSendActive(false);
+  };
+
   return (
     <>
       <section className="number-phone">
@@ -21,12 +115,18 @@ const CheckCode = () => {
                 number3: "",
                 number4: "",
               }}
+              onSubmit={requestCode}
             >
               {() => (
                 <Form className="number-phone__form">
                   <ul className="number-phone__form-numbers">
                     <li className="number-phone__form-numbers-item">
                       <Field
+                        onInput={({ target }) =>
+                          setNumberOneValue(target.value)
+                        }
+                        value={numberOneValue}
+                        id="numberOne"
                         className="number-phone__form-number"
                         type="text"
                         name="number1"
@@ -35,6 +135,11 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
+                        onInput={({ target }) =>
+                          setNumberTwoValue(target.value)
+                        }
+                        value={numberTwoValue}
+                        id="numberTwo"
                         className="number-phone__form-number"
                         type="text"
                         name="number2"
@@ -43,6 +148,11 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
+                        onInput={({ target }) =>
+                          setNumberThreeValue(target.value)
+                        }
+                        value={numberThreeValue}
+                        id="numberThree"
                         className="number-phone__form-number"
                         type="text"
                         name="number3"
@@ -51,6 +161,11 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
+                        onInput={({ target }) =>
+                          setNumberFourValue(target.value)
+                        }
+                        value={numberFourValue}
+                        id="numberFour"
                         className="number-phone__form-number"
                         type="text"
                         name="number4"
@@ -80,7 +195,10 @@ const CheckCode = () => {
                   Не хвилюйся, тицяй
                 </p>
 
-                <button className="number-phone__code-send-button">
+                <button
+                  className="number-phone__code-send-button"
+                  onClick={againSendCode}
+                >
                   Відправити ще раз
                 </button>
               </div>

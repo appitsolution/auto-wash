@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import profileLogo from "../../assets/logo-profile.png";
-import data from "../../assets/profile/profile-data.svg";
+import dataIcon from "../../assets/profile/profile-data.svg";
 import settings from "../../assets/profile/settings.svg";
 import question from "../../assets/profile/question.svg";
 import support from "../../assets/profile/support.svg";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Profile = () => {
+  const [data, setData] = useState({});
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    if (token !== "") {
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+        .then((res) => setData(res.data));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
   return (
     <section className="profile">
       <div className="profile__header">
-        <h1 className="profile__header-title">Тут буде ваше Ім’я</h1>
+        <h1 className="profile__header-title">
+          {data.firstName !== "" ? data.firstName : "Тут буде ваше Ім’я"}
+        </h1>
         <div className="profile__header-flex">
-          <p className="profile__header-flex-id">#1234567</p>
+          <p className="profile__header-flex-id">#{data.idUser}</p>
           <img
             className="profile__header-flex-logo"
             alt="profile-logo"
@@ -27,7 +43,7 @@ const Profile = () => {
               <img
                 className="rofile__menu-link-img"
                 alt="profile-menu"
-                src={data}
+                src={dataIcon}
               />
               Особисті дані
             </Link>
