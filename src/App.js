@@ -18,6 +18,8 @@ import { useDispatch } from "react-redux";
 import { setToken } from "./redux/slice/sliceUser";
 import ProfileDataCars from "./pages/profile-data-cars";
 import InfoPage from "./pages/info";
+import MyCards from "./pages/my-cards";
+import PaymentPage from "./pages/payment";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/payment/:id" element={<PaymentPage />} />
+      <Route path="/info/my-cards" element={<MyCards />} />
       <Route path="/info" element={<InfoPage />} />
       <Route path="/signin/:number" element={<SignIn />} />
       <Route path="/promotions/:id" element={<PromotionsItem />} />

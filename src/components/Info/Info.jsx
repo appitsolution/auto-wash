@@ -74,7 +74,7 @@ const Info = () => {
               </Link>
             </li>
             <li className="info__menu-item">
-              <Link className="info__menu-item-link">
+              <Link to="my-cards" className="info__menu-item-link">
                 <img
                   className="info__menu-item-link-img"
                   src={cardInfo}
