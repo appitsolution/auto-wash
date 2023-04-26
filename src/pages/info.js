@@ -3,7 +3,7 @@ import OnlyMobile from "../components/OnlyMobile";
 import Footer from "../components/Footer";
 import Info from "../components/Info/Info";
 
-const ProfileData = () => {
+const InfoPage = () => {
   return (
     <>
       <Info />
@@ -13,4 +13,4 @@ const ProfileData = () => {
   );
 };
 
-export default ProfileData;
+export default InfoPage;

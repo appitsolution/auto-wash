@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "./redux/slice/sliceUser";
 import ProfileDataCars from "./pages/profile-data-cars";
-import Info from "./components/Info/Info";
+import InfoPage from "./pages/info";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/info" element={<Info />} />
+      <Route path="/info" element={<InfoPage />} />
       <Route path="/signin/:number" element={<SignIn />} />
       <Route path="/promotions/:id" element={<PromotionsItem />} />
       <Route path="/promotions" element={<Promotions />} />

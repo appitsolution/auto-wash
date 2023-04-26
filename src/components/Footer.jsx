@@ -10,7 +10,7 @@ const Footer = ({ current = "" }) => {
           <ul className="footer__menu">
             <li className="footer__menu-item">
               <Link
-                to="/"
+                to="/info"
                 className={`footer__menu-link ${
                   current === "home" ? "active" : ""
                 }`}
