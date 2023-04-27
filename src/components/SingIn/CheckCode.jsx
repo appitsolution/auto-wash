@@ -129,7 +129,7 @@ const CheckCode = () => {
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
-                        type="number"
+                        type="text"
                         name="number1"
                         maxLength={1}
                       />
