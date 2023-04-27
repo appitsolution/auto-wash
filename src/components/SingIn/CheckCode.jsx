@@ -122,9 +122,10 @@ const CheckCode = () => {
                   <ul className="number-phone__form-numbers">
                     <li className="number-phone__form-numbers-item">
                       <Field
-                        onInput={({ target }) =>
-                          setNumberOneValue(target.value)
-                        }
+                        onInput={({ target }) => {
+                          const value = target.value.replace(/[^\d]/g, "");
+                          setNumberOneValue(value);
+                        }}
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
@@ -135,9 +136,10 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
-                        onInput={({ target }) =>
-                          setNumberTwoValue(target.value)
-                        }
+                        onInput={({ target }) => {
+                          const value = target.value.replace(/[^\d]/g, "");
+                          setNumberTwoValue(value);
+                        }}
                         value={numberTwoValue}
                         id="numberTwo"
                         className="number-phone__form-number"
@@ -148,9 +150,10 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
-                        onInput={({ target }) =>
-                          setNumberThreeValue(target.value)
-                        }
+                        onInput={({ target }) => {
+                          const value = target.value.replace(/[^\d]/g, "");
+                          setNumberThreeValue(value);
+                        }}
                         value={numberThreeValue}
                         id="numberThree"
                         className="number-phone__form-number"
@@ -161,9 +164,10 @@ const CheckCode = () => {
                     </li>
                     <li className="number-phone__form-numbers-item">
                       <Field
-                        onInput={({ target }) =>
-                          setNumberFourValue(target.value)
-                        }
+                        onInput={({ target }) => {
+                          const value = target.value.replace(/[^\d]/g, "");
+                          setNumberFourValue(value);
+                        }}
                         value={numberFourValue}
                         id="numberFour"
                         className="number-phone__form-number"
