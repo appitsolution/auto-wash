@@ -129,7 +129,7 @@ const CheckCode = () => {
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
-                        type="text"
+                        type="number"
                         name="number1"
                         maxLength={1}
                       />
@@ -143,7 +143,7 @@ const CheckCode = () => {
                         value={numberTwoValue}
                         id="numberTwo"
                         className="number-phone__form-number"
-                        type="text"
+                        type="number"
                         name="number2"
                         maxLength={1}
                       />
@@ -157,7 +157,7 @@ const CheckCode = () => {
                         value={numberThreeValue}
                         id="numberThree"
                         className="number-phone__form-number"
-                        type="text"
+                        type="number"
                         name="number3"
                         maxLength={1}
                       />
@@ -171,7 +171,7 @@ const CheckCode = () => {
                         value={numberFourValue}
                         id="numberFour"
                         className="number-phone__form-number"
-                        type="text"
+                        type="number"
                         name="number4"
                         maxLength={1}
                       />
