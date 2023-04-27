@@ -137,6 +137,7 @@ const CheckCode = () => {
                     <li className="number-phone__form-numbers-item">
                       <Field
                         onInput={({ target }) => {
+                          if (target.value.length > 1) return;
                           const value = target.value.replace(/[^\d]/g, "");
                           setNumberTwoValue(value);
                         }}
