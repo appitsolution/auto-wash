@@ -4,8 +4,8 @@ import back from "../../assets/profile/back.svg";
 import paymentUser from "../../assets/profile/profile-data.svg";
 const CryptoJS = require("crypto-js");
 
-const publicKey = "sandbox_i93827836650";
-const privateKey = "sandbox_qMDNWjt3kWbsaEONYYwsYfddQrF2bCV8hmCJ1aY2";
+const publicKey = "sandbox_i82407298585";
+const privateKey = "sandbox_pzP5wzHnDw6jyimjOLhHIw5vyFPcL7aB2lrawUCo";
 
 const Payment = () => {
   const [numberValue, setNumberValue] = useState("");
@@ -91,7 +91,7 @@ const Payment = () => {
 
             <form
               method="POST"
-              action="https://www.liqpay.ua/api/3/checkout"
+              action="https://www.liqpay.ua/uk/checkout/sandbox_i82407298585"
               accept-charset="utf-8"
             >
               <input type="hidden" name="data" value={data} />
