@@ -29,7 +29,7 @@ const Payment = () => {
     order_id: "000001",
   };
   const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
-  console.log(data);
+
   const signature = CryptoJS.SHA1(privateKey + data + privateKey).toString(
     CryptoJS.enc.Base64
   );

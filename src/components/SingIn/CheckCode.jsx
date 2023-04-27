@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
+import liqpay from 'liqpay'
 
 const CheckCode = () => {
   const dispatch = useDispatch();
@@ -25,43 +26,6 @@ const CheckCode = () => {
   const openSend = () => {
     setSendActive(!sendActive);
   };
-
-  // One Number
-  useEffect(() => {
-    if (numberOneValue !== "") {
-      numberTwo?.focus();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberOneValue]);
-
-  // Two Number
-  useEffect(() => {
-    if (numberTwoValue !== "") {
-      numberThree?.focus();
-    } else {
-      numberOne?.focus();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberTwoValue]);
-
-  // Three Number
-  useEffect(() => {
-    if (numberThreeValue !== "") {
-      numberFour?.focus();
-    } else {
-      numberTwo?.focus();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberThreeValue]);
-
-  // Four Number
-
-  useEffect(() => {
-    if (numberFourValue === "") {
-      numberThree?.focus();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberFourValue]);
 
   const { number } = useParams();
 
@@ -102,6 +66,21 @@ const CheckCode = () => {
     setSendActive(false);
   };
 
+  const changeFocus = (input) => {
+    if (input.value.length >= input.maxLength) {
+      var nextInput = input.parentElement?.nextElementSibling?.firstChild;
+
+      if (nextInput != null) {
+        nextInput?.focus();
+      }
+    } else if (input.value.length === 0) {
+      var prevInput = input.parentElement?.previousElementSibling?.firstChild;
+      if (prevInput != null) {
+        prevInput?.focus();
+      }
+    }
+  };
+
   return (
     <>
       <section className="number-phone">
@@ -124,12 +103,16 @@ const CheckCode = () => {
                       <Field
                         onInput={({ target }) => {
                           const value = target.value.replace(/[^\d]/g, "");
+                          if (value !== "") {
+                            changeFocus(target);
+                          }
+
                           setNumberOneValue(value);
                         }}
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
-                        type="text"
+                        type="tel"
                         name="number1"
                         maxLength={1}
                       />
@@ -137,16 +120,18 @@ const CheckCode = () => {
                     <li className="number-phone__form-numbers-item">
                       <Field
                         onInput={({ target }) => {
-                          if (target.value.length > 1) return;
                           const value = target.value.replace(/[^\d]/g, "");
                           setNumberTwoValue(value);
+                          if (value !== "") {
+                            changeFocus(target);
+                          }
                         }}
                         value={numberTwoValue}
                         id="numberTwo"
                         className="number-phone__form-number"
-                        type="number"
+                        type="tel"
                         name="number2"
-                        maxLength={1}
+                        maxLength="1"
                       />
                     </li>
                     <li className="number-phone__form-numbers-item">
@@ -154,11 +139,14 @@ const CheckCode = () => {
                         onInput={({ target }) => {
                           const value = target.value.replace(/[^\d]/g, "");
                           setNumberThreeValue(value);
+                          if (value !== "") {
+                            changeFocus(target);
+                          }
                         }}
                         value={numberThreeValue}
                         id="numberThree"
                         className="number-phone__form-number"
-                        type="number"
+                        type="tel"
                         name="number3"
                         maxLength={1}
                       />
@@ -168,11 +156,14 @@ const CheckCode = () => {
                         onInput={({ target }) => {
                           const value = target.value.replace(/[^\d]/g, "");
                           setNumberFourValue(value);
+                          if (value !== "") {
+                            changeFocus(target);
+                          }
                         }}
                         value={numberFourValue}
                         id="numberFour"
                         className="number-phone__form-number"
-                        type="number"
+                        type="tel"
                         name="number4"
                         maxLength={1}
                       />
