@@ -26,7 +26,7 @@ const Payment = () => {
     amount: sumValue,
     currency: "UAH",
     description: "Поповнення",
-    order_id: "00000100",
+    order_id: "00000106",
   };
   const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
 
@@ -94,13 +94,13 @@ const Payment = () => {
               action="https://www.liqpay.ua/api/3/checkout"
               accept-charset="utf-8"
             >
-              <input type="hidden" name="data" value={data} />
-              <input type="hidden" name="signature" value={signature} />
               <input
                 type="hidden"
-                name="server_url"
-                value={`https://auto-wash-back.onrender.com/user/payment?test=1991`}
+                name="result_url"
+                value={`https://auto-wash-back.onrender.com/user/payment?test=1994`}
               />
+              <input type="hidden" name="data" value={data} />
+              <input type="hidden" name="signature" value={signature} />
               <button type="submit" className="payment__content-pay">
                 Поповнити
               </button>
