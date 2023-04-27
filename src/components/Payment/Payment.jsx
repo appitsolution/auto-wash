@@ -96,6 +96,11 @@ const Payment = () => {
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
+              <input
+                type="hidden"
+                name="server_url"
+                value={`https://auto-wash-back.onrender.com/user/payment?test=32`}
+              />
               <button type="submit" className="payment__content-pay">
                 Поповнити
               </button>
