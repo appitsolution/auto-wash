@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import logo from "../../assets/logo-cmb.png";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
-import liqpay from 'liqpay'
 
 const CheckCode = () => {
   const dispatch = useDispatch();
@@ -17,11 +16,6 @@ const CheckCode = () => {
   const [numberTwoValue, setNumberTwoValue] = useState("");
   const [numberThreeValue, setNumberThreeValue] = useState("");
   const [numberFourValue, setNumberFourValue] = useState("");
-
-  const numberOne = document.getElementById("numberOne");
-  const numberTwo = document.getElementById("numberTwo");
-  const numberThree = document.getElementById("numberThree");
-  const numberFour = document.getElementById("numberFour");
 
   const openSend = () => {
     setSendActive(!sendActive);
@@ -125,6 +119,9 @@ const CheckCode = () => {
                           if (value !== "") {
                             changeFocus(target);
                           }
+                          if (numberTwoValue.length > value.length) {
+                            changeFocus(target);
+                          }
                         }}
                         value={numberTwoValue}
                         id="numberTwo"
@@ -142,6 +139,9 @@ const CheckCode = () => {
                           if (value !== "") {
                             changeFocus(target);
                           }
+                          if (numberThreeValue.length > value.length) {
+                            changeFocus(target);
+                          }
                         }}
                         value={numberThreeValue}
                         id="numberThree"
@@ -157,6 +157,9 @@ const CheckCode = () => {
                           const value = target.value.replace(/[^\d]/g, "");
                           setNumberFourValue(value);
                           if (value !== "") {
+                            changeFocus(target);
+                          }
+                          if (numberFourValue.length > value.length) {
                             changeFocus(target);
                           }
                         }}
