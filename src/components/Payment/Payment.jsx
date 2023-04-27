@@ -91,7 +91,7 @@ const Payment = () => {
 
             <form
               method="POST"
-              action="https://www.liqpay.ua/uk/checkout/sandbox_i82407298585"
+              action="https://www.liqpay.ua/api/3/checkout"
               accept-charset="utf-8"
             >
               <input type="hidden" name="data" value={data} />
