@@ -26,7 +26,7 @@ const Payment = () => {
     amount: sumValue,
     currency: "UAH",
     description: "Поповнення",
-    order_id: "0000013",
+    order_id: "0000015",
   };
   const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
 
