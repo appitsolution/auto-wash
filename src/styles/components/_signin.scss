@@ -88,6 +88,10 @@
 
                 transform: translateY(-25%);
             }
+
+            &:focus::placeholder {
+                opacity: 0;
+            }
         }
 
         &-error {

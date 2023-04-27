@@ -2,29 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import paymentUser from "../../assets/profile/profile-data.svg";
-import axios from "axios";
+const CryptoJS = require("crypto-js");
+
+const publicKey = "sandbox_i93827836650";
+const privateKey = "sandbox_qMDNWjt3kWbsaEONYYwsYfddQrF2bCV8hmCJ1aY2";
 
 const Payment = () => {
-  const liqpayData = {
-    action: "pay",
-    amount: "10",
-    currency: "USD",
-    description: "Payment for order #123",
-    order_id: "123",
-    result_url: "https://example.com/result",
-    server_url: "https://example.com/server",
-  };
-
-  axios
-    .post("https://www.liqpay.ua/api/3/checkout", liqpayData)
-    .then((response) => {
-      const formHtml = response.data;
-      console.log(formHtml);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
   const [numberValue, setNumberValue] = useState("");
   const [sumValue, setSumValue] = useState("50");
 
@@ -35,6 +18,22 @@ const Payment = () => {
       document.body.style.backgroundColor = "#0F84F0";
     };
   }, []);
+
+  const json_string = {
+    version: "3",
+    public_key: publicKey,
+    action: "pay",
+    amount: sumValue,
+    currency: "UAH",
+    description: "Поповнення",
+    order_id: "000001",
+  };
+  const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
+  console.log(data);
+  const signature = CryptoJS.SHA1(privateKey + data + privateKey).toString(
+    CryptoJS.enc.Base64
+  );
+
   return (
     <section className="payment">
       <div className="payment__header">
@@ -90,7 +89,17 @@ const Payment = () => {
               </div>
             </div>
 
-            <button className="payment__content-pay">Поповнити</button>
+            <form
+              method="POST"
+              action="https://www.liqpay.ua/api/3/checkout"
+              accept-charset="utf-8"
+            >
+              <input type="hidden" name="data" value={data} />
+              <input type="hidden" name="signature" value={signature} />
+              <button type="submit" className="payment__content-pay">
+                Поповнити
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -98,8 +107,6 @@ const Payment = () => {
       <Link to="/info" className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
-
-      {/* <div dangerouslySetInnerHTML={{ __html: formHtml }}></div> */}
     </section>
   );
 };
