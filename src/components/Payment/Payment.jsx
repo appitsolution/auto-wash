@@ -99,7 +99,7 @@ const Payment = () => {
               <input
                 type="hidden"
                 name="server_url"
-                value={`https://auto-wash-back.onrender.com/user/payment?test=32`}
+                value={`https://auto-wash-back.onrender.com/user/payment?test=1991`}
               />
               <button type="submit" className="payment__content-pay">
                 Поповнити
