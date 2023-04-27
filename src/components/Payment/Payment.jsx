@@ -4,8 +4,8 @@ import back from "../../assets/profile/back.svg";
 import paymentUser from "../../assets/profile/profile-data.svg";
 const CryptoJS = require("crypto-js");
 
-const publicKey = "sandbox_i82407298585";
-const privateKey = "sandbox_pzP5wzHnDw6jyimjOLhHIw5vyFPcL7aB2lrawUCo";
+const publicKey = "sandbox_i98441757663";
+const privateKey = "sandbox_JaBwypsn5eGVcDIIgWDcElXJy6NwEoRXFmh7UuGR";
 
 const Payment = () => {
   const [numberValue, setNumberValue] = useState("");
