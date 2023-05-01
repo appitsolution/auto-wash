@@ -61,7 +61,7 @@ const Payment = () => {
     currency: "UAH",
     description: "Поповнення",
     server_url: `https://auto-wash-back.onrender.com/user/payment?order=${orderIdGenerate}`,
-    // result_url: "https://auto-wash-back.onrender.com/user/payment",
+    result_url: `https://auto-wash-back.onrender.com/user/payment?order=${orderIdGenerate}`,
     order_id: orderIdGenerate,
   };
   const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
