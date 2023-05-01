@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import cardsItem from "../../assets/cards-item.png";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Cards = () => {
+  const [data, setData] = useState([]);
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    if (token !== "") {
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+        .then((res) => {
+          setData(res.data.balanceWash);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
   return (
     <section className="info__cards">
       <div className="info__cards-header">
@@ -25,34 +40,24 @@ const Cards = () => {
 
       <div className="container">
         <ul className="info__cards-list">
-          <li className="info__cards-list-item">
-            <div className="info__cards-list-item-content">
-              <p className="info__cards-list-item-content-id">#1234567</p>
-              <h3 className="info__cards-list-item-content-title">
-                Автомийка на Ватутіна
-              </h3>
-              <p className="info__cards-list-item-content-balance">231 UAH</p>
-            </div>
-            <img
-              className="info__cards-list-item-img"
-              src={cardsItem}
-              alt="card-item"
-            />
-          </li>
-          <li className="info__cards-list-item">
-            <div className="info__cards-list-item-content">
-              <p className="info__cards-list-item-content-id">#1234567</p>
-              <h3 className="info__cards-list-item-content-title">
-                Автомийка на Ватутіна
-              </h3>
-              <p className="info__cards-list-item-content-balance">231 UAH</p>
-            </div>
-            <img
-              className="info__cards-list-item-img"
-              src={cardsItem}
-              alt="card-item"
-            />
-          </li>
+          {data.map((item) => (
+            <li className="info__cards-list-item">
+              <div className="info__cards-list-item-content">
+                <p className="info__cards-list-item-content-id">#{item.id}</p>
+                <h3 className="info__cards-list-item-content-title">
+                  {item.address}
+                </h3>
+                <p className="info__cards-list-item-content-balance">
+                  {item.balance} UAH
+                </p>
+              </div>
+              <img
+                className="info__cards-list-item-img"
+                src={cardsItem}
+                alt="card-item"
+              />
+            </li>
+          ))}
         </ul>
       </div>
     </section>

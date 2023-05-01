@@ -88,7 +88,7 @@ const Page = () => {
                     </p>
                     <p className="history-order__item-text-date">{item.date}</p>
                   </div>
-                  <p className="history-order__item-price">{item.price} ₴</p>
+                  <p className="history-order__item-price">{item.balance} ₴</p>
                 </div>
               </li>
             ))}

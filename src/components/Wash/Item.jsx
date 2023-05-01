@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import slide1 from "../../assets/wash/sliders/1.png";
+import { Link } from "react-router-dom";
 import washIconRoad from "../../assets/wash/wash-item-icon.png";
 import backIcon from "../../assets/wash/back.svg";
 
 // Import Swiper styles
 import "swiper/css";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Item = ({ data }) => {
   console.log(data);
+  const [balanceCurrent, setBalanceCurrent] = useState("0");
 
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {
@@ -23,6 +25,24 @@ const Item = ({ data }) => {
       return htmlElements.join(" ");
     }
   };
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    if (token !== "") {
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+        .then((res) => {
+          const result = res.data.balanceWash.find(
+            (item) => item.id === data.id
+          );
+          if (result === undefined) return;
+
+          setBalanceCurrent(result.balance);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <section className="wash">
@@ -54,7 +74,9 @@ const Item = ({ data }) => {
               <p className="wash__item-page-info-balance-text">
                 Баланс на мийці
               </p>
-              <p className="wash__item-page-info-balance-price">26 ₴</p>
+              <p className="wash__item-page-info-balance-price">
+                {balanceCurrent} ₴
+              </p>
             </div>
 
             <div className="wash__item-page-info-content">
@@ -84,9 +106,12 @@ const Item = ({ data }) => {
                 className="wash__item-page-info-content-desc"
               ></p>
 
-              <button className="wash__item-page-info-content-deposit">
+              <Link
+                to={`/payment/${data.id}`}
+                className="wash__item-page-info-content-deposit"
+              >
                 Поповнити баланс
-              </button>
+              </Link>
 
               <button className="wash__item-page-info-content-road">
                 Прокласти маршрут
