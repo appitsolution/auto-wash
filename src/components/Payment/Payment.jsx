@@ -60,7 +60,7 @@ const Payment = () => {
     amount: sumValue,
     currency: "UAH",
     description: "Поповнення",
-    server_url: `https://auto-wash-back.onrender.com/user/payment?orderId=${orderIdGenerate}`,
+    server_url: `https://auto-wash-back.onrender.com/user/payment?order=${orderIdGenerate}`,
     // result_url: "https://auto-wash-back.onrender.com/user/payment",
     order_id: orderIdGenerate,
   };
