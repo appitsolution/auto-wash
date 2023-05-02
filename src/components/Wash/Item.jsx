@@ -113,9 +113,12 @@ const Item = ({ data }) => {
                 Поповнити баланс
               </Link>
 
-              <button className="wash__item-page-info-content-road">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
+                className="wash__item-page-info-content-road"
+              >
                 Прокласти маршрут
-              </button>
+              </a>
             </div>
           </div>
           <Link to="/wash" className="wash__item-page-back">
