@@ -154,14 +154,11 @@ const Payment = () => {
               method="POST"
               action="https://www.liqpay.ua/api/3/checkout"
               accept-charset="utf-8"
+              onSubmit={createOrder}
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
-              <button
-                type="submit"
-                className="payment__content-pay"
-                onClick={createOrder}
-              >
+              <button type="submit" className="payment__content-pay">
                 Поповнити
               </button>
             </form>
