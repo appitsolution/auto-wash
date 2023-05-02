@@ -37,11 +37,13 @@ const NumberPhone = () => {
       }, 3000);
       return;
     }
-    await axios.post(`${process.env.REACT_APP_SERVER}/user/check-code`, {
-      number: currentNumber,
-    });
-    navigate(`/signin/${currentNumber}`);
-    console.log(currentNumber);
+    axios
+      .post(`${process.env.REACT_APP_SERVER}/user/check-code`, {
+        number: currentNumber,
+      })
+      .then(() => {
+        navigate(`/signin/${currentNumber}`);
+      });
   };
 
   return (
@@ -69,7 +71,9 @@ const NumberPhone = () => {
                 >
                   некоректні дані
                 </p>
-                <button className="number-phone__form-button">Далі</button>
+                <button className="number-phone__form-button" type="submit">
+                  Далі
+                </button>
               </Form>
             )}
           </Formik>
