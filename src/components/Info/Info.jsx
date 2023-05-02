@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import profileLogo from "../../assets/logo-profile.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -7,7 +7,7 @@ import qrImg from "../../assets/profile/questions-1.png";
 import carInfo from "../../assets/carInfo.svg";
 import cardInfo from "../../assets/cardInfo.svg";
 
-const Info = () => {
+const Info = memo(() => {
   const [data, setData] = useState({});
 
   const token = useSelector((state) => state.user.token);
@@ -95,6 +95,6 @@ const Info = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Info;
