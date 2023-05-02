@@ -1,18 +1,36 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import scan from "../assets/icons/scan.svg";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const QRPage = () => {
+  const navigate = useNavigate();
   const [qrData, setQrData] = useState("");
 
   const handleError = (error) => {
     console.error(error);
   };
 
-  const handleScan = (data) => {
+  const handleScan = async (data) => {
     if (data) {
-      console.log(data);
-      setQrData(data.text);
+      // console.log(data);
+      try {
+        const dataWash = JSON.parse(data.text);
+
+        if (dataWash.hasOwnProperty("washId")) {
+          const total = await axios.get(
+            `${process.env.REACT_APP_SERVER}/api/wash/${dataWash.washId}`
+          );
+          if (total.data.hasOwnProperty("title")) {
+            navigate(`/wash/${total.data.id}`);
+          }
+          console.log(total);
+        }
+        setQrData(data.text);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   return (
