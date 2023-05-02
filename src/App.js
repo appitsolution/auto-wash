@@ -22,7 +22,7 @@ import InfoPage from "./pages/info";
 import MyCards from "./pages/my-cards";
 import PaymentPage from "./pages/payment";
 import axios from "axios";
-import QRPage from "./components/QRPage";
+import QR from "./pages/qr";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -209,7 +209,7 @@ const App = () => {
           />
         }
       />
-      <Route path="/qr-scan" element={<QRPage />} />
+      <Route path="/qr-scan" element={<QR />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
