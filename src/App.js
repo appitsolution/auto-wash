@@ -93,14 +93,22 @@ const App = () => {
           />
         }
       />
-      <Route path="/signin/:number" element={<SignIn />} />
+      <Route
+        path="/signin/:number"
+        element={
+          <PrivateRouter
+            isAuthenticated={!isAuthenticated}
+            element={<SignIn />}
+            pathNotAuthenticated="/info"
+          />
+        }
+      />
       <Route
         path="/promotions/:id"
         element={
           <PrivateRouter
-            isAuthenticated={!isAuthenticated}
+            isAuthenticated={isAuthenticated}
             element={<PromotionsItem />}
-            pathNotAuthenticated="/info"
           />
         }
       />
