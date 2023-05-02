@@ -12,7 +12,7 @@ const QRPage = () => {
   const handleScan = (data) => {
     if (data) {
       console.log(data);
-      setQrData(data);
+      setQrData(data.text);
     }
   };
   return (
@@ -24,7 +24,10 @@ const QRPage = () => {
           className="qr-scan"
           constraints={{ facingMode: "environment" }}
         />
-        <img className="qr-scan-icon" src={scan} alt="icon" />
+        <div className="qr-scan-content">
+          <p className="qr-scan-content-text">{qrData}</p>
+          <img className="qr-scan-icon" src={scan} alt="icon" />
+        </div>
       </div>
     </>
   );
