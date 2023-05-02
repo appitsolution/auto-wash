@@ -68,7 +68,18 @@ const Payment = () => {
     CryptoJS.enc.Base64
   );
 
+  const createOrderMiddle = async () => {
+    await axios.post(`${process.env.REACT_APP_SERVER}/user/payment-create`, {
+      number: currentNumber,
+      orderId: orderIdGenerate,
+      washId: id,
+      titleWash: dataWash.title,
+      addressWash: dataWash.address,
+    });
+  };
+
   const createOrder = async (e) => {
+    e.preventDefault();
     if (numberValue === "") return;
     if (!acceptNumber) {
       e.preventDefault();
@@ -80,14 +91,9 @@ const Payment = () => {
       return;
     }
 
-    alert("ok");
-    await axios.post(`${process.env.REACT_APP_SERVER}/user/payment-create`, {
-      number: currentNumber,
-      orderId: orderIdGenerate,
-      washId: id,
-      titleWash: dataWash.title,
-      addressWash: dataWash.address,
-    });
+    await createOrderMiddle();
+
+    document.getElementById("payment-form").submit();
   };
 
   return (
@@ -153,19 +159,15 @@ const Payment = () => {
             </div>
 
             <form
+              onSubmit={createOrder}
               method="POST"
               action="https://www.liqpay.ua/api/3/checkout"
               accept-charset="utf-8"
+              id="payment-form"
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
-              <button
-                type="submit"
-                className="payment__content-pay"
-                onClick={createOrder}
-              >
-                Поповнити
-              </button>
+              <button className="payment__content-pay">Поповнити</button>
             </form>
           </div>
         </div>
