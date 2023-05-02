@@ -1,13 +1,16 @@
-import React from "react";
-import Footer from "../components/Footer";
+import React, { lazy, Suspense } from "react";
 import Page from "../components/HistoryOrder/Page";
 import OnlyMobile from "../components/OnlyMobile";
+
+const Footer = lazy(() => import("../components/Footer"));
 
 const HistoryOrder = () => {
   return (
     <>
       <Page />
-      <Footer current="history" />
+      <Suspense>
+        <Footer current="history" />
+      </Suspense>
       <OnlyMobile />
     </>
   );

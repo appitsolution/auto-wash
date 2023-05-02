@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import React, { Suspense, useEffect, useState, lazy } from "react";
 import OnlyMobile from "../components/OnlyMobile";
 import Page from "../components/Wash/Page";
 import axios from "axios";
+
+const Footer = lazy(() => import("../components/Footer"));
 
 const Wash = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,9 @@ const Wash = () => {
   return (
     <>
       <Page data={data} />
-      <Footer current="wash" />
+      <Suspense>
+        <Footer current="wash" />
+      </Suspense>
       <OnlyMobile />
     </>
   );

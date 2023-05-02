@@ -20,6 +20,12 @@
         align-items: center;
         gap: 10px;
 
+        &:active {
+            appearance: none;
+            outline: none;
+            background: none;
+        }
+
         &-icon {
             width: 32px;
             height: 26px;

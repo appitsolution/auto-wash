@@ -19,6 +19,7 @@
         align-items: center;
 
         color: #000000;
+        min-height: 30px;
     }
 
     &-flex {
@@ -129,6 +130,7 @@
 
                 color: #000000;
                 overflow: hidden;
+                min-height: 24px;
             }
         }
 

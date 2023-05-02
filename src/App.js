@@ -1,28 +1,31 @@
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import PrivateRouter from "./components/PrivateRouter";
-import Home from "./pages/home";
-import SignIn from "./pages/sign-in";
-import Promotions from "./pages/promotions";
-import PromotionsItem from "./pages/promotions-item";
-import NotFound from "./pages/404";
-import Wash from "./pages/wash";
-import WashItem from "./pages/wash-item";
-import HistoryOrder from "./pages/history-order";
-import Profile from "./pages/profile";
-import ProfileSettings from "./pages/profile-settings";
-import ProfileSupport from "./pages/profile-support";
-import ProfileQuestions from "./pages/profile-questions";
-import ProfileQuestionsItem from "./pages/profile-questions-item";
-import ProfileData from "./pages/profile-data";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "./redux/slice/sliceUser";
-import ProfileDataCars from "./pages/profile-data-cars";
-import InfoPage from "./pages/info";
-import MyCards from "./pages/my-cards";
-import PaymentPage from "./pages/payment";
 import axios from "axios";
-import QR from "./pages/qr";
+import PrivateRouter from "./components/PrivateRouter";
+import ProfileDataCars from "./pages/profile-data-cars";
+
+const Home = lazy(() => import("./pages/home"));
+const SignIn = lazy(() => import("./pages/sign-in"));
+const Promotions = lazy(() => import("./pages/promotions"));
+const PromotionsItem = lazy(() => import("./pages/promotions-item"));
+const NotFound = lazy(() => import("./pages/404"));
+const Wash = lazy(() => import("./pages/wash"));
+const WashItem = lazy(() => import("./pages/wash-item"));
+const HistoryOrder = lazy(() => import("./pages/history-order"));
+const Profile = lazy(() => import("./pages/profile"));
+const ProfileSettings = lazy(() => import("./pages/profile-settings"));
+const ProfileSupport = lazy(() => import("./pages/profile-support"));
+const ProfileQuestions = lazy(() => import("./pages/profile-questions"));
+const ProfileQuestionsItem = lazy(() =>
+  import("./pages/profile-questions-item")
+);
+const ProfileData = lazy(() => import("./pages/profile-data"));
+const InfoPage = lazy(() => import("./pages/info"));
+const MyCards = lazy(() => import("./pages/my-cards"));
+const PaymentPage = lazy(() => import("./pages/payment"));
+const QR = lazy(() => import("./pages/qr"));
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,115 +59,119 @@ const App = () => {
   if (!isReady) return null;
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <PrivateRouter
-            isAuthenticated={!isAuthenticated}
-            element={<Home />}
-            pathNotAuthenticated="/info"
-          />
-        }
-      />
-      <Route
-        path="/payment/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<PaymentPage />}
-          />
-        }
-      />
-      <Route
-        path="/info/my-cards"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<MyCards />}
-          />
-        }
-      />
-      <Route
-        path="/info"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<InfoPage />}
-          />
-        }
-      />
-      <Route
-        path="/signin/:number"
-        element={
-          <PrivateRouter
-            isAuthenticated={!isAuthenticated}
-            element={<SignIn />}
-            pathNotAuthenticated="/info"
-          />
-        }
-      />
-      <Route
-        path="/promotions/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<PromotionsItem />}
-          />
-        }
-      />
-      <Route
-        path="/promotions"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<Promotions />}
-          />
-        }
-      />
-      <Route
-        path="/wash/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<WashItem />}
-          />
-        }
-      />
-      <Route
-        path="/wash"
-        element={
-          <PrivateRouter isAuthenticated={isAuthenticated} element={<Wash />} />
-        }
-      />
-      <Route
-        path="/history-order"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<HistoryOrder />}
-          />
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<Profile />}
-          />
-        }
-      />
-      <Route
-        path="/profile/data"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileData />}
-          />
-        }
-      />
-      {/* <Route
+    <Suspense>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRouter
+              isAuthenticated={!isAuthenticated}
+              element={<Home />}
+              pathNotAuthenticated="/info"
+            />
+          }
+        />
+        <Route
+          path="/payment/:id"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<PaymentPage />}
+            />
+          }
+        />
+        <Route
+          path="/info/my-cards"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<MyCards />}
+            />
+          }
+        />
+        <Route
+          path="/info"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<InfoPage />}
+            />
+          }
+        />
+        <Route
+          path="/signin/:number"
+          element={
+            <PrivateRouter
+              isAuthenticated={!isAuthenticated}
+              element={<SignIn />}
+              pathNotAuthenticated="/info"
+            />
+          }
+        />
+        <Route
+          path="/promotions/:id"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<PromotionsItem />}
+            />
+          }
+        />
+        <Route
+          path="/promotions"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<Promotions />}
+            />
+          }
+        />
+        <Route
+          path="/wash/:id"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<WashItem />}
+            />
+          }
+        />
+        <Route
+          path="/wash"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<Wash />}
+            />
+          }
+        />
+        <Route
+          path="/history-order"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<HistoryOrder />}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<Profile />}
+            />
+          }
+        />
+        <Route
+          path="/profile/data"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<ProfileData />}
+            />
+          }
+        />
+        {/* <Route
         path="/profile/data/cars"
         element={
           <PrivateRouter
@@ -173,46 +180,47 @@ const App = () => {
           />
         }
       /> */}
-      <Route
-        path="/profile/settings"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileSettings />}
-          />
-        }
-      />
-      <Route
-        path="/profile/support"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileSupport />}
-          />
-        }
-      />
-      <Route
-        path="/profile/questions/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileQuestionsItem />}
-          />
-        }
-      />
-      <Route
-        path="/profile/questions"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileQuestions />}
-          />
-        }
-      />
-      <Route path="/qr-scan" element={<QR />} />
+        <Route
+          path="/profile/settings"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<ProfileSettings />}
+            />
+          }
+        />
+        <Route
+          path="/profile/support"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<ProfileSupport />}
+            />
+          }
+        />
+        <Route
+          path="/profile/questions/:id"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<ProfileQuestionsItem />}
+            />
+          }
+        />
+        <Route
+          path="/profile/questions"
+          element={
+            <PrivateRouter
+              isAuthenticated={isAuthenticated}
+              element={<ProfileQuestions />}
+            />
+          }
+        />
+        <Route path="/qr-scan" element={<QR />} />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 };
 
