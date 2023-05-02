@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,7 @@ import deleteProfile from "../../assets/profile/delete-profile.svg";
 import outProfile from "../../assets/profile/out-profile.svg";
 import back from "../../assets/profile/back.svg";
 
-const Settings = () => {
+const Settings = memo(() => {
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState();
   const dispatch = useDispatch();
@@ -129,6 +129,6 @@ const Settings = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Settings;
