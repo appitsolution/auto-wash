@@ -46,7 +46,9 @@ const CheckCode = () => {
     localStorage.setItem("token", result.data);
     dispatch(setToken(result.data));
     await Promise.resolve();
-    navigate("/profile");
+    setTimeout(() => {
+      navigate("/profile");
+    }, 200);
   };
 
   const againSendCode = async () => {
