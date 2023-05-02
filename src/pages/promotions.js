@@ -1,9 +1,8 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import OnlyMobile from "../components/OnlyMobile";
 import Page from "../components/Promotions/Page";
 import axios from "axios";
-
-const Footer = lazy(() => import("../components/Footer"));
 
 const Promotions = () => {
   const [data, setData] = useState([]);
@@ -15,10 +14,7 @@ const Promotions = () => {
   return (
     <>
       <Page data={data} />
-
-      <Suspense>
-        <Footer current="promotions" />
-      </Suspense>
+      <Footer current="promotions" />
       <OnlyMobile />
     </>
   );

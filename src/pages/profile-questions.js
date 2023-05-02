@@ -1,9 +1,8 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import OnlyMobile from "../components/OnlyMobile";
+import Footer from "../components/Footer";
 import Questions from "../components/Profile/Questions";
 import axios from "axios";
-
-const Footer = lazy(() => import("../components/Footer"));
 
 const ProfileQuestions = () => {
   const [data, setData] = useState([]);
@@ -16,9 +15,7 @@ const ProfileQuestions = () => {
   return (
     <>
       <Questions data={data} />
-      <Suspense>
-        <Footer current="profile" />
-      </Suspense>
+      <Footer current="profile" />
       <OnlyMobile />
     </>
   );

@@ -1,10 +1,9 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import OnlyMobile from "../components/OnlyMobile";
 import Item from "../components/Promotions/Item";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
-const Footer = lazy(() => import("../components/Footer"));
 
 const PromotionsItem = () => {
   const { id } = useParams();
@@ -20,9 +19,7 @@ const PromotionsItem = () => {
   return (
     <>
       <Item data={data} />
-      <Suspense>
-        <Footer current="promotions" />
-      </Suspense>
+      <Footer current="promotions" />
       <OnlyMobile />
     </>
   );

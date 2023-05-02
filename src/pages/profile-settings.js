@@ -1,16 +1,13 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import Settings from "../components/Profile/Settings";
 import OnlyMobile from "../components/OnlyMobile";
-
-const Footer = lazy(() => import("../components/Footer"));
+import Footer from "../components/Footer";
 
 const ProfileSettings = () => {
   return (
     <>
       <Settings />
-      <Suspense>
-        <Footer current="profile" />
-      </Suspense>
+      <Footer current="profile" />
       <OnlyMobile />
     </>
   );
