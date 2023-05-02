@@ -115,6 +115,7 @@ const Item = ({ data }) => {
 
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
+                target="_blank"
                 className="wash__item-page-info-content-road"
               >
                 Прокласти маршрут
