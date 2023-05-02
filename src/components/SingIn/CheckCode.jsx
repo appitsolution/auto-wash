@@ -47,9 +47,10 @@ const CheckCode = () => {
       }
     );
 
-    localStorage.setItem("token", result.data);
-    dispatch(setToken(result.data));
-    navigate("/profile");
+    localStorage.setItem("token", result.data).then(()=> {
+      dispatch(setToken(result.data));
+      navigate("/profile");
+    });
   };
 
   const againSendCode = async () => {

@@ -202,14 +202,14 @@ const Data = () => {
               Змінити пошту
             </button>
           </div>
-          <Link to="cars" className="profile__data-content-correct">
+          {/* <Link to="cars" className="profile__data-content-correct">
             <img
               className="profile__data-content-corrent-img"
               src={car}
               alt="correct"
             />
             Додати машину
-          </Link>
+          </Link> */}
         </div>
       </div>
 

@@ -145,7 +145,7 @@ const App = () => {
           />
         }
       />
-      <Route
+      {/* <Route
         path="/profile/data/cars"
         element={
           <PrivateRouter
@@ -153,7 +153,7 @@ const App = () => {
             element={<ProfileDataCars />}
           />
         }
-      />
+      /> */}
       <Route
         path="/profile/settings"
         element={
