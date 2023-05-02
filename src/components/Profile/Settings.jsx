@@ -36,6 +36,7 @@ const Settings = () => {
   const outProfileRequest = () => {
     localStorage.removeItem("token");
     dispatch(setToken(""));
+    document.location.reload();
     navigate("/");
   };
 
@@ -44,6 +45,9 @@ const Settings = () => {
       await axios.post(`${process.env.REACT_APP_SERVER}/user/delete`, {
         idUser: data.idUser,
       });
+      localStorage.removeItem("token");
+      dispatch(setToken(""));
+      document.location.reload();
       navigate("/");
     } catch (err) {
       console.log(err);
