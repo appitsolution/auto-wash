@@ -78,7 +78,7 @@ const Page = () => {
           </div>
         ) : (
           <ul className="history-order__list">
-            {data.map((item) => (
+            {data.reverse().map((item) => (
               <li className="history-order__item">
                 <h2 className="history-order__item-title">{item.title}</h2>
                 <div className="history-order__item-block">

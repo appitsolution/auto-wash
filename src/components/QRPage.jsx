@@ -25,7 +25,6 @@ const QRPage = () => {
           if (total.data.hasOwnProperty("title")) {
             navigate(`/wash/${total.data.id}`);
           }
-          console.log(total);
         }
         setQrData(data.text);
       } catch (err) {
