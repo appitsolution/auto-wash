@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import profileLogo from "../../assets/logo-profile.png";
 import dataIcon from "../../assets/profile/profile-data.svg";
@@ -8,7 +8,7 @@ import support from "../../assets/profile/support.svg";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const Profile = () => {
+const Profile = memo(() => {
   const [data, setData] = useState({});
 
   const token = useSelector((state) => state.user.token);
@@ -82,6 +82,6 @@ const Profile = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Profile;

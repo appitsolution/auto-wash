@@ -1,12 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import phone from "../../assets/profile/phone.png";
-import telegram from "../../assets/profile/telegram.png";
-import instagram from "../../assets/profile/instagram.png";
-import youtube from "../../assets/profile/youtube.png";
 
-const Support = ({ data }) => {
+const Support = memo(({ data }) => {
   return (
     <section className="profile__support">
       <div className="container">
@@ -66,6 +63,6 @@ const Support = ({ data }) => {
       </Link>
     </section>
   );
-};
+});
 
 export default Support;

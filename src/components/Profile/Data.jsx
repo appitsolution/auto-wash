@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import correct from "../../assets/profile/correct.png";
@@ -7,7 +7,7 @@ import flag from "../../assets/profile/flag.png";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const Data = () => {
+const Data = memo(() => {
   const [data, setData] = useState({
     idUser: "",
     email: "",
@@ -381,6 +381,6 @@ const Data = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Data;

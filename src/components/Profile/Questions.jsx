@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import questions1 from "../../assets/profile/questions-1.png";
@@ -85,7 +85,7 @@ const dataTest = [
   },
 ];
 
-const Questions = ({ data }) => {
+const Questions = memo(({ data }) => {
   return (
     <section className="profile__questions">
       <div className="container">
@@ -122,6 +122,6 @@ const Questions = ({ data }) => {
       </Link>
     </section>
   );
-};
+});
 
 export default Questions;
