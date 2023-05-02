@@ -210,6 +210,7 @@ const App = () => {
         }
       />
       <Route path="/qr-scan" element={<QRPage />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
