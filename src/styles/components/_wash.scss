@@ -166,22 +166,16 @@
 
             &-block {
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
             }
 
             &-description {
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
-                max-width: 167px;
             }
 
             &-image {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-                align-items: center;
+                display: none;
 
                 &-text {
                     font-family: "Montserrat";
