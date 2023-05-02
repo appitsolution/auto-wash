@@ -17,10 +17,10 @@ const QRPage = () => {
   return (
     <>
       <QrReader
-        facingMode="environment"
         delay={300}
         onResult={handleScan}
         style={{ width: "100%" }}
+        constraints={{ facingMode: "environment" }}
       />
     </>
   );
