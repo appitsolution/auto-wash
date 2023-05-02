@@ -79,6 +79,8 @@ const Payment = () => {
       }, 3000);
       return;
     }
+
+    alert("ok");
     await axios.post(`${process.env.REACT_APP_SERVER}/user/payment-create`, {
       number: currentNumber,
       orderId: orderIdGenerate,
@@ -154,11 +156,14 @@ const Payment = () => {
               method="POST"
               action="https://www.liqpay.ua/api/3/checkout"
               accept-charset="utf-8"
-              onClick={createOrder}
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
-              <button type="submit" className="payment__content-pay">
+              <button
+                type="submit"
+                className="payment__content-pay"
+                onClick={createOrder}
+              >
                 Поповнити
               </button>
             </form>
