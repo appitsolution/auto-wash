@@ -8,3 +8,5 @@ const QR = () => {
     </>
   );
 };
+
+export default QR;
