@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./hooks/Icon";
 
-const Footer = ({ current = "" }) => {
+const Footer = memo(({ current = "" }) => {
   return (
     <footer className="footer">
       <div className="container">
@@ -68,6 +68,6 @@ const Footer = ({ current = "" }) => {
       </div>
     </footer>
   );
-};
+});
 
 export default Footer;
