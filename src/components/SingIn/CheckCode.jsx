@@ -49,7 +49,7 @@ const CheckCode = () => {
     setTimeout(() => {
       document.location.reload();
       navigate("/profile");
-    }, 200);
+    }, 100);
   };
 
   const againSendCode = async () => {
