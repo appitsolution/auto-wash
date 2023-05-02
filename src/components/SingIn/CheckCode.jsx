@@ -47,6 +47,7 @@ const CheckCode = () => {
     dispatch(setToken(result.data));
     await Promise.resolve();
     setTimeout(() => {
+      document.location.reload();
       navigate("/profile");
     }, 200);
   };
