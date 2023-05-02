@@ -40,6 +40,23 @@ const Info = () => {
         <div className="info__block">
           <ul className="info__menu">
             <li className="info__menu-item">
+              <Link className="info__menu-item-link" to="/qr-scan">
+                <img
+                  className="info__menu-item-link-img"
+                  src={qrImg}
+                  alt="menu-info"
+                />
+                <div className="info__menu-item-link-content">
+                  <h2 className="info__menu-item-link-content-title">
+                    Скануй QR-код
+                  </h2>
+                  <p className="info__menu-item-link-content-desc">
+                    Натисність та наведить на QR-код біля апарату
+                  </p>
+                </div>
+              </Link>
+            </li>
+            <li className="info__menu-item">
               <Link className="info__menu-item-link" to="/wash">
                 <img
                   className="info__menu-item-link-img"
