@@ -33,10 +33,6 @@ const CheckCode = () => {
       return;
     }
 
-    console.log(
-      numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
-    );
-
     const result = await axios.post(
       `${process.env.REACT_APP_SERVER}/user/login`,
       {
@@ -47,10 +43,10 @@ const CheckCode = () => {
       }
     );
 
-    localStorage.setItem("token", result.data).then(()=> {
-      dispatch(setToken(result.data));
-      navigate("/profile");
-    });
+    localStorage.setItem("token", result.data);
+    dispatch(setToken(result.data));
+    await Promise.resolve();
+    navigate("/profile");
   };
 
   const againSendCode = async () => {
