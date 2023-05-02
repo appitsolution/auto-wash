@@ -172,7 +172,9 @@ const CheckCode = () => {
                       />
                     </li>
                   </ul>
-                  <button className="number-phone__form-button">Далі</button>
+                  <button type="submit" className="number-phone__form-button">
+                    Далі
+                  </button>
                 </Form>
               )}
             </Formik>
