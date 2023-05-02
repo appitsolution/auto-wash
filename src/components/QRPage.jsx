@@ -16,7 +16,12 @@ const QRPage = () => {
   };
   return (
     <>
-      <QrReader delay={300} onResult={handleScan} style={{ width: "100%" }} />
+      <QrReader
+        facingMode="environment"
+        delay={300}
+        onResult={handleScan}
+        style={{ width: "100%" }}
+      />
     </>
   );
 };
