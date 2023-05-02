@@ -56,7 +56,16 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRouter
+            isAuthenticated={!isAuthenticated}
+            element={<Home />}
+            pathNotAuthenticated="/info"
+          />
+        }
+      />
       <Route
         path="/payment/:id"
         element={
@@ -89,8 +98,9 @@ const App = () => {
         path="/promotions/:id"
         element={
           <PrivateRouter
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={!isAuthenticated}
             element={<PromotionsItem />}
+            pathNotAuthenticated="/info"
           />
         }
       />
