@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
+import scan from "../assets/icons/scan.svg";
 
 const QRPage = () => {
   const [qrData, setQrData] = useState("");
@@ -16,12 +17,15 @@ const QRPage = () => {
   };
   return (
     <>
-      <QrReader
-        delay={300}
-        onResult={handleScan}
-        style={{ width: "100%" }}
-        constraints={{ facingMode: "environment" }}
-      />
+      <div className="qr-scan-block">
+        <QrReader
+          delay={300}
+          onResult={handleScan}
+          className="qr-scan"
+          constraints={{ facingMode: "environment" }}
+        />
+        <img className="qr-scan-icon" src={scan} alt="icon" />
+      </div>
     </>
   );
 };
