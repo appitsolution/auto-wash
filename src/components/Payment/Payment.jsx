@@ -25,8 +25,6 @@ const Payment = () => {
   const [sumValue, setSumValue] = useState("50");
   const [currentNumber, setCurrentNumber] = useState("");
 
-  // const liqpay = LiqPay(publicKey, privateKey);
-
   useEffect(() => {
     const phoneNumber = numberValue;
 
@@ -70,7 +68,7 @@ const Payment = () => {
     CryptoJS.enc.Base64
   );
 
-  const createOrder = (e) => {
+  const createOrder = async (e) => {
     if (numberValue === "") return;
     if (!acceptNumber) {
       e.preventDefault();
@@ -81,7 +79,7 @@ const Payment = () => {
       }, 3000);
       return;
     }
-    axios.post(`${process.env.REACT_APP_SERVER}/user/payment-create`, {
+    await axios.post(`${process.env.REACT_APP_SERVER}/user/payment-create`, {
       number: currentNumber,
       orderId: orderIdGenerate,
       washId: id,
