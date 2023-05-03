@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import paymentUser from "../../assets/profile/profile-data.svg";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const CryptoJS = require("crypto-js");
 
 const publicKey = "sandbox_i98441757663";
@@ -24,6 +25,17 @@ const Payment = () => {
   const [numberValue, setNumberValue] = useState("");
   const [sumValue, setSumValue] = useState("50");
   const [currentNumber, setCurrentNumber] = useState("");
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+      .then((res) => {
+        setCurrentNumber(res.data.phone);
+        setNumberValue(res.data.phone);
+      });
+  }, [token]);
 
   useEffect(() => {
     const phoneNumber = numberValue;
