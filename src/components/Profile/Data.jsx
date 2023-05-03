@@ -21,13 +21,17 @@ const Data = memo(() => {
   const [chagePhone, setChangePhone] = useState(false);
   const [chageName, setChangeName] = useState(false);
   const [chageEmail, setChangeEmail] = useState(false);
+  const [lazyData, setLazyData] = useState(false);
 
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-      .then((res) => setData(res.data));
+      .then((res) => {
+        setData(res.data);
+        setLazyData(true);
+      });
   }, [token]);
 
   // CHANGE PHONE
@@ -110,7 +114,12 @@ const Data = memo(() => {
                 <p className="profile__data-content-data-title">
                   Номер телефону
                 </p>
-                <p className="profile__data-content-data-text">{data.phone}</p>
+                <p
+                  className="profile__data-content-data-text"
+                  style={{ opacity: lazyData ? 1 : 0 }}
+                >
+                  {data.phone}
+                </p>
               </div>
             </div>
             <button
@@ -134,8 +143,12 @@ const Data = memo(() => {
                   className="profile__data-content-data-text"
                   style={
                     data.firstName === ""
-                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
-                      : {}
+                      ? {
+                          fontSize: "15px",
+                          color: "rgba(0, 0, 0, 0.5)",
+                          opacity: lazyData ? 1 : 0,
+                        }
+                      : { opacity: lazyData ? 1 : 0 }
                   }
                 >
                   {data.firstName === ""
@@ -149,8 +162,12 @@ const Data = memo(() => {
                   className="profile__data-content-data-text "
                   style={
                     data.lastName === ""
-                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
-                      : {}
+                      ? {
+                          fontSize: "15px",
+                          color: "rgba(0, 0, 0, 0.5)",
+                          opacity: lazyData ? 1 : 0,
+                        }
+                      : { opacity: lazyData ? 1 : 0 }
                   }
                 >
                   {data.lastName === ""
@@ -182,8 +199,12 @@ const Data = memo(() => {
                   className="profile__data-content-data-text"
                   style={
                     !data.email
-                      ? { fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }
-                      : {}
+                      ? {
+                          fontSize: "15px",
+                          color: "rgba(0, 0, 0, 0.5)",
+                          opacity: lazyData ? 1 : 0,
+                        }
+                      : { opacity: lazyData ? 1 : 0 }
                   }
                 >
                   {!data.email ? "Тут буде ваша пошта" : data.email}

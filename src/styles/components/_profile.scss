@@ -20,6 +20,7 @@
 
         color: #000000;
         min-height: 30px;
+        transition: opacity 250ms linear;
     }
 
     &-flex {
@@ -131,6 +132,7 @@
                 color: #000000;
                 overflow: hidden;
                 min-height: 24px;
+                transition: opacity 350ms linear;
             }
         }
 
