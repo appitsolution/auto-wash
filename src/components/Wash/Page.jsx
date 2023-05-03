@@ -57,7 +57,10 @@ const Page = ({ data }) => {
         />
       </div>
       <div className="container">
-        <ul className="wash__list">
+        <ul
+          className="wash__list"
+          style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
+        >
           {data.map((item) => (
             <li className="wash__item" key={item.id}>
               <Link to={`/wash/${item.id}`} className="wash__item-link">

@@ -9,6 +9,7 @@ import cardInfo from "../../assets/cardInfo.svg";
 
 const Info = memo(() => {
   const [data, setData] = useState({});
+  const [lazyData, setLazyData] = useState(false);
 
   const token = useSelector((state) => state.user.token);
 
@@ -16,14 +17,20 @@ const Info = memo(() => {
     if (token !== "") {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-        .then((res) => setData(res.data));
+        .then((res) => {
+          setData(res.data);
+          setLazyData(true);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   return (
     <section className="info">
       <div className="profile__header">
-        <h1 className="profile__header-title">
+        <h1
+          className="profile__header-title"
+          style={{ opacity: lazyData ? 1 : 0 }}
+        >
           {data.firstName !== "" ? data.firstName : "Тут буде ваше Ім’я"}
         </h1>
         <div className="profile__header-flex">

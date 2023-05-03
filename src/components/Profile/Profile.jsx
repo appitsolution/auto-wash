@@ -48,7 +48,7 @@ const Profile = memo(() => {
           <li className="profile__menu-item">
             <Link className="profile__menu-link" to="/profile/data">
               <img
-                className="rofile__menu-link-img"
+                className="profile__menu-link-img"
                 alt="profile-menu"
                 src={dataIcon}
               />
@@ -58,7 +58,7 @@ const Profile = memo(() => {
           <li className="profile__menu-item">
             <Link className="profile__menu-link" to="/profile/settings">
               <img
-                className="rofile__menu-link-img"
+                className="profile__menu-link-img"
                 alt="profile-menu"
                 src={settings}
               />
@@ -68,7 +68,7 @@ const Profile = memo(() => {
           <li className="profile__menu-item">
             <Link className="profile__menu-link" to="/profile/questions">
               <img
-                className="rofile__menu-link-img"
+                className="profile__menu-link-img"
                 alt="profile-menu"
                 src={question}
               />
@@ -78,7 +78,7 @@ const Profile = memo(() => {
           <li className="profile__menu-item">
             <Link className="profile__menu-link" to="/profile/support">
               <img
-                className="rofile__menu-link-img"
+                className="profile__menu-link-img"
                 alt="profile-menu"
                 src={support}
               />

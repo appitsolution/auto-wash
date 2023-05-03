@@ -36,12 +36,14 @@
     flex-direction: column;
     gap: 30px;
     padding: 125px 0;
+    transition: opacity 500ms linear;
 }
 
 .promotions__item {
     background: #ffffff;
     border-radius: 15px;
     filter: drop-shadow(2px 5px 10px rgba(0, 0, 0, 0.4));
+    min-height: 100px;
 
     &-page {
         padding: 24px 0;

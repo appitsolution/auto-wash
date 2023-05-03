@@ -17,7 +17,10 @@ const Page = ({ data }) => {
         />
       </div>
       <div className="container">
-        <ul className="promotions__list">
+        <ul
+          className="promotions__list"
+          style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
+        >
           {data.map((item) => (
             <li className="promotions__item" key={item.id}>
               <Link
