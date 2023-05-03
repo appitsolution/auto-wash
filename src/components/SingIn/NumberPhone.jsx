@@ -51,7 +51,7 @@ const NumberPhone = () => {
       <div className="container">
         <div className="number-phone__block">
           <h1 className="number-phone__title">Вхід в кабінет</h1>
-          <Formik initialValues={{ phone: "" }} onSubmit={submitNumber}>
+          <Formik initialValues={{ phone: "" }}>
             {() => (
               <Form className="number-phone__form">
                 <Field
@@ -71,7 +71,11 @@ const NumberPhone = () => {
                 >
                   некоректні дані
                 </p>
-                <button className="number-phone__form-button" type="submit">
+                <button
+                  className="number-phone__form-button"
+                  type="button"
+                  onClick={submitNumber}
+                >
                   Далі
                 </button>
               </Form>
