@@ -91,7 +91,10 @@ const Questions = memo(({ data }) => {
       <div className="container">
         <h1 className="profile__questions-title">Відповіді на запитання</h1>
 
-        <ul className="profile__questions-list">
+        <ul
+          className="profile__questions-list"
+          style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
+        >
           {data.map((item) => (
             <li className="profile__questions-list-item" key={item.id}>
               <Link

@@ -8,11 +8,13 @@ const Support = memo(({ data }) => {
     <section className="profile__support">
       <div className="container">
         <h1 className="profile__support-title">Служба підтримки</h1>
-
         {Object.keys(data).length === 0 ? (
           <></>
         ) : (
-          <div className="profile__support-content">
+          <div
+            className="profile__support-content"
+            style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
+          >
             <div className="profile__support-content-numbers">
               <h2 className="profile__support-content-numbers-title">
                 Центр підтримки клієнтів

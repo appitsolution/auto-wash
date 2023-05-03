@@ -7,6 +7,7 @@ import axios from "axios";
 
 const Cards = () => {
   const [data, setData] = useState([]);
+  const [lazyData, setLazyData] = useState(false);
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const Cards = () => {
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
           setData(res.data.balanceWash);
+          setLazyData(true);
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +41,7 @@ const Cards = () => {
       </div>
 
       <div className="container">
-        <ul className="info__cards-list">
+        <ul className="info__cards-list" style={{ opacity: lazyData ? 1 : 0 }}>
           {data.map((item) => (
             <li className="info__cards-list-item">
               <div className="info__cards-list-item-content">
