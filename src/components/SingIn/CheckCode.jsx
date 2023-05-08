@@ -103,6 +103,7 @@ const CheckCode = () => {
 
                           setNumberOneValue(value);
                         }}
+                        autocomplete="off"
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
@@ -123,6 +124,7 @@ const CheckCode = () => {
                             changeFocus(target);
                           }
                         }}
+                        autocomplete="off"
                         value={numberTwoValue}
                         id="numberTwo"
                         className="number-phone__form-number"
@@ -143,6 +145,7 @@ const CheckCode = () => {
                             changeFocus(target);
                           }
                         }}
+                        autocomplete="off"
                         value={numberThreeValue}
                         id="numberThree"
                         className="number-phone__form-number"
@@ -163,6 +166,7 @@ const CheckCode = () => {
                             changeFocus(target);
                           }
                         }}
+                        autocomplete="off"
                         value={numberFourValue}
                         id="numberFour"
                         className="number-phone__form-number"
