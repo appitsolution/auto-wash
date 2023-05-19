@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const Item = ({ data }) => {
   console.log(data);
   const [balanceCurrent, setBalanceCurrent] = useState("0");
+  const [switchWashButton, setSwitchButton] = useState(false);
 
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {
@@ -105,6 +106,25 @@ const Item = ({ data }) => {
                 dangerouslySetInnerHTML={{ __html: parseDescription() }}
                 className="wash__item-page-info-content-desc"
               ></p>
+
+              {switchWashButton ? (
+                <button
+                  className="wash__item-page-info-content-deposit"
+                  onClick={() => setSwitchButton(!switchWashButton)}
+                >
+                  Скінчити мийк
+                </button>
+              ) : (
+                <button
+                  className="wash__item-page-info-content-deposit"
+                  onClick={() => {
+                    if (balanceCurrent === "0") return;
+                    setSwitchButton(!switchWashButton);
+                  }}
+                >
+                  Помити авто
+                </button>
+              )}
 
               <Link
                 to={`/payment/${data.id}`}

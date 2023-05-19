@@ -118,28 +118,6 @@ const Payment = () => {
       <div className="payment__content">
         <div className="payment__content-block">
           <div className="container">
-            <div className="payment__content-number">
-              <input
-                className="payment__content-number-input"
-                placeholder="+380 01 002 03 04"
-                value={numberValue}
-                onInput={({ target }) => setNumberValue(target.value)}
-              />
-
-              <img
-                className="payment__content-number-img"
-                src={paymentUser}
-                alt="payment-icon"
-              />
-            </div>
-            <p
-              className={`number-phone__form-error ${
-                errorNumber ? "active" : ""
-              }`}
-            >
-              некоректні дані
-            </p>
-
             <div className="payment__content-sum">
               <h2 className="payment__content-sum-title">Сума поповнення</h2>
 
