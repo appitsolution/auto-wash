@@ -1,5 +1,65 @@
+.wash__filter {
+    position: relative;
+    width: 100px;
+    height: 35px;
+    margin-top: 125px;
+
+    &-open {
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        width: 100px;
+        height: 35px;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    &-text {
+        position: sticky;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+        z-index: 2;
+    }
+
+    &-buttons {
+        position: absolute;
+        top: 80%;
+        left: 0;
+        width: 100px;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #ffffff;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+        border-radius: 0px 0px 10px 10px;
+        z-index: 1;
+        overflow: hidden;
+        transition: height 250ms linear;
+
+        &.active {
+            height: 80px;
+        }
+    }
+
+    &-button {
+        height: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        z-index: -1;
+    }
+}
+
 .wash__list {
     padding: 125px 0;
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 25px;
