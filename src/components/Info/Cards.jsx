@@ -4,10 +4,12 @@ import back from "../../assets/profile/back.svg";
 import cardsItem from "../../assets/cards-item.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import removeCard from "../../assets/icons/removeCard.svg";
 
 const Cards = () => {
   const [data, setData] = useState([]);
   const [lazyData, setLazyData] = useState(false);
+  const [acceptShow, setAcceptShow] = useState(false);
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -58,9 +60,42 @@ const Cards = () => {
                 src={cardsItem}
                 alt="card-item"
               />
+
+              <button
+                className="info__cards-remove"
+                onClick={() => setAcceptShow(true)}
+              >
+                <img className="info__cards-remove-icon" src={removeCard} />
+              </button>
             </li>
           ))}
         </ul>
+
+        <div
+          className={`info__cards-remove-backdrop ${
+            acceptShow ? "active" : ""
+          }`}
+        >
+          <div className="info__cards-remove-modal">
+            <p className="info__cards-remove-modal-title">
+              Ви дійсно бажаєте видалити картку клієнта?
+            </p>
+            <div className="info__cards-remove-modal-block">
+              <button
+                onClick={() => setAcceptShow(false)}
+                className="info__cards-remove-modal-accept"
+              >
+                Так
+              </button>
+              <button
+                onClick={() => setAcceptShow(false)}
+                className="info__cards-remove-modal-decline"
+              >
+                Ні
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
