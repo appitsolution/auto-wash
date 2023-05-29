@@ -22,6 +22,7 @@ import MyCards from "./pages/my-cards";
 import PaymentPage from "./pages/payment";
 import axios from "axios";
 import QR from "./pages/qr";
+import PaymentPostPage from "./pages/payment-post";
 const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
@@ -73,6 +74,15 @@ const App = () => {
           <PrivateRouter
             isAuthenticated={isAuthenticated}
             element={<PaymentPage />}
+          />
+        }
+      />
+      <Route
+        path="/payment-post/:id"
+        element={
+          <PrivateRouter
+            isAuthenticated={isAuthenticated}
+            element={<PaymentPostPage />}
           />
         }
       />

@@ -107,24 +107,12 @@ const Item = ({ data }) => {
                 className="wash__item-page-info-content-desc"
               ></p>
 
-              {switchWashButton ? (
-                <button
-                  className="wash__item-page-info-content-deposit"
-                  onClick={() => setSwitchButton(!switchWashButton)}
-                >
-                  Скінчити мийк
-                </button>
-              ) : (
-                <button
-                  className="wash__item-page-info-content-deposit"
-                  onClick={() => {
-                    if (balanceCurrent === "0") return;
-                    setSwitchButton(!switchWashButton);
-                  }}
-                >
-                  Помити авто
-                </button>
-              )}
+              <Link
+                to={`/payment-post/${data.id}`}
+                className="wash__item-page-info-content-deposit"
+              >
+                Помити авто
+              </Link>
 
               <Link
                 to={`/payment/${data.id}`}

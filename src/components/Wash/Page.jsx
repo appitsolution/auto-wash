@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import promotions from "../../assets/icons/promotions.svg";
 import wash2 from "../../assets/wash/wash-2.png";
@@ -8,6 +8,8 @@ import slide2 from "../../assets/wash/sliders/2.png";
 import slide3 from "../../assets/wash/sliders/3.png";
 import filterWash from "../../assets/icons/filter-wash.svg";
 import filterWashItem from "../../assets/icons/filter-wash-item.png";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const dataTest = [
   {
@@ -45,6 +47,7 @@ const dataTest = [
 ];
 
 const Page = ({ data }) => {
+  const [userBalanceWash, setBalanceWash] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [currectFilterName, setCurrentFilterName] = useState("А - Я");
   const [filterList, setFilterList] = useState([]);
@@ -63,6 +66,24 @@ const Page = ({ data }) => {
       setFilterList(newList);
     }
   };
+
+  const returnBalanceWash = (id) => {
+    const getBalance = userBalanceWash.find((item) => item.id === id);
+    if (getBalance === undefined) return "0";
+    return getBalance.balance;
+  };
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    if (token !== "") {
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+        .then((res) => {
+          setBalanceWash(res.data.balanceWash);
+        });
+    }
+  }, [data]);
   return (
     <section className="wash">
       <div className="promotions__notification">
@@ -118,6 +139,14 @@ const Page = ({ data }) => {
                         alt="content"
                         src={item.images[0].image.url}
                       />
+                      <div className="wash__item-image-balance">
+                        <p className="wash__item-image-balance-text">
+                          {userBalanceWash.length === 0
+                            ? "0"
+                            : returnBalanceWash(item.id)}{" "}
+                          ₴
+                        </p>
+                      </div>
                     </div>
                     <div className="wash__item-content">
                       <div className="wash__item-content-info">
@@ -154,6 +183,14 @@ const Page = ({ data }) => {
                         alt="content"
                         src={item.images[0].image.url}
                       />
+                      <div className="wash__item-image-balance">
+                        <p className="wash__item-image-balance-text">
+                          {userBalanceWash.length === 0
+                            ? "0"
+                            : returnBalanceWash(item.id)}{" "}
+                          ₴
+                        </p>
+                      </div>
                     </div>
                     <div className="wash__item-content">
                       <div className="wash__item-content-info">

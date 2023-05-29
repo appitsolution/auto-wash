@@ -1,0 +1,196 @@
+// import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
+
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import back from "../../assets/profile/back.svg";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+const PaymentPost = () => {
+  const { id } = useParams();
+
+  const [dataUser, setDataUser] = useState({});
+
+  const [numberValue, setNumberValue] = useState("");
+  const [sumValue, setSumValue] = useState("50");
+  const [currentNumber, setCurrentNumber] = useState("");
+
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+      .then((res) => {
+        setCurrentNumber(res.data.phone);
+        setNumberValue(res.data.phone);
+        setDataUser(res.data);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "white";
+
+    return () => {
+      document.body.style.backgroundColor = "#0F84F0";
+    };
+  }, []);
+
+  const [currentWash, setCurrentWash] = useState({});
+  const [washPosts, setWashPosts] = useState([]);
+  const [selectPost, setSelectPost] = useState("");
+
+  const changeSelected = (number) => {
+    if (selectPost === number) {
+      return setSelectPost("");
+    }
+    setSelectPost(number);
+  };
+
+  const getWashPosts = async () => {
+    const result = await axios.get(
+      `${process.env.REACT_APP_SERVER}/api/wash/${id}`
+    );
+    setCurrentWash(result.data);
+    const newPosts = result.data.posts.map((item) => {
+      return { ...item, selected: false };
+    });
+    setWashPosts(newPosts);
+  };
+
+  useEffect(() => {
+    const changePosts = washPosts.map((item) => {
+      if (item.number === selectPost) {
+        return {
+          ...item,
+          selected: true,
+        };
+      } else {
+        return {
+          ...item,
+          selected: false,
+        };
+      }
+    });
+    setWashPosts(changePosts);
+  }, [selectPost]);
+
+  useEffect(() => {
+    getWashPosts();
+  }, [id]);
+
+  return (
+    <section className="payment">
+      <div className="payment__header">
+        <ul className="payment__header__posts">
+          {washPosts.length === 0 ? (
+            <></>
+          ) : (
+            <>
+              {washPosts.map((item) => {
+                if (selectPost === "") {
+                  return (
+                    <li className="payment__header__posts-item">
+                      <button
+                        className="payment__header__posts-button"
+                        onClick={() => changeSelected(item.number)}
+                      >
+                        {item.number}
+                      </button>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li className="payment__header__posts-item">
+                      <button
+                        className={`payment__header__posts-button ${
+                          item.selected ? "active" : "not-active"
+                        }`}
+                        onClick={() => changeSelected(item.number)}
+                      >
+                        {item.number}
+                      </button>
+                    </li>
+                  );
+                }
+              })}
+            </>
+          )}
+        </ul>
+      </div>
+      <div className="payment__content">
+        <div className="payment__content-block">
+          <div className="container">
+            <div className="payment__content-info">
+              <div className="payment__content-info-title">
+                <p className="payment__content-info-title-text">
+                  {Object.keys(currentWash).length === 0
+                    ? ""
+                    : currentWash.title}
+                </p>
+              </div>
+              <div className="payment__content-info-number">
+                <p className="payment__content-info-number-text">
+                  Пост №{selectPost === "" ? "" : selectPost}
+                </p>
+              </div>
+            </div>
+            <div className="payment__content-sum">
+              <h2 className="payment__content-sum-title">Сума поповнення</h2>
+
+              <div className="payment__content-sum-block">
+                <label className="payment__content-sum-input-label">
+                  <input
+                    className="payment__content-sum-input"
+                    value={sumValue}
+                    onInput={({ target }) => setSumValue(target.value)}
+                  />
+                  <p className="payment__content-sum-input-text">грн</p>
+                </label>
+
+                <div className="payment__content-sum-variant">
+                  <button
+                    className="payment__content-sum-variant-button"
+                    onClick={() => setSumValue("100")}
+                  >
+                    100
+                  </button>
+                  <button
+                    onClick={() => setSumValue("200")}
+                    className="payment__content-sum-variant-button"
+                    style={{
+                      opacity:
+                        Object.keys(dataUser).length === 0
+                          ? 1
+                          : dataUser.balanceWash.find((item) => item.id === id)
+                              .balance >= "200"
+                          ? 1
+                          : 0.5,
+                    }}
+                    disabled={
+                      Object.keys(dataUser).length === 0
+                        ? 1
+                        : dataUser.balanceWash.find((item) => item.id === id)
+                            .balance >= "200"
+                        ? false
+                        : true
+                    }
+                  >
+                    200
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button className="payment__content-pay">Оплатити мийку</button>
+          </div>
+        </div>
+      </div>
+
+      <Link to="/wash" className="profile__questions-back">
+        <img className="profile__questions-back-icon" src={back} alt="back" />
+      </Link>
+    </section>
+  );
+};
+
+export default PaymentPost;

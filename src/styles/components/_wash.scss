@@ -89,6 +89,23 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        &-balance {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px 5px 1px 11px;
+            background: #ffffff;
+            border-radius: 20px 0px 0px 0px;
+            &-text {
+                font-family: "Montserrat";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 22px;
+                color: #11bb02;
+            }
+        }
     }
 
     &-content {
