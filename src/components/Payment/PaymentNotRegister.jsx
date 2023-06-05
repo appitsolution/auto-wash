@@ -1,36 +1,19 @@
 // import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useNavigation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import axios from "axios";
-import { useSelector } from "react-redux";
+const CryptoJS = require("crypto-js");
 
-const PaymentPost = () => {
+const publicKey = "sandbox_i98441757663";
+const privateKey = "sandbox_JaBwypsn5eGVcDIIgWDcElXJy6NwEoRXFmh7UuGR";
+
+const PaymentNotRegister = () => {
   const { id } = useParams();
   const navigation = useNavigate();
 
-  const [dataUser, setDataUser] = useState({});
-
-  const [numberValue, setNumberValue] = useState("");
   const [sumValue, setSumValue] = useState("50");
-  const [currentNumber, setCurrentNumber] = useState("");
-
-  const token = useSelector((state) => state.user.token);
-
-  useEffect(() => {
-    try {
-      axios
-        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-        .then((res) => {
-          setCurrentNumber(res.data.phone);
-          setNumberValue(res.data.phone);
-          setDataUser(res.data);
-        });
-    } catch (err) {
-      navigation("/404");
-    }
-  }, [token]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
@@ -61,12 +44,7 @@ const PaymentPost = () => {
         return { ...item, selected: false };
       });
       setWashPosts(newPosts);
-
-      if (result.response.status === 404) {
-        return navigation("/404");
-      }
     } catch (err) {
-      console.log(err.response.status === 404);
       if (err.response.status === 404) {
         return navigation("/404");
       }
@@ -93,6 +71,52 @@ const PaymentPost = () => {
   useEffect(() => {
     getWashPosts();
   }, [id]);
+
+  const orderIdGenerate = String(Math.floor(Math.random() * 900000) + 100000);
+
+  const json_string = {
+    version: "3",
+    public_key: publicKey,
+    action: "pay",
+    amount: sumValue,
+    currency: "UAH",
+    description: "Поповнення",
+    // server_url: `https://auto-wash-back.onrender.com/user/payment`,
+    result_url: `https://auto-wash-back.onrender.com/user/payment-not-register?order=${orderIdGenerate}`,
+    order_id: orderIdGenerate,
+  };
+  const data = JSON.stringify(json_string).toString(CryptoJS.enc.Base64);
+
+  const signature = CryptoJS.SHA1(privateKey + data + privateKey).toString(
+    CryptoJS.enc.Base64
+  );
+
+  const createOrderMiddle = async () => {
+    const dataWash = await axios.get(
+      `${process.env.REACT_APP_SERVER}/api/wash/${id}`
+    );
+    await axios.post(
+      `${process.env.REACT_APP_SERVER}/user/payment-create-not-register`,
+      {
+        orderId: orderIdGenerate,
+        washId: id,
+        washNumberPost: selectPost,
+        titleWash: dataWash.data.title,
+        addressWash: dataWash.data.address,
+      }
+    );
+  };
+
+  const createOrder = async (e) => {
+    e.preventDefault();
+
+    if (selectPost === "") return;
+    if (sumValue === "") return;
+
+    await createOrderMiddle();
+
+    document.getElementById("payment-form").submit();
+  };
 
   return (
     <section className="payment">
@@ -173,23 +197,6 @@ const PaymentPost = () => {
                   <button
                     onClick={() => setSumValue("200")}
                     className="payment__content-sum-variant-button"
-                    style={{
-                      opacity:
-                        Object.keys(dataUser).length === 0
-                          ? 1
-                          : dataUser.balanceWash.find((item) => item.id === id)
-                              .balance >= "200"
-                          ? 1
-                          : 0.5,
-                    }}
-                    disabled={
-                      Object.keys(dataUser).length === 0
-                        ? 1
-                        : dataUser.balanceWash.find((item) => item.id === id)
-                            .balance >= "200"
-                        ? false
-                        : true
-                    }
                   >
                     200
                   </button>
@@ -197,7 +204,17 @@ const PaymentPost = () => {
               </div>
             </div>
 
-            <button className="payment__content-pay">Оплатити мийку</button>
+            <form
+              onSubmit={createOrder}
+              method="POST"
+              action="https://www.liqpay.ua/api/3/checkout"
+              accept-charset="utf-8"
+              id="payment-form"
+            >
+              <input type="hidden" name="data" value={data} />
+              <input type="hidden" name="signature" value={signature} />
+              <button className="payment__content-pay">Поповнити мийку</button>
+            </form>
           </div>
         </div>
       </div>
@@ -209,4 +226,4 @@ const PaymentPost = () => {
   );
 };
 
-export default PaymentPost;
+export default PaymentNotRegister;

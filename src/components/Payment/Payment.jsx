@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
-import paymentUser from "../../assets/profile/profile-data.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 const CryptoJS = require("crypto-js");
@@ -29,12 +28,16 @@ const Payment = () => {
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-      .then((res) => {
-        setCurrentNumber(res.data.phone);
-        setNumberValue(res.data.phone);
-      });
+    try {
+      axios
+        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
+        .then((res) => {
+          setCurrentNumber(res.data.phone);
+          setNumberValue(res.data.phone);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }, [token]);
 
   useEffect(() => {

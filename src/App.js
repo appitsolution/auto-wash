@@ -23,6 +23,7 @@ import PaymentPage from "./pages/payment";
 import axios from "axios";
 import QR from "./pages/qr";
 import PaymentPostPage from "./pages/payment-post";
+import PaymentNotRegisterPage from "./pages/payment-not-register";
 const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
@@ -85,6 +86,10 @@ const App = () => {
             element={<PaymentPostPage />}
           />
         }
+      />
+      <Route
+        path="/payment-not-register/:id"
+        element={<PaymentNotRegisterPage />}
       />
       <Route
         path="/info/my-cards"
