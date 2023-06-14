@@ -1,6 +1,6 @@
 // import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useNavigation, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import axios from "axios";
@@ -93,6 +93,15 @@ const PaymentPost = () => {
   useEffect(() => {
     getWashPosts();
   }, [id]);
+
+  const checkSelectedPost = useMemo(() => {
+    if (washPosts.length === 0) return false;
+
+    const selectedPost = washPosts.find((item) => item.selected === true);
+    if (selectedPost === undefined) return false;
+
+    return true;
+  }, [washPosts]);
 
   return (
     <section className="payment">
@@ -197,12 +206,17 @@ const PaymentPost = () => {
               </div>
             </div>
 
-            <button className="payment__content-pay">Оплатити мийку</button>
+            <button
+              className="payment__content-pay"
+              style={{ opacity: checkSelectedPost ? 1 : 0.5 }}
+            >
+              Оплатити мийку
+            </button>
           </div>
         </div>
       </div>
 
-      <Link to="/wash" className="profile__questions-back">
+      <Link to={`/wash/${id}`} className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
     </section>
