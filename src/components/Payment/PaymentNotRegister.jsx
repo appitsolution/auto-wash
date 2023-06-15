@@ -1,6 +1,6 @@
 // import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import axios from "axios";
@@ -118,6 +118,15 @@ const PaymentNotRegister = () => {
     document.getElementById("payment-form").submit();
   };
 
+  const checkSelectedPost = useMemo(() => {
+    if (washPosts.length === 0) return false;
+
+    const selectedPost = washPosts.find((item) => item.selected === true);
+    if (selectedPost === undefined) return false;
+
+    return true;
+  }, [washPosts]);
+
   return (
     <section className="payment">
       <div className="payment__header">
@@ -213,7 +222,13 @@ const PaymentNotRegister = () => {
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
-              <button className="payment__content-pay">Поповнити мийку</button>
+              <button
+                disabled={!checkSelectedPost}
+                className="payment__content-pay"
+                style={{ opacity: checkSelectedPost ? 1 : 0.5 }}
+              >
+                Поповнити мийку
+              </button>
             </form>
           </div>
         </div>
