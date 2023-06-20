@@ -1,8 +1,13 @@
 // import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useNavigation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -103,6 +108,20 @@ const PaymentPost = () => {
     return true;
   }, [washPosts]);
 
+  const checkUserBalanceWash = () => {
+    if (Object.keys(dataUser).length === 0) return false;
+
+    const curentWashBalance = dataUser.balanceWash.find(
+      (item) => item.id === id
+    );
+    if (curentWashBalance === undefined) {
+      // NotificationManager.error("Поповніть свій баланс", "Недостатньо коштів.");
+
+      return false;
+    }
+    return curentWashBalance.balance >= "200" ? false : true;
+  };
+
   return (
     <section className="payment">
       <div className="payment__header">
@@ -183,22 +202,9 @@ const PaymentPost = () => {
                     onClick={() => setSumValue("200")}
                     className="payment__content-sum-variant-button"
                     style={{
-                      opacity:
-                        Object.keys(dataUser).length === 0
-                          ? 1
-                          : dataUser.balanceWash.find((item) => item.id === id)
-                              .balance >= "200"
-                          ? 1
-                          : 0.5,
+                      opacity: checkUserBalanceWash() ? 1 : 0.5,
                     }}
-                    disabled={
-                      Object.keys(dataUser).length === 0
-                        ? 1
-                        : dataUser.balanceWash.find((item) => item.id === id)
-                            .balance >= "200"
-                        ? false
-                        : true
-                    }
+                    disabled={checkUserBalanceWash()}
                   >
                     200
                   </button>
@@ -219,6 +225,7 @@ const PaymentPost = () => {
       <Link to={`/wash/${id}`} className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
+      <NotificationContainer />
     </section>
   );
 };
