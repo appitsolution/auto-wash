@@ -128,6 +128,13 @@ const Item = ({ data }) => {
               >
                 Прокласти маршрут
               </a>
+              <a
+                href={`tel:${data.phoneWash}`}
+                target="_blank"
+                className="wash__item-page-info-content-road"
+              >
+                Зателефонувати
+              </a>
             </div>
           </div>
           <Link to="/wash" className="wash__item-page-back">
