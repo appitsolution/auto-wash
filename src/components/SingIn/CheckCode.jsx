@@ -33,23 +33,28 @@ const CheckCode = () => {
       return;
     }
 
-    const result = await axios.post(
-      `${process.env.REACT_APP_SERVER}/user/login`,
-      {
-        number,
-        code: `${
-          numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
-        }`,
-      }
-    );
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/login`,
+        {
+          number,
+          code: `${
+            numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
+          }`,
+        }
+      );
 
-    localStorage.setItem("token", result.data);
-    dispatch(setToken(result.data));
-    await Promise.resolve();
-    setTimeout(() => {
-      document.location.reload();
-      navigate("/profile");
-    }, 100);
+      localStorage.setItem("token", result.data);
+      dispatch(setToken(result.data));
+      await Promise.resolve();
+      setTimeout(() => {
+        document.location.reload();
+        navigate("/profile");
+      }, 200);
+    } catch (err) {
+      console.log(err);
+      navigate("/404");
+    }
   };
 
   const againSendCode = async () => {
