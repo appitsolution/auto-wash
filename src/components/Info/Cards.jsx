@@ -17,7 +17,7 @@ const Cards = () => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
-          setData(res.data.balanceWash);
+          setData(res.data.data.balanceWash);
           setLazyData(true);
         });
     }

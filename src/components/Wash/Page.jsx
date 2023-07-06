@@ -80,7 +80,7 @@ const Page = ({ data }) => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
-          setBalanceWash(res.data.balanceWash);
+          setBalanceWash(res.data.data.balanceWash);
         });
     }
   }, [data]);

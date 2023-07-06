@@ -29,7 +29,7 @@ const Data = memo(() => {
     axios
       .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
       .then((res) => {
-        setData(res.data);
+        setData(res.data.data);
         setLazyData(true);
       });
   }, [token]);

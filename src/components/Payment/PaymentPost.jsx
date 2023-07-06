@@ -28,9 +28,9 @@ const PaymentPost = () => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
-          setCurrentNumber(res.data.phone);
-          setNumberValue(res.data.phone);
-          setDataUser(res.data);
+          setCurrentNumber(res.data.data.phone);
+          setNumberValue(res.data.data.phone);
+          setDataUser(res.data.data);
         });
     } catch (err) {
       navigation("/404");

@@ -52,7 +52,7 @@ const Page = () => {
     axios
       .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
       .then((res) => {
-        setData(res.data.historyPayment);
+        setData(res.data.data.historyPayment);
       })
       .finally(() => {
         setLazyData(true);

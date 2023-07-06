@@ -34,7 +34,7 @@ const Item = ({ data }) => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
-          const result = res.data.balanceWash.find(
+          const result = res.data.data.balanceWash.find(
             (item) => item.id === data.id
           );
           if (result === undefined) return;

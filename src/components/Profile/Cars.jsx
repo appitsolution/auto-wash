@@ -13,7 +13,7 @@ const Cars = () => {
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-      .then((res) => setData(res.data));
+      .then((res) => setData(res.data.data));
   }, [token]);
 
   const [addCarActive, setAddCarActive] = useState(false);

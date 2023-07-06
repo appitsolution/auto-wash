@@ -36,6 +36,7 @@ const App = () => {
     if (tokenLocal !== "") {
       dispatch(setToken(tokenLocal));
       try {
+        console.log("TESE");
         if (tokenLocal === null || tokenLocal === "") {
           setIsReady(true);
           return;
@@ -52,6 +53,8 @@ const App = () => {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      setIsReady(true);
     }
   }, [dispatch]);
 

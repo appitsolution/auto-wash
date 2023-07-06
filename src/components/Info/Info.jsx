@@ -1,11 +1,11 @@
 import { memo, useEffect, useState } from "react";
 import profileLogo from "../../assets/logo-profile.png";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import qrImg from "../../assets/profile/questions-1.png";
 import carInfo from "../../assets/carInfo.svg";
 import cardInfo from "../../assets/cardInfo.svg";
+import requestVerify from "../hooks/requestVerify";
 
 const Info = memo(() => {
   const [data, setData] = useState({});
@@ -13,15 +13,17 @@ const Info = memo(() => {
 
   const token = useSelector((state) => state.user.token);
 
-  useEffect(() => {
+  const getVerify = async () => {
     if (token !== "") {
-      axios
-        .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-        .then((res) => {
-          setData(res.data);
-          setLazyData(true);
-        });
+      const result = await requestVerify(token);
+
+      setData(result);
+      setLazyData(true);
     }
+  };
+
+  useEffect(() => {
+    getVerify();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   return (

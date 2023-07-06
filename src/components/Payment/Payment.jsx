@@ -32,8 +32,8 @@ const Payment = () => {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
-          setCurrentNumber(res.data.phone);
-          setNumberValue(res.data.phone);
+          setCurrentNumber(res.data.data.phone);
+          setNumberValue(res.data.data.phone);
         });
     } catch (err) {
       console.log(err);
