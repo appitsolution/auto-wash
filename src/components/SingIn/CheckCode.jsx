@@ -47,10 +47,10 @@ const CheckCode = () => {
       localStorage.setItem("token", result.data);
       dispatch(setToken(result.data));
       await Promise.resolve();
+      document.location.reload();
       setTimeout(() => {
-        document.location.reload();
         navigate("/profile");
-      }, 200);
+      }, 100);
     } catch (err) {
       console.log(err);
       navigate("/404");

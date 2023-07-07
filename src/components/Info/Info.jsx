@@ -16,8 +16,7 @@ const Info = memo(() => {
   const getVerify = async () => {
     if (token !== "") {
       const result = await requestVerify(token);
-
-      setData(result);
+      setData(result.data);
       setLazyData(true);
     }
   };

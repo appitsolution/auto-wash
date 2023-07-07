@@ -3,6 +3,7 @@ import React, { memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import smile from "../../assets/smile.png";
 import { Link } from "react-router-dom";
+import requestVerify from "../hooks/requestVerify";
 
 // const dataTest = [
 //   {
@@ -48,15 +49,14 @@ const Page = () => {
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState([]);
 
+  const getData = async () => {
+    const result = await requestVerify(token);
+    setData(result.data.historyPayment);
+    setLazyData(true);
+  };
+
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
-      .then((res) => {
-        setData(res.data.data.historyPayment);
-      })
-      .finally(() => {
-        setLazyData(true);
-      });
+    getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
