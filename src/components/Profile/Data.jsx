@@ -389,7 +389,13 @@ const Data = memo(() => {
           </div>
         </div>
 
-        <button onClick={changeEmail} className="profile__data-change-accept">
+        <button
+          onClick={changeEmail}
+          className="profile__data-change-accept"
+          style={{
+            opacity: firstNameValue === "" || lastNameValue === "" ? 0 : 1,
+          }}
+        >
           Підтвердити
         </button>
 

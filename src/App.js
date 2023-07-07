@@ -117,7 +117,7 @@ const App = () => {
         element={
           <PrivateRouter
             isAuthenticated={!isAuthenticated}
-            element={<SignIn />}
+            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
             pathNotAuthenticated="/info"
           />
         }

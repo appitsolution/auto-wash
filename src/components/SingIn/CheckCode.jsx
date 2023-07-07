@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
 
-const CheckCode = () => {
+const CheckCode = ({ setIsAuthenticated }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,8 +46,9 @@ const CheckCode = () => {
 
       localStorage.setItem("token", result.data);
       dispatch(setToken(result.data));
-      await Promise.resolve();
-      document.location.reload();
+      setIsAuthenticated(true);
+      // await Promise.resolve();
+      // document.location.reload();
       setTimeout(() => {
         navigate("/profile");
       }, 100);
