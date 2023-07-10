@@ -290,7 +290,11 @@ const Data = memo(() => {
           </div>
         </div>
 
-        <button onClick={changePhone} className="profile__data-change-accept">
+        <button
+          onClick={changePhone}
+          className="profile__data-change-accept"
+          style={{ opacity: acceptNumber ? 1 : 0.5 }}
+        >
           Підтвердити
         </button>
 
@@ -346,7 +350,13 @@ const Data = memo(() => {
           </div>
         </div>
 
-        <button onClick={changeName} className="profile__data-change-accept">
+        <button
+          onClick={changeName}
+          className="profile__data-change-accept"
+          style={{
+            opacity: firstNameValue === "" || lastNameValue === "" ? 0.5 : 1,
+          }}
+        >
           Підтвердити
         </button>
 
@@ -393,7 +403,7 @@ const Data = memo(() => {
           onClick={changeEmail}
           className="profile__data-change-accept"
           style={{
-            opacity: firstNameValue === "" || lastNameValue === "" ? 0 : 1,
+            opacity: emailValue === "" ? 0.5 : 1,
           }}
         >
           Підтвердити
