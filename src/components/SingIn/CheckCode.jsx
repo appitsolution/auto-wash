@@ -50,7 +50,7 @@ const CheckCode = ({ setIsAuthenticated }) => {
       // await Promise.resolve();
       // document.location.reload();
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/imfo");
       }, 100);
     } catch (err) {
       console.log(err);
