@@ -16,6 +16,7 @@ const CheckCode = ({ setIsAuthenticated }) => {
   const [numberTwoValue, setNumberTwoValue] = useState("");
   const [numberThreeValue, setNumberThreeValue] = useState("");
   const [numberFourValue, setNumberFourValue] = useState("");
+  const [errorCode, setErrorCode] = useState(false);
 
   const openSend = () => {
     setSendActive(!sendActive);
@@ -43,18 +44,16 @@ const CheckCode = ({ setIsAuthenticated }) => {
           }`,
         }
       );
-
+      setIsAuthenticated(true);
       localStorage.setItem("token", result.data);
       dispatch(setToken(result.data));
-      setIsAuthenticated(true);
-      // await Promise.resolve();
-      // document.location.reload();
+
       setTimeout(() => {
         navigate("/info");
-      }, 100);
+      }, 150);
     } catch (err) {
+      setErrorCode(true);
       console.log(err);
-      navigate("/404");
     }
   };
 
@@ -113,6 +112,12 @@ const CheckCode = ({ setIsAuthenticated }) => {
                         value={numberOneValue}
                         id="numberOne"
                         className="number-phone__form-number"
+                        style={{
+                          border: errorCode
+                            ? "2px solid red"
+                            : "2px solid black",
+                        }}
+                        onFocus={() => setErrorCode(false)}
                         type="tel"
                         name="number1"
                         maxLength={1}
@@ -134,6 +139,12 @@ const CheckCode = ({ setIsAuthenticated }) => {
                         value={numberTwoValue}
                         id="numberTwo"
                         className="number-phone__form-number"
+                        style={{
+                          border: errorCode
+                            ? "2px solid red"
+                            : "2px solid black",
+                        }}
+                        onFocus={() => setErrorCode(false)}
                         type="tel"
                         name="number2"
                         maxLength="1"
@@ -155,6 +166,12 @@ const CheckCode = ({ setIsAuthenticated }) => {
                         value={numberThreeValue}
                         id="numberThree"
                         className="number-phone__form-number"
+                        style={{
+                          border: errorCode
+                            ? "2px solid red"
+                            : "2px solid black",
+                        }}
+                        onFocus={() => setErrorCode(false)}
                         type="tel"
                         name="number3"
                         maxLength={1}
@@ -176,6 +193,12 @@ const CheckCode = ({ setIsAuthenticated }) => {
                         value={numberFourValue}
                         id="numberFour"
                         className="number-phone__form-number"
+                        style={{
+                          border: errorCode
+                            ? "2px solid red"
+                            : "2px solid black",
+                        }}
+                        onFocus={() => setErrorCode(false)}
                         type="tel"
                         name="number4"
                         maxLength={1}
