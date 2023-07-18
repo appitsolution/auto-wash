@@ -207,7 +207,10 @@ const MapComponent = () => {
               position={[marker.coordinates.lat, marker.coordinates.lng]}
             >
               <Popup>
-                <div className="maps-popup">
+                <div
+                  className="maps-popup"
+                  onClick={() => navigation(`/wash/${marker.id}`)}
+                >
                   <p className="maps-popup-address">
                     {marker.city}, {marker.address}
                   </p>
