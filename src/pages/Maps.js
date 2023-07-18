@@ -1,5 +1,6 @@
 import React from "react";
 import MapComponent from "../components/Wash/Maps";
+import OnlyMobile from "../components/OnlyMobile";
 
 const Maps = () => {
   return (
@@ -7,6 +8,7 @@ const Maps = () => {
       <div>
         <MapComponent />
       </div>
+      <OnlyMobile />
     </>
   );
 };
