@@ -154,7 +154,7 @@ const MapComponent = () => {
         <MapContainer
           ref={mapRef}
           center={position}
-          zoom={8}
+          zoom={10}
           style={{ width: "100%", height: "100%", zIndex: 2 }}
           zoomControl={false}
         >
