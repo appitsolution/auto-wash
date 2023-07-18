@@ -24,7 +24,7 @@ import axios from "axios";
 import QR from "./pages/qr";
 import PaymentPostPage from "./pages/payment-post";
 import PaymentNotRegisterPage from "./pages/payment-not-register";
-
+import Maps from "./pages/maps";
 const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
