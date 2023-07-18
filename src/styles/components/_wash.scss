@@ -1,8 +1,14 @@
+.wash__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 125px;
+}
+
 .wash__filter {
     position: relative;
     width: 100px;
     height: 35px;
-    margin-top: 125px;
 
     &-open {
         z-index: 2;
@@ -54,6 +60,25 @@
         justify-content: center;
         gap: 7px;
         z-index: -1;
+    }
+}
+
+.wash__maps {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid #183b6b;
+    background: #0f84f0;
+
+    &-text {
+        padding: 0 13px 0 11px;
+        color: #fff;
+        font-family: Montserrat;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
     }
 }
 

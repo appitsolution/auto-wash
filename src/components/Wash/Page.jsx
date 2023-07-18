@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import promotions from "../../assets/icons/promotions.svg";
 import wash2 from "../../assets/wash/wash-2.png";
 import washAdd from "../../assets/wash/wash-add.svg";
@@ -10,6 +10,7 @@ import filterWash from "../../assets/icons/filter-wash.svg";
 import filterWashItem from "../../assets/icons/filter-wash-item.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import mapIcon from "../../assets/icons/map-icon.png";
 
 const dataTest = [
   {
@@ -47,6 +48,7 @@ const dataTest = [
 ];
 
 const Page = ({ data }) => {
+  const navigation = useNavigate();
   const [userBalanceWash, setBalanceWash] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [currectFilterName, setCurrentFilterName] = useState("А - Я");
@@ -98,31 +100,40 @@ const Page = ({ data }) => {
         />
       </div>
       <div className="container">
-        <div className="wash__filter">
-          <button
-            className="wash__filter-open"
-            onClick={() => setShowFilter(!showFilter)}
-          >
-            <p className="wash__filter-text">{currectFilterName}</p>
-            <img className="wash__filter-icon" src={filterWash} />
-          </button>
+        <div className="wash__head">
+          <div className="wash__filter">
+            <button
+              className="wash__filter-open"
+              onClick={() => setShowFilter(!showFilter)}
+            >
+              <p className="wash__filter-text">{currectFilterName}</p>
+              <img className="wash__filter-icon" src={filterWash} />
+            </button>
 
-          <div className={`wash__filter-buttons ${showFilter ? "active" : ""}`}>
-            <button
-              className="wash__filter-button"
-              onClick={() => filterIs("А - Я")}
+            <div
+              className={`wash__filter-buttons ${showFilter ? "active" : ""}`}
             >
-              <img className="wash__filter-icon" src={filterWashItem} />
-              <p className="wash__filter-text">Від А</p>
-            </button>
-            <button
-              className="wash__filter-button"
-              onClick={() => filterIs("Я - А")}
-            >
-              <img className="wash__filter-icon" src={filterWashItem} />
-              <p className="wash__filter-text">Від Я</p>
-            </button>
+              <button
+                className="wash__filter-button"
+                onClick={() => filterIs("А - Я")}
+              >
+                <img className="wash__filter-icon" src={filterWashItem} />
+                <p className="wash__filter-text">Від А</p>
+              </button>
+              <button
+                className="wash__filter-button"
+                onClick={() => filterIs("Я - А")}
+              >
+                <img className="wash__filter-icon" src={filterWashItem} />
+                <p className="wash__filter-text">Від Я</p>
+              </button>
+            </div>
           </div>
+
+          <button className="wash__maps" onClick={() => navigation("/maps")}>
+            <img className="wash__maps-icon" src={mapIcon} />
+            <p className="wash__maps-text">НА МАПІ</p>
+          </button>
         </div>
         <ul
           className="wash__list"
