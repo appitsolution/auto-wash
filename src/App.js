@@ -24,7 +24,7 @@ import axios from "axios";
 import QR from "./pages/qr";
 import PaymentPostPage from "./pages/payment-post";
 import PaymentNotRegisterPage from "./pages/payment-not-register";
-import Maps from "./pages/maps";
+import MapsWash from "./pages/maps-wash";
 const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
@@ -83,7 +83,7 @@ const App = () => {
         }
       />
 
-      <Route path="/maps" element={<Maps />} />
+      <Route path="/maps" element={<MapsWash />} />
       <Route
         path="/payment-post/:id"
         element={
