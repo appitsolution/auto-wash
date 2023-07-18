@@ -16,6 +16,13 @@ import minus from "../../assets/icons/minus.svg";
 import { useEffect } from "react";
 import axios from "axios";
 import getCoordinates from "./getCoordinates";
+import mapPoint from "../../assets/icons/map-point.svg";
+import L from "leaflet";
+
+const customIcon = new L.Icon({
+  iconUrl: mapPoint, // Замените на путь к вашей иконке
+  iconSize: [32, 32], // Размер иконки [ширина, высота]
+});
 
 function CurrentLocate() {
   const map = useMap();
@@ -114,7 +121,9 @@ const MapComponent = () => {
         result.data.docs.map(async (item) => {
           return {
             ...item,
-            coordinates: await getCoordinates(`Украина ${item.address}`),
+            coordinates: await getCoordinates(
+              `Украина, ${item.city}, ${item.address}`
+            ),
           };
         })
       );
@@ -134,6 +143,37 @@ const MapComponent = () => {
     getWash();
   }, []);
 
+  function getDayOfWeekNumber(dayAbbreviation) {
+    const daysOfWeek = ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+    const dayIndex = daysOfWeek.indexOf(dayAbbreviation.toUpperCase());
+    if (dayIndex === -1) {
+      throw new Error("Неверное сокращенное название дня недели");
+    }
+    return dayIndex;
+  }
+
+  function isShopOpen(openTime, closeTime, weekend) {
+    const currentTime = new Date();
+    const currentDay = currentTime.getDay();
+    const closedDays = weekend.map((item) => getDayOfWeekNumber(item));
+
+    const formattedOpenTime = parseInt(openTime.replace(":", ""));
+    const formattedCloseTime = parseInt(closeTime.replace(":", ""));
+
+    const currentTimeNumeric =
+      currentTime.getHours() * 100 + currentTime.getMinutes();
+
+    const isOpenDay = !closedDays.includes(currentDay);
+
+    const isOpenTime =
+      currentTimeNumeric >= formattedOpenTime &&
+      currentTimeNumeric <= formattedCloseTime;
+
+    return isOpenDay && isOpenTime;
+  }
+
+  // Пример использования функции
+
   return (
     <>
       <div className="maps">
@@ -146,9 +186,9 @@ const MapComponent = () => {
               <img className="maps-head-back-button-icon" src={back} />
             </button>
           </div>
-          <div className="maps-head-filter" onClick={openFilter}>
+          {/* <div className="maps-head-filter" onClick={openFilter}>
             <button className="maps-head-filter-button">Фільтри</button>
-          </div>
+          </div> */}
         </div>
 
         <MapContainer
@@ -160,43 +200,55 @@ const MapComponent = () => {
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          {filterWash.length === 0 ? (
-            <>
-              {wash.map((marker, index) => (
-                <Marker
-                  key={index}
-                  position={[marker.coordinates.lat, marker.coordinates.lng]}
-                >
-                  <Popup>
-                    <div>
-                      <p>Текст для информационного окна</p>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
-            </>
-          ) : (
-            <>
-              {filterWash.map((marker, index) => (
-                <Marker
-                  key={index}
-                  position={[marker.coordinates.lat, marker.coordinates.lng]}
-                >
-                  <Popup>
-                    <div>
-                      <p>Текст для информационного окна</p>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
-            </>
-          )}
+          {wash.map((marker, index) => (
+            <Marker
+              key={index}
+              icon={customIcon}
+              position={[marker.coordinates.lat, marker.coordinates.lng]}
+            >
+              <Popup>
+                <div className="maps-popup">
+                  <p className="maps-popup-address">
+                    {marker.city}, {marker.address}
+                  </p>
+                  <p className="maps-popup-time">
+                    {marker.schedule.timeIn}-{marker.schedule.timeOut}{" "}
+                    {isShopOpen(
+                      marker.schedule.timeIn,
+                      marker.schedule.timeOut,
+                      marker.schedule.weekend.length === 0
+                        ? []
+                        : marker.schedule.weekend.map((item) => item.day)
+                    ) ? (
+                      <>
+                        (<span className="maps-popup-time-open">Відчинено</span>
+                        )
+                      </>
+                    ) : (
+                      <>
+                        (<span className="maps-popup-time-close">Зачинено</span>
+                        )
+                      </>
+                    )}
+                  </p>
+
+                  <ul className="maps-popup-categories">
+                    {marker.categories.map((item) => (
+                      <li className="maps-popup-categories-item">
+                        {item.category.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
 
           <CurrentLocate />
           <MapControls />
         </MapContainer>
 
-        <div className={`maps-filter ${isFilterOpen ? "active" : ""}`}>
+        {/* <div className={`maps-filter ${isFilterOpen ? "active" : ""}`}>
           <div className="maps-filter-block">
             <div className="maps-filter-head">
               <p className="maps-filter-head-title">Фільтри</p>
@@ -241,7 +293,7 @@ const MapComponent = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

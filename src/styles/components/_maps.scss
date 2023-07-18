@@ -196,4 +196,73 @@
             }
         }
     }
+
+    &-popup {
+        & &-address {
+            margin: 0;
+            margin-bottom: 3px;
+        }
+        & &-time {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        &-address {
+            color: #fff;
+            font-family: Montserrat;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+        &-time {
+            color: #fff;
+            font-family: Montserrat;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+
+            &-open {
+                color: #00ff00;
+            }
+            &-close {
+                color: #ffeb00;
+            }
+        }
+
+        &-categories {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            justify-content: space-between;
+
+            &-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px 6px;
+                color: #fff;
+                font-family: Montserrat;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                border-radius: 15px;
+                border: 2px solid white;
+            }
+        }
+    }
+}
+
+.leaflet-popup-content-wrapper {
+    background: #005eb6;
+    box-shadow: none;
+}
+
+.leaflet-popup-tip {
+    background: #005eb6;
+}
+
+.leaflet-popup-close-button span {
+    color: white;
 }
