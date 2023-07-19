@@ -91,7 +91,7 @@ const MapComponent = () => {
   };
 
   const [filterWash, setFilterWash] = useState([]);
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [isOpenWashFilter, setIsOpenWashFilter] = useState(false);
 
   const goFilter = () => {
     const categories = categoriesWash.filter((item) => item.used);
@@ -101,13 +101,22 @@ const MapComponent = () => {
 
     const newFilter = wash.filter((item) => {
       let findCategory = false;
-
+      console.log(usedCategories);
       item.categories.forEach((category) => {
         if (usedCategories.includes(category.category.name)) {
           findCategory = true;
         }
       });
-      if (isOpenFilter) {
+
+      if (findCategory) {
+        return item;
+      } else {
+        return;
+      }
+    });
+
+    if (isOpenWashFilter) {
+      const newFilterIsOpen = newFilter.filter((item) => {
         if (
           isShopOpen(
             item.schedule.timeIn,
@@ -121,9 +130,12 @@ const MapComponent = () => {
         } else {
           return;
         }
-      }
-      if (findCategory) return item;
-    });
+      });
+
+      setFilterWash(newFilterIsOpen);
+      setIsFilterOpen(false);
+      return;
+    }
 
     setFilterWash(newFilter);
     setIsFilterOpen(false);
@@ -342,10 +354,10 @@ const MapComponent = () => {
             <div className="maps-filter-categories">
               <button
                 className={`maps-filter-categories-button ${
-                  isOpenFilter ? "active" : ""
+                  isOpenWashFilter ? "active" : ""
                 }
                 }`}
-                onClick={() => setIsOpenFilter(!isOpenFilter)}
+                onClick={() => setIsOpenWashFilter(!isOpenWashFilter)}
               >
                 Відкрито зараз
               </button>
