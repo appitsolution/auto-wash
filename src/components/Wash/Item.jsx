@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import washIconRoad from "../../assets/wash/wash-item-icon.png";
 import backIcon from "../../assets/wash/back.svg";
 
@@ -10,7 +10,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const Item = ({ data }) => {
-  console.log(data);
+  const location = useLocation();
   const [balanceCurrent, setBalanceCurrent] = useState("0");
   const [switchWashButton, setSwitchButton] = useState(false);
 
@@ -30,6 +30,11 @@ const Item = ({ data }) => {
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
+    localStorage.setItem(
+      "history-path",
+      JSON.stringify({ path: location.pathname })
+    );
+
     if (token !== "") {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })

@@ -26,7 +26,7 @@ const customIcon = new L.Icon({
 
 function CurrentLocate() {
   const map = useMap();
-  const mapEvents = useMapEvents({
+  useMapEvents({
     locationfound: (location) => {
       map.setView({ lat: location.latlng.lat, lng: location.latlng.lng });
     },
@@ -57,10 +57,10 @@ function MapControls() {
   return (
     <div className="maps-control">
       <button onClick={handleZoomIn} className="maps-control-plus">
-        <img className="maps-control-plus-icon" src={plus} />
+        <img className="maps-control-plus-icon" src={plus} alt="plus" />
       </button>
       <button onClick={handleZoomOut} className="maps-control-minus">
-        <img className="maps-control-plus-icon" src={minus} />
+        <img className="maps-control-plus-icon" src={minus} alt="minus" />
       </button>
     </div>
   );
@@ -209,7 +209,11 @@ const MapComponent = () => {
               className="maps-head-back-button"
               onClick={() => navigation("/wash")}
             >
-              <img className="maps-head-back-button-icon" src={back} />
+              <img
+                className="maps-head-back-button-icon"
+                src={back}
+                alt="back"
+              />
             </button>
           </div>
           <div className="maps-head-filter" onClick={openFilter}>
@@ -347,7 +351,11 @@ const MapComponent = () => {
             <div className="maps-filter-head">
               <p className="maps-filter-head-title">Фільтри</p>
               <button className="maps-filter-head-close" onClick={openFilter}>
-                <img className="maps-filter-head-close-icon" src={close} />
+                <img
+                  className="maps-filter-head-close-icon"
+                  src={close}
+                  alt="close"
+                />
               </button>
             </div>
 
@@ -380,6 +388,7 @@ const MapComponent = () => {
                         <img
                           className="maps-filter-categories-button-icon"
                           src={item.icon.url}
+                          alt="categories-icon"
                         />
                       )}
 

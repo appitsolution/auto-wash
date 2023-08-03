@@ -10,7 +10,7 @@ const CryptoJS = require("crypto-js");
 const publicKey = "sandbox_i98441757663";
 const privateKey = "sandbox_JaBwypsn5eGVcDIIgWDcElXJy6NwEoRXFmh7UuGR";
 
-const Payment = () => {
+const Payment = (props) => {
   const { id } = useParams();
   const [dataWash, setDataWash] = useState({});
 
@@ -111,6 +111,14 @@ const Payment = () => {
     document.getElementById("payment-form").submit();
   };
 
+  const prevPath = () => {
+    if (!localStorage.getItem("history-path")) {
+      return null;
+    }
+    const history = JSON.parse(localStorage.getItem("history-path"));
+
+    return history.path;
+  };
   return (
     <section className="payment">
       <div className="payment__header">
@@ -166,7 +174,10 @@ const Payment = () => {
         </div>
       </div>
 
-      <Link to="/info" className="profile__questions-back">
+      <Link
+        to={prevPath() ? prevPath() : "/info"}
+        className="profile__questions-back"
+      >
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
     </section>
