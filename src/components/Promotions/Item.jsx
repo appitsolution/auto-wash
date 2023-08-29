@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Item = ({ data }) => {
+  const { t, i18n } = useTranslation();
+
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {
       const htmlElements = [];
@@ -30,7 +33,7 @@ const Item = ({ data }) => {
                   </h2>
                   <p className="promotions__item-content-date">
                     {" "}
-                    Діє з {data.dateStart.slice(5, 10)} до{" "}
+                    {t("Діє з")} {data.dateStart.slice(5, 10)} {t("до")}{" "}
                     {data.dateEnd.slice(5, 10)}
                   </p>
                 </div>
@@ -52,7 +55,7 @@ const Item = ({ data }) => {
                 className="promotions__item-page-content-desc"
               ></p>
               <button className="promotions__item-page-content-button">
-                Оформити картку
+                {t("Оформити картку")}
               </button>
             </div>
           </div>

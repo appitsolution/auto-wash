@@ -5,10 +5,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
+import { useTranslation } from "react-i18next";
 
 const CheckCode = ({ setIsAuthenticated }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const [sendActive, setSendActive] = useState(false);
 
@@ -85,7 +87,7 @@ const CheckCode = ({ setIsAuthenticated }) => {
       <section className="number-phone">
         <div className="container">
           <div className="number-phone__block">
-            <h1 className="number-phone__second">Введіть код з СМС</h1>
+            <h1 className="number-phone__second">{t("Введіть код з СМС")}</h1>
             <Formik
               initialValues={{
                 number1: "",
@@ -206,7 +208,7 @@ const CheckCode = ({ setIsAuthenticated }) => {
                     </li>
                   </ul>
                   <button type="submit" className="number-phone__form-button">
-                    Далі
+                    {t("Далі")}
                   </button>
                 </Form>
               )}
@@ -214,7 +216,7 @@ const CheckCode = ({ setIsAuthenticated }) => {
 
             <div className="number-phone__code">
               <button className="number-phone__code-open" onClick={openSend}>
-                Мені не прийшов код
+                {t("Мені не прийшов код")}
               </button>
 
               <div
@@ -223,17 +225,17 @@ const CheckCode = ({ setIsAuthenticated }) => {
                 }`}
               >
                 <h2 className="number-phone__code-send-title">
-                  Не прийшов код в СМС?
+                  {t("Не прийшов код в СМС?")}
                 </h2>
                 <p className="number-phone__code-send-text">
-                  Не хвилюйся, тицяй
+                  {t("Не хвилюйся, тицяй")}
                 </p>
 
                 <button
                   className="number-phone__code-send-button"
                   onClick={againSendCode}
                 >
-                  Відправити ще раз
+                  {t("Відправити ще раз")}
                 </button>
               </div>
             </div>

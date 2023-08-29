@@ -5,6 +5,7 @@ import questions1 from "../../assets/profile/questions-1.png";
 import questions2 from "../../assets/profile/questions-2.png";
 import questions3 from "../../assets/profile/questions-3.png";
 import questions4 from "../../assets/profile/questions-4.png";
+import { useTranslation } from "react-i18next";
 
 const dataTest = [
   {
@@ -86,10 +87,13 @@ const dataTest = [
 ];
 
 const Questions = memo(({ data }) => {
+  const { t, i18n } = useTranslation();
   return (
     <section className="profile__questions">
       <div className="container">
-        <h1 className="profile__questions-title">Відповіді на запитання</h1>
+        <h1 className="profile__questions-title">
+          {t("Відповіді на запитання")}
+        </h1>
 
         <ul
           className="profile__questions-list"

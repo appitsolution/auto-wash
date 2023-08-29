@@ -11,6 +11,7 @@ import filterWashItem from "../../assets/icons/filter-wash-item.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import mapIcon from "../../assets/icons/map-icon.png";
+import { useTranslation } from "react-i18next";
 
 const dataTest = [
   {
@@ -48,6 +49,8 @@ const dataTest = [
 ];
 
 const Page = ({ data }) => {
+  const { t, i18n } = useTranslation();
+
   const navigation = useNavigate();
   const [userBalanceWash, setBalanceWash] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
@@ -78,6 +81,7 @@ const Page = ({ data }) => {
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
+    console.log(data);
     if (token !== "") {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
@@ -90,7 +94,7 @@ const Page = ({ data }) => {
     <section className="wash">
       <div className="promotions__notification">
         <p className="promotions__notification-text">
-          Обери собі найкращу мийку або детейлінг
+          {t("Обери собі найкращу мийку або детейлінг")}
         </p>
 
         <img
@@ -132,7 +136,7 @@ const Page = ({ data }) => {
 
           <button className="wash__maps" onClick={() => navigation("/maps")}>
             <img className="wash__maps-icon" src={mapIcon} />
-            <p className="wash__maps-text">НА МАПІ</p>
+            <p className="wash__maps-text">{t("НА МАПІ")}</p>
           </button>
         </div>
         <ul
@@ -175,7 +179,7 @@ const Page = ({ data }) => {
                           src={washAdd}
                         />
                         <p className="wash__item-content-addition-text">
-                          Пилосос
+                          {t("Пилосос")}
                         </p>
                       </div>
                     </div>
@@ -219,7 +223,7 @@ const Page = ({ data }) => {
                           src={washAdd}
                         />
                         <p className="wash__item-content-addition-text">
-                          Пилосос
+                          {t("Пилосос")}
                         </p>
                       </div>
                     </div>

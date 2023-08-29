@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import smile from "../../assets/smile.png";
 import { Link } from "react-router-dom";
 import requestVerify from "../hooks/requestVerify";
+import { useTranslation } from "react-i18next";
 
 // const dataTest = [
 //   {
@@ -48,6 +49,7 @@ const Page = () => {
   const [lazyData, setLazyData] = useState(false);
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState([]);
+  const { t, i18n } = useTranslation();
 
   const getData = async () => {
     const result = await requestVerify(token);
@@ -63,7 +65,7 @@ const Page = () => {
   return (
     <section className="history-order">
       <div className="container">
-        <h1 className="history-order__title">Історія мийок</h1>
+        <h1 className="history-order__title">{t("Історія мийок")}</h1>
         <div
           style={{
             transition: "opacity 250ms linear",
@@ -74,7 +76,7 @@ const Page = () => {
             <div className="history-order__null">
               <div className="history-order__null-content">
                 <p className="history-order__null-content-text">
-                  На жаль, у Вас ще немає історії мийок
+                  {t("На жаль, у Вас ще немає історії мийок")}
                 </p>
                 <img
                   className="history-order__null-content-icon"
@@ -83,7 +85,7 @@ const Page = () => {
                 />
               </div>
               <Link className="history-order__null-button" to="/wash">
-                Виправити це
+                {t("Виправити це")}
               </Link>
             </div>
           ) : (

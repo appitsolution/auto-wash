@@ -2,12 +2,14 @@ import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import phone from "../../assets/profile/phone.png";
+import { useTranslation } from "react-i18next";
 
 const Support = memo(({ data }) => {
+  const { t, i18n } = useTranslation();
   return (
     <section className="profile__support">
       <div className="container">
-        <h1 className="profile__support-title">Служба підтримки</h1>
+        <h1 className="profile__support-title">{t("Служба підтримки")}</h1>
         {Object.keys(data).length === 0 ? (
           <></>
         ) : (
@@ -17,7 +19,7 @@ const Support = memo(({ data }) => {
           >
             <div className="profile__support-content-numbers">
               <h2 className="profile__support-content-numbers-title">
-                Центр підтримки клієнтів
+                {t("Центр підтримки клієнтів")}
               </h2>
 
               <div className="profile__support-content-numbers-block">

@@ -7,12 +7,14 @@ import question from "../../assets/profile/question.svg";
 import support from "../../assets/profile/support.svg";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const Profile = memo(() => {
   const [data, setData] = useState({});
   const [lazyData, setLazyData] = useState(false);
 
   const token = useSelector((state) => state.user.token);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (token !== "") {
@@ -32,7 +34,7 @@ const Profile = memo(() => {
           className="profile__header-title"
           style={{ opacity: lazyData ? 1 : 0 }}
         >
-          {data.firstName !== "" ? data.firstName : "Тут буде ваше Ім’я"}
+          {data.firstName !== "" ? data.firstName : t("Тут буде ваше Ім’я")}
         </h1>
         <div className="profile__header-flex">
           <p className="profile__header-flex-id">#{data.idUser}</p>
@@ -52,7 +54,7 @@ const Profile = memo(() => {
                 alt="profile-menu"
                 src={dataIcon}
               />
-              Особисті дані
+              {t("Особисті дані")}
             </Link>
           </li>
           <li className="profile__menu-item">
@@ -62,7 +64,7 @@ const Profile = memo(() => {
                 alt="profile-menu"
                 src={settings}
               />
-              Налаштування
+              {t("Налаштування")}
             </Link>
           </li>
           <li className="profile__menu-item">
@@ -72,7 +74,7 @@ const Profile = memo(() => {
                 alt="profile-menu"
                 src={question}
               />
-              Відповіді на запитання
+              {t("Відповіді на запитання")}
             </Link>
           </li>
           <li className="profile__menu-item">
@@ -82,7 +84,7 @@ const Profile = memo(() => {
                 alt="profile-menu"
                 src={support}
               />
-              Служба підтримки
+              {t("Служба підтримки")}
             </Link>
           </li>
         </ul>

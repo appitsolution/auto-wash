@@ -1,8 +1,11 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./hooks/Icon";
+import { useTranslation } from "react-i18next";
 
 const Footer = memo(({ current = "" }) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <footer className="footer">
       <div className="container">
@@ -16,7 +19,7 @@ const Footer = memo(({ current = "" }) => {
                 }`}
               >
                 <Icon id="house" />
-                <p className="footer__menu-link-title">Головна</p>
+                <p className="footer__menu-link-title">{t("Головна")}</p>
               </Link>
             </li>
             <li className="footer__menu-item">
@@ -27,7 +30,7 @@ const Footer = memo(({ current = "" }) => {
                 }`}
               >
                 <Icon id="dis" />
-                <p className="footer__menu-link-title">Акції</p>
+                <p className="footer__menu-link-title">{t("Акції")}</p>
               </Link>
             </li>
             <li className="footer__menu-item">
@@ -38,7 +41,7 @@ const Footer = memo(({ current = "" }) => {
                 }`}
               >
                 <Icon id="car" />
-                <p className="footer__menu-link-title">Мийки</p>
+                <p className="footer__menu-link-title">{t("Мийки")}</p>
               </Link>
             </li>
             <li className="footer__menu-item">
@@ -49,7 +52,7 @@ const Footer = memo(({ current = "" }) => {
                 }`}
               >
                 <Icon id="history" />
-                <p className="footer__menu-link-title">Історія</p>
+                <p className="footer__menu-link-title">{t("Історія")}</p>
               </Link>
             </li>
             <li className="footer__menu-item">
@@ -60,7 +63,7 @@ const Footer = memo(({ current = "" }) => {
                 }`}
               >
                 <Icon id="human" />
-                <p className="footer__menu-link-title">Профіль</p>
+                <p className="footer__menu-link-title">{t("Профіль")}</p>
               </Link>
             </li>
           </ul>

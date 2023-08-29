@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 const CryptoJS = require("crypto-js");
 
 const publicKey = "sandbox_i98441757663";
@@ -14,6 +15,7 @@ const PaymentNotRegister = () => {
   const navigation = useNavigate();
 
   const [sumValue, setSumValue] = useState("50");
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
@@ -184,7 +186,10 @@ const PaymentNotRegister = () => {
               </div>
             </div>
             <div className="payment__content-sum">
-              <h2 className="payment__content-sum-title">Сума поповнення</h2>
+              <h2 className="payment__content-sum-title">
+                {" "}
+                {t("Сума поповнення")}
+              </h2>
 
               <div className="payment__content-sum-block">
                 <label className="payment__content-sum-input-label">
@@ -227,7 +232,7 @@ const PaymentNotRegister = () => {
                 className="payment__content-pay"
                 style={{ opacity: checkSelectedPost ? 1 : 0.5 }}
               >
-                Поповнити мийку
+                {t("Поповнити мийку")}
               </button>
             </form>
           </div>

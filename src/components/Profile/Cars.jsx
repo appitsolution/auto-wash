@@ -4,11 +4,13 @@ import back from "../../assets/profile/back.svg";
 import plus from "../../assets/profile/plus.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Cars = () => {
   const [data, setData] = useState({});
 
   const token = useSelector((state) => state.user.token);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     axios
@@ -38,7 +40,7 @@ const Cars = () => {
                 <li className="profile__data-cars-list-item">
                   <div className="profile__data-content-data-block">
                     <p className="profile__data-content-data-title">
-                      Номер авто
+                      {t("Номер авто")}
                     </p>
                     <p
                       className="profile__data-content-data-text"
@@ -52,12 +54,14 @@ const Cars = () => {
             ) : (
               <li className="profile__data-cars-list-item">
                 <div className="profile__data-content-data-block">
-                  <p className="profile__data-content-data-title">Номер авто</p>
+                  <p className="profile__data-content-data-title">
+                    {t("Номер авто")}
+                  </p>
                   <p
                     className="profile__data-content-data-text"
                     style={{ fontSize: "15px", color: "rgba(0, 0, 0, 0.5)" }}
                   >
-                    Тут буде номер вашого авто
+                    {t("Тут буде номер вашого авто")}
                   </p>
                 </div>
               </li>
@@ -73,7 +77,7 @@ const Cars = () => {
               src={plus}
               alt="plus"
             />
-            Додати автомобіль
+            {t("Додати автомобіль")}
           </button>
         </div>
 
@@ -87,10 +91,14 @@ const Cars = () => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">Додати автомобіль</h3>
+            <h3 className="profile__data-change-title">
+              {t("Додати автомобіль")}
+            </h3>
 
             <p className="profile__data-change-text">
-              Введіть новий номер автомобіля, щоб далі користуватися мийками
+              {t(
+                "Введіть новий номер автомобіля, щоб далі користуватися мийками"
+              )}
             </p>
 
             <label
@@ -108,14 +116,14 @@ const Cars = () => {
             </label>
 
             <p className="profile__data-change-text">
-              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
-              з нашою Політикою конфеденційності.
+              {t(`Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
+              з нашою Політикою конфеденційності.`)}
             </p>
           </div>
         </div>
 
         <button onClick={addCarFunc} className="profile__data-change-accept">
-          Підтвердити
+          {t("Підтвердити")}
         </button>
 
         <button

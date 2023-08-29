@@ -10,6 +10,7 @@ import {
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const PaymentPost = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const PaymentPost = () => {
   const [currentNumber, setCurrentNumber] = useState("");
 
   const token = useSelector((state) => state.user.token);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     try {
@@ -179,7 +181,9 @@ const PaymentPost = () => {
               </div>
             </div>
             <div className="payment__content-sum">
-              <h2 className="payment__content-sum-title">Сума поповнення</h2>
+              <h2 className="payment__content-sum-title">
+                {t("Сума поповнення")}
+              </h2>
 
               <div className="payment__content-sum-block">
                 <label className="payment__content-sum-input-label">
@@ -216,7 +220,7 @@ const PaymentPost = () => {
               className="payment__content-pay"
               style={{ opacity: checkSelectedPost ? 1 : 0.5 }}
             >
-              Оплатити мийку
+              {t("Оплатити мийку")}
             </button>
           </div>
         </div>
@@ -225,6 +229,7 @@ const PaymentPost = () => {
       <Link to={`/wash/${id}`} className="profile__questions-back">
         <img className="profile__questions-back-icon" src={back} alt="back" />
       </Link>
+
       <NotificationContainer />
     </section>
   );

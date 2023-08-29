@@ -6,10 +6,12 @@ import qrImg from "../../assets/profile/questions-1.png";
 import carInfo from "../../assets/carInfo.svg";
 import cardInfo from "../../assets/cardInfo.svg";
 import requestVerify from "../hooks/requestVerify";
+import { useTranslation } from "react-i18next";
 
 const Info = memo(() => {
   const [data, setData] = useState({});
   const [lazyData, setLazyData] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const token = useSelector((state) => state.user.token);
 
@@ -27,12 +29,17 @@ const Info = memo(() => {
   }, [token]);
   return (
     <section className="info">
-      <div className="profile__header">
+      <div
+        className="profile__header"
+        onClick={() => {
+          i18n.changeLanguage("en");
+        }}
+      >
         <h1
           className="profile__header-title"
           style={{ opacity: lazyData ? 1 : 0 }}
         >
-          {data.firstName !== "" ? data.firstName : "Тут буде ваше Ім’я"}
+          {data.firstName !== "" ? data.firstName : t("Тут буде ваше Ім’я")}
         </h1>
         <div className="profile__header-flex">
           <p className="profile__header-flex-id">#{data.idUser}</p>
@@ -56,10 +63,10 @@ const Info = memo(() => {
                 />
                 <div className="info__menu-item-link-content">
                   <h2 className="info__menu-item-link-content-title">
-                    Скануй QR-код
+                    {t("Скануй QR-код")}
                   </h2>
                   <p className="info__menu-item-link-content-desc">
-                    Натисність та наведить на QR-код біля апарату
+                    {t("Натисність та наведить на QR-код біля апарату")}
                   </p>
                 </div>
               </Link>
@@ -73,10 +80,10 @@ const Info = memo(() => {
                 />
                 <div className="info__menu-item-link-content">
                   <h2 className="info__menu-item-link-content-title">
-                    Вибери мийку
+                    {t("Вибери мийку")}
                   </h2>
                   <p className="info__menu-item-link-content-desc">
-                    Поповни рахунок чи проклади маршрут
+                    {t("Поповни рахунок чи проклади маршрут")}
                   </p>
                 </div>
               </Link>
@@ -90,10 +97,10 @@ const Info = memo(() => {
                 />
                 <div className="info__menu-item-link-content">
                   <h2 className="info__menu-item-link-content-title">
-                    Мої картки
+                    {t("Мої картки")}
                   </h2>
                   <p className="info__menu-item-link-content-desc">
-                    Перевір баланс своїх карток клієнта
+                    {t("Перевір баланс своїх карток клієнта")}
                   </p>
                 </div>
               </Link>

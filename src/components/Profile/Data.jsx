@@ -6,6 +6,7 @@ import car from "../../assets/profile/car.png";
 import flag from "../../assets/profile/flag.png";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Data = memo(() => {
   const [data, setData] = useState({
@@ -22,6 +23,8 @@ const Data = memo(() => {
   const [chageName, setChangeName] = useState(false);
   const [chageEmail, setChangeEmail] = useState(false);
   const [lazyData, setLazyData] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const token = useSelector((state) => state.user.token);
 
@@ -105,14 +108,14 @@ const Data = memo(() => {
   return (
     <section className="profile__data">
       <div className="container">
-        <h1 className="profile__data-title">Особисті дані</h1>
+        <h1 className="profile__data-title">{t("Особисті дані")}</h1>
 
         <div className="profile__data-content">
           <div className="profile__data-content-flex">
             <div className="profile__data-content-data">
               <div className="profile__data-content-data-block">
                 <p className="profile__data-content-data-title">
-                  Номер телефону
+                  {t("Номер телефону")}
                 </p>
                 <p
                   className="profile__data-content-data-text"
@@ -131,14 +134,14 @@ const Data = memo(() => {
                 src={correct}
                 alt="correct"
               />
-              Змінити номер
+              {t("Змінити номер")}
             </button>
           </div>
 
           <div className="profile__data-content-flex">
             <div className="profile__data-content-data">
               <div className="profile__data-content-data-block">
-                <p className="profile__data-content-data-title">Ім’я</p>
+                <p className="profile__data-content-data-title">{t("Ім’я")}</p>
                 <p
                   className="profile__data-content-data-text"
                   style={
@@ -152,12 +155,14 @@ const Data = memo(() => {
                   }
                 >
                   {data.firstName === ""
-                    ? "Тут буде ваше Ім’я"
+                    ? t("Тут буде ваше Ім’я")
                     : data.firstName}
                 </p>
               </div>
               <div className="profile__data-content-data-block">
-                <p className="profile__data-content-data-title">Прізвище</p>
+                <p className="profile__data-content-data-title">
+                  {t("Прізвище")}
+                </p>
                 <p
                   className="profile__data-content-data-text "
                   style={
@@ -171,7 +176,7 @@ const Data = memo(() => {
                   }
                 >
                   {data.lastName === ""
-                    ? "Тут буде ваше Прізвище"
+                    ? t("Тут буде ваше Прізвище")
                     : data.lastName}
                 </p>
               </div>
@@ -185,7 +190,7 @@ const Data = memo(() => {
                 src={correct}
                 alt="correct"
               />
-              Змінити дані
+              {t("Змінити дані")}
             </button>
           </div>
 
@@ -193,7 +198,7 @@ const Data = memo(() => {
             <div className="profile__data-content-data">
               <div className="profile__data-content-data-block">
                 <p className="profile__data-content-data-title">
-                  Електронна пошта
+                  {t("Електронна пошта")}
                 </p>
                 <p
                   className="profile__data-content-data-text"
@@ -207,7 +212,7 @@ const Data = memo(() => {
                       : { opacity: lazyData ? 1 : 0 }
                   }
                 >
-                  {!data.email ? "Тут буде ваша пошта" : data.email}
+                  {!data.email ? t("Тут буде ваша пошта") : data.email}
                 </p>
               </div>
             </div>
@@ -220,7 +225,7 @@ const Data = memo(() => {
                 src={correct}
                 alt="correct"
               />
-              Змінити пошту
+              {t("Змінити пошту")}
             </button>
           </div>
           {/* <Link to="cars" className="profile__data-content-correct">
@@ -245,10 +250,12 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">Ваш телефон</h3>
+            <h3 className="profile__data-change-title">{t("Ваш телефон")}</h3>
 
             <p className="profile__data-change-text">
-              Введіть новий номер телефону, щоб далі користуватися мийками
+              {t(
+                "Введіть новий номер телефону, щоб далі користуватися мийками"
+              )}
             </p>
 
             <label className="profile__data-change-edit">
@@ -279,13 +286,14 @@ const Data = memo(() => {
                   }
                 }}
                 value={phoneValue}
-                placeholder="Введіть новий номер"
+                placeholder={t("Введіть новий номер")}
                 className="profile__data-change-edit-input"
               />
             </label>
             <p className="profile__data-change-text">
-              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
-              з нашою Політикою конфеденційності.
+              {t(
+                "Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь з нашою Політикою конфеденційності."
+              )}
             </p>
           </div>
         </div>
@@ -295,7 +303,7 @@ const Data = memo(() => {
           className="profile__data-change-accept"
           style={{ opacity: acceptNumber ? 1 : 0.5 }}
         >
-          Підтвердити
+          {t("Підтвердити")}
         </button>
 
         <button
@@ -313,10 +321,10 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">Ваші дані</h3>
+            <h3 className="profile__data-change-title">{t("Ваші дані")}</h3>
 
             <p className="profile__data-change-text">
-              Введіть нові дані, щоб далі користуватися мийками
+              {t("Введіть нові дані, щоб далі користуватися мийками")}
             </p>
 
             <h4 className="profile__data-change-second">І’мя</h4>
@@ -326,26 +334,27 @@ const Data = memo(() => {
                 type="text"
                 value={firstNameValue}
                 onInput={({ target }) => setFirstNameValue(target.value)}
-                placeholder="Введіть нове ім’я"
+                placeholder={t("Введіть нове ім’я")}
                 className="profile__data-change-edit-input"
               />
             </label>
 
-            <h4 className="profile__data-change-second">Прізвище</h4>
+            <h4 className="profile__data-change-second">{t("Прізвище")}</h4>
 
             <label className="profile__data-change-edit">
               <input
                 type="text"
                 value={lastNameValue}
                 onInput={({ target }) => setLastNameValue(target.value)}
-                placeholder="Введіть нове прізвище"
+                placeholder={t("Введіть нове прізвище")}
                 className="profile__data-change-edit-input"
               />
             </label>
 
             <p className="profile__data-change-text">
-              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
-              з нашою Політикою конфеденційності.
+              {t(
+                "Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь з нашою Політикою конфеденційності."
+              )}
             </p>
           </div>
         </div>
@@ -357,7 +366,7 @@ const Data = memo(() => {
             opacity: firstNameValue === "" || lastNameValue === "" ? 0.5 : 1,
           }}
         >
-          Підтвердити
+          {t("Підтвердити")}
         </button>
 
         <button
@@ -375,11 +384,12 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">Ваша пошта</h3>
+            <h3 className="profile__data-change-title">{t("Ваша пошта")}</h3>
 
             <p className="profile__data-change-text">
-              Введіть нову адресу електронної пошти, щоб далі користуватися
-              мийками
+              {t(
+                "Введіть нову адресу електронної пошти, щоб далі користуватися мийками"
+              )}
             </p>
 
             <label className="profile__data-change-edit">
@@ -387,14 +397,15 @@ const Data = memo(() => {
                 type="text"
                 value={emailValue}
                 onInput={({ target }) => setEmailValue(target.value)}
-                placeholder="Введіть нову пошту"
+                placeholder={t("Введіть нову пошту")}
                 className="profile__data-change-edit-input"
               />
             </label>
 
             <p className="profile__data-change-text">
-              Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь
-              з нашою Політикою конфеденційності.
+              {t(
+                "Використовуючи наш сайт оплати мийки, ви визнаєте та погоджуєтесь з нашою Політикою конфеденційності."
+              )}
             </p>
           </div>
         </div>
@@ -406,7 +417,7 @@ const Data = memo(() => {
             opacity: emailValue === "" ? 0.5 : 1,
           }}
         >
-          Підтвердити
+          {t("Підтвердити")}
         </button>
 
         <button

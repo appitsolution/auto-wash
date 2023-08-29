@@ -3,12 +3,16 @@ import { Formik, Form, Field } from "formik";
 import logo from "../../assets/logo-cmb.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import lang from "../../assets/icons/lang.svg";
+import { useTranslation } from "react-i18next";
 
 const NumberPhone = () => {
   const [acceptNumber, setAcceptNumber] = useState(false);
   const [errorNumber, setErrorNumber] = useState(false);
   const [numberInput, setNumberInput] = useState("");
   const [currentNumber, setCurrentNumber] = useState("");
+
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -50,7 +54,21 @@ const NumberPhone = () => {
     <section className="number-phone">
       <div className="container">
         <div className="number-phone__block">
-          <h1 className="number-phone__title">Вхід в кабінет</h1>
+          <button
+            style={{
+              position: "absolute",
+              top: 23,
+              right: 23,
+              borderRadius: 8,
+              background: "#FFF",
+              boxShadow: "3px 4px 4px 0px rgba(0, 0, 0, 0.40)",
+            }}
+            onClick={() => navigate("/lang")}
+            className="number-phone-lang"
+          >
+            <img className="number-phone-lang-icon" src={lang} />
+          </button>
+          <h1 className="number-phone__title">{t("Вхід в кабінет")}</h1>
           <Formik initialValues={{ phone: "" }}>
             {() => (
               <Form className="number-phone__form">
@@ -58,7 +76,7 @@ const NumberPhone = () => {
                   className="number-phone__form-phone"
                   type="text"
                   name="phone"
-                  placeholder="Введіть свій номер телефону"
+                  placeholder={t("Введіть свій номер телефону")}
                   onInput={({ target }) =>
                     setNumberInput(target.value.replace(/[^\d]/g, ""))
                   }
@@ -69,14 +87,14 @@ const NumberPhone = () => {
                     errorNumber ? "active" : ""
                   }`}
                 >
-                  некоректні дані
+                  {t("некоректні дані")}
                 </p>
                 <button
                   className="number-phone__form-button"
                   type="button"
                   onClick={submitNumber}
                 >
-                  Далі
+                  {t("Далі")}
                 </button>
               </Form>
             )}

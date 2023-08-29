@@ -25,15 +25,25 @@ import QR from "./pages/qr";
 import PaymentPostPage from "./pages/payment-post";
 import PaymentNotRegisterPage from "./pages/payment-not-register";
 import MapsWash from "./pages/maps-wash";
+import Lang from "./pages/lang";
+import { useTranslation } from "react-i18next";
+
 const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const tokenLocal = localStorage.getItem("token");
+    const currentLang = localStorage.getItem("lang");
+    if (!currentLang) {
+      localStorage.setItem("lang", "ua");
+    } else {
+      i18n.changeLanguage(currentLang);
+    }
     if (tokenLocal !== "") {
       dispatch(setToken(tokenLocal));
       try {
@@ -69,6 +79,16 @@ const App = () => {
           <PrivateRouter
             isAuthenticated={!isAuthenticated}
             element={<Home />}
+            pathNotAuthenticated="/info"
+          />
+        }
+      />
+      <Route
+        path="/lang"
+        element={
+          <PrivateRouter
+            isAuthenticated={!isAuthenticated}
+            element={<Lang />}
             pathNotAuthenticated="/info"
           />
         }

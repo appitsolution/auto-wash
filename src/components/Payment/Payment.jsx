@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 const CryptoJS = require("crypto-js");
 
 const publicKey = "sandbox_i98441757663";
@@ -24,6 +25,7 @@ const Payment = (props) => {
   const [numberValue, setNumberValue] = useState("");
   const [sumValue, setSumValue] = useState("50");
   const [currentNumber, setCurrentNumber] = useState("");
+  const { t, i18n } = useTranslation();
 
   const token = useSelector((state) => state.user.token);
 
@@ -123,14 +125,16 @@ const Payment = (props) => {
     <section className="payment">
       <div className="payment__header">
         <div className="header">
-          <h1 className="payment__header-title">Поповнення</h1>
+          <h1 className="payment__header-title">{t("Поповнення")}</h1>
         </div>
       </div>
       <div className="payment__content">
         <div className="payment__content-block">
           <div className="container">
             <div className="payment__content-sum">
-              <h2 className="payment__content-sum-title">Сума поповнення</h2>
+              <h2 className="payment__content-sum-title">
+                {t("Сума поповнення")}
+              </h2>
 
               <div className="payment__content-sum-block">
                 <label className="payment__content-sum-input-label">
@@ -168,7 +172,7 @@ const Payment = (props) => {
             >
               <input type="hidden" name="data" value={data} />
               <input type="hidden" name="signature" value={signature} />
-              <button className="payment__content-pay">Поповнити</button>
+              <button className="payment__content-pay">{t("Поповнити")}</button>
             </form>
           </div>
         </div>

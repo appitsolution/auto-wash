@@ -18,6 +18,7 @@ import axios from "axios";
 import getCoordinates from "./getCoordinates";
 import mapPoint from "../../assets/icons/map-point.svg";
 import L from "leaflet";
+import { useTranslation } from "react-i18next";
 
 const customIcon = new L.Icon({
   iconUrl: mapPoint, // Замените на путь к вашей иконке
@@ -67,6 +68,7 @@ function MapControls() {
 }
 
 const MapComponent = () => {
+  const { t, i18n } = useTranslation();
   const [categoriesWash, setCategoriesWash] = useState([]);
   const [wash, setWash] = useState([]);
   const navigation = useNavigate();
@@ -217,7 +219,7 @@ const MapComponent = () => {
             </button>
           </div>
           <div className="maps-head-filter" onClick={openFilter}>
-            <button className="maps-head-filter-button">Фільтри</button>
+            <button className="maps-head-filter-button">{t("Фільтри")}</button>
           </div>
         </div>
 
@@ -258,7 +260,7 @@ const MapComponent = () => {
                           <>
                             (
                             <span className="maps-popup-time-open">
-                              Відчинено
+                              {t("Відчинено")}
                             </span>
                             )
                           </>
@@ -266,7 +268,7 @@ const MapComponent = () => {
                           <>
                             (
                             <span className="maps-popup-time-close">
-                              Зачинено
+                              {t("Зачинено")}
                             </span>
                             )
                           </>
@@ -313,7 +315,7 @@ const MapComponent = () => {
                           <>
                             (
                             <span className="maps-popup-time-open">
-                              Відчинено
+                              {t("Відчинено")}
                             </span>
                             )
                           </>
@@ -321,7 +323,7 @@ const MapComponent = () => {
                           <>
                             (
                             <span className="maps-popup-time-close">
-                              Зачинено
+                              {t("Зачинено")}
                             </span>
                             )
                           </>
@@ -349,7 +351,7 @@ const MapComponent = () => {
         <div className={`maps-filter ${isFilterOpen ? "active" : ""}`}>
           <div className="maps-filter-block">
             <div className="maps-filter-head">
-              <p className="maps-filter-head-title">Фільтри</p>
+              <p className="maps-filter-head-title">{t("Фільтри")}</p>
               <button className="maps-filter-head-close" onClick={openFilter}>
                 <img
                   className="maps-filter-head-close-icon"
@@ -367,7 +369,7 @@ const MapComponent = () => {
                 }`}
                 onClick={() => setIsOpenWashFilter(!isOpenWashFilter)}
               >
-                Відкрито зараз
+                {t("Відкрито зараз")}
               </button>
 
               {categoriesWash.length === 0 ? (
@@ -401,7 +403,7 @@ const MapComponent = () => {
 
             <div className="maps-filter-result">
               <button className="maps-filter-result-button" onClick={goFilter}>
-                Показати результати
+                {t("Показати результати")}
               </button>
             </div>
           </div>

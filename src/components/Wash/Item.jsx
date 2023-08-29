@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Link, useLocation } from "react-router-dom";
 import washIconRoad from "../../assets/wash/wash-item-icon.png";
 import backIcon from "../../assets/wash/back.svg";
+import { useTranslation } from "react-i18next";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,10 +15,12 @@ const Item = ({ data }) => {
   const [balanceCurrent, setBalanceCurrent] = useState("0");
   const [switchWashButton, setSwitchButton] = useState(false);
 
+  const { t, i18n } = useTranslation();
+
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {
       const htmlElements = [];
-
+      if (!data.description) return "";
       data.description.forEach((item, index) => {
         htmlElements.push(item.children[0].text);
         if (index === data.description.length) return;
@@ -73,12 +76,12 @@ const Item = ({ data }) => {
               ))}
             </Swiper>
 
-            <p className="wash__item-page-slider-text">Гортай фото</p>
+            <p className="wash__item-page-slider-text">{t("Гортай фото")}</p>
           </div>
           <div className="wash__item-page-info">
             <div className="wash__item-page-info-balance">
               <p className="wash__item-page-info-balance-text">
-                Баланс на мийці
+                {t("Баланс на мийці")}
               </p>
               <p className="wash__item-page-info-balance-price">
                 {balanceCurrent} ₴
@@ -116,14 +119,14 @@ const Item = ({ data }) => {
                 to={`/payment-post/${data.id}`}
                 className="wash__item-page-info-content-deposit"
               >
-                Помити авто
+                {t("Помити авто")}
               </Link>
 
               <Link
                 to={`/payment/${data.id}`}
                 className="wash__item-page-info-content-deposit"
               >
-                Поповнити баланс
+                {t("Поповнити баланс")}
               </Link>
 
               <a
@@ -131,7 +134,7 @@ const Item = ({ data }) => {
                 target="_blank"
                 className="wash__item-page-info-content-road"
               >
-                Прокласти маршрут
+                {t("Прокласти маршрут")}
               </a>
 
               <a
@@ -143,7 +146,7 @@ const Item = ({ data }) => {
                   pointerEvents: data.phoneWash ? "all" : "none",
                 }}
               >
-                Зателефонувати
+                {t("Зателефонувати")}
               </a>
             </div>
           </div>

@@ -5,12 +5,14 @@ import cardsItem from "../../assets/cards-item.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import removeCard from "../../assets/icons/removeCard.svg";
+import { useTranslation } from "react-i18next";
 
 const Cards = () => {
   const [data, setData] = useState([]);
   const [lazyData, setLazyData] = useState(false);
   const [acceptShow, setAcceptShow] = useState(false);
   const token = useSelector((state) => state.user.token);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (token !== "") {
@@ -26,7 +28,7 @@ const Cards = () => {
   return (
     <section className="info__cards">
       <div className="info__cards-header">
-        <p className="info__cards-header-title">Мої карти клієнта</p>
+        <p className="info__cards-header-title">{t("Мої карти клієнта")}</p>
 
         <Link
           to="/info"
@@ -85,13 +87,13 @@ const Cards = () => {
                 onClick={() => setAcceptShow(false)}
                 className="info__cards-remove-modal-accept"
               >
-                Так
+                {t("Так")}
               </button>
               <button
                 onClick={() => setAcceptShow(false)}
                 className="info__cards-remove-modal-decline"
               >
-                Ні
+                {t("Ні")}
               </button>
             </div>
           </div>

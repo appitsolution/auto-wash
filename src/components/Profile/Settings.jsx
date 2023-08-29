@@ -6,12 +6,15 @@ import { setToken } from "../../redux/slice/sliceUser.js";
 import deleteProfile from "../../assets/profile/delete-profile.svg";
 import outProfile from "../../assets/profile/out-profile.svg";
 import back from "../../assets/profile/back.svg";
+import { useTranslation } from "react-i18next";
 
 const Settings = memo(() => {
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     axios
@@ -57,14 +60,14 @@ const Settings = memo(() => {
   return (
     <section className="profile__settings">
       <div className="container">
-        <h2 className="profile__settings-title">Налаштування</h2>
+        <h2 className="profile__settings-title">{t("Налаштування")}</h2>
         <button className="profile__settings-out" onClick={outProfileFunc}>
           <img
             className="profile__settings-out-icon"
             alt="out-icon"
             src={outProfile}
           />
-          Вийти з аккаунту
+          {t("Вийти з аккаунту")}
         </button>
         <button
           className="profile__settings-delete"
@@ -75,7 +78,7 @@ const Settings = memo(() => {
             alt="out-icon"
             src={deleteProfile}
           />
-          Видалити аккаунт
+          {t("Видалити аккаунт")}
         </button>
       </div>
       <Link to="/profile" className="profile__settings-back">
@@ -86,20 +89,20 @@ const Settings = memo(() => {
         className={`profile__settings-accept-out ${outActive ? "active" : ""}`}
       >
         <h3 className="profile__settings-accept-out-title">
-          Ви дійсно бажаєте вийти з аккаунту ?
+          {t("Ви дійсно бажаєте вийти з аккаунту ?")}
         </h3>
         <div className="profile__settings-accept-out-block">
           <button
             onClick={outProfileRequest}
             className="profile__settings-accept-out-block-yes"
           >
-            Так
+            {t("Так")}
           </button>
           <button
             className="profile__settings-accept-out-block-no"
             onClick={() => setOutActive(false)}
           >
-            Ні
+            {t("Ні")}
           </button>
         </div>
       </div>
@@ -110,20 +113,20 @@ const Settings = memo(() => {
         }`}
       >
         <h3 className="profile__settings-accept-delete-title">
-          Ви дійсно бажаєте видалити аккаунт ?
+          {t("Ви дійсно бажаєте видалити аккаунт ?")}
         </h3>
         <div className="profile__settings-accept-delete-block">
           <button
             className="profile__settings-accept-delete-block-yes"
             onClick={deleteProfileRequest}
           >
-            Так
+            {t("Так")}
           </button>
           <button
             className="profile__settings-accept-delete-block-no"
             onClick={() => setDeleteActive(false)}
           >
-            Ні
+            {t("Ні")}
           </button>
         </div>
       </div>

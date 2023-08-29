@@ -1,13 +1,16 @@
 import React from "react";
 import promotions from "../../assets/icons/promotions.svg";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Page = ({ data }) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="promotions">
       <div className="promotions__notification">
         <p className="promotions__notification-text">
-          Магазин автокосметики та обладнання для автомийок
+          {t("Магазин автокосметики та обладнання для автомийок")}
         </p>
 
         <img
@@ -32,7 +35,7 @@ const Page = ({ data }) => {
                     {item.title}
                   </h2>
                   <p className="promotions__item-content-date">
-                    Діє з {item.dateStart.slice(5, 10)} до{" "}
+                    {t("Діє з")} {item.dateStart.slice(5, 10)} {t("до")}{" "}
                     {item.dateEnd.slice(5, 10)}
                   </p>
                 </div>
