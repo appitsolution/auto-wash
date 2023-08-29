@@ -17,13 +17,23 @@ const QRPage = () => {
       // console.log(data);
       try {
         const dataWash = JSON.parse(data.text);
+        const currentLang = localStorage.getItem("lang");
 
         if (dataWash.hasOwnProperty("washId")) {
-          const total = await axios.get(
-            `${process.env.REACT_APP_SERVER}/api/wash/${dataWash.washId}`
-          );
-          if (total.data.hasOwnProperty("title")) {
-            navigate(`/wash/${total.data.id}`);
+          if (!currentLang) {
+            const total = await axios.get(
+              `${process.env.REACT_APP_SERVER}/api/wash/${dataWash.washId}`
+            );
+            if (total.data.hasOwnProperty("title")) {
+              navigate(`/wash/${total.data.id}`);
+            }
+          } else {
+            const total = await axios.get(
+              `${process.env.REACT_APP_SERVER}/api/wash/${dataWash.washId}?locale=${currentLang}`
+            );
+            if (total.data.hasOwnProperty("title")) {
+              navigate(`/wash/${total.data.id}`);
+            }
           }
         }
         setQrData(data.text);

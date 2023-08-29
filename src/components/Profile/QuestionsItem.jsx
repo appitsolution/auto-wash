@@ -7,6 +7,7 @@ const QuestionsItem = ({ data }) => {
     if (Object.keys(data).length !== 0) {
       const htmlElements = [];
 
+      if (!data.answer) return;
       data.answer.forEach((item, index) => {
         htmlElements.push(item.children[0].text);
         if (index === data.description.length) return;

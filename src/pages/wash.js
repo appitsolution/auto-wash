@@ -8,9 +8,18 @@ const Wash = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_SERVER}/api/wash`).then((res) => {
-      setData(res.data.docs);
-    });
+    const currentLang = localStorage.getItem("lang");
+    if (!currentLang) {
+      axios(`${process.env.REACT_APP_SERVER}/api/wash`).then((res) => {
+        setData(res.data.docs);
+      });
+    } else {
+      axios(
+        `${process.env.REACT_APP_SERVER}/api/wash?locale=${currentLang}`
+      ).then((res) => {
+        setData(res.data.docs);
+      });
+    }
   }, []);
   return (
     <>

@@ -60,18 +60,35 @@ const PaymentPost = () => {
 
   const getWashPosts = async () => {
     try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/wash/${id}`
-      );
-      setCurrentWash(result.data);
-      const newPosts = result.data.posts.map((item) => {
-        return { ...item, selected: false };
-      });
-      setWashPosts(newPosts);
-
-      if (result.response.status === 404) {
-        return navigation("/404");
+      const currentLang = localStorage.getItem('lang')
+      if(!currentLang){
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER}/api/wash/${id}`
+        );
+        setCurrentWash(result.data);
+        const newPosts = result.data.posts.map((item) => {
+          return { ...item, selected: false };
+        });
+        setWashPosts(newPosts);
+  
+        if (result.response.status === 404) {
+          return navigation("/404");
+        }
+      }else {
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`
+        );
+        setCurrentWash(result.data);
+        const newPosts = result.data.posts.map((item) => {
+          return { ...item, selected: false };
+        });
+        setWashPosts(newPosts);
+  
+        if (result.response.status === 404) {
+          return navigation("/404");
+        }
       }
+     
     } catch (err) {
       console.log(err.response.status === 404);
       if (err.response.status === 404) {

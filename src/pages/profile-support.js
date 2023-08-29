@@ -8,9 +8,19 @@ const ProfileSettings = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_SERVER}/api/support`).then((res) => {
-      setData(res.data.docs[0]);
-    });
+    const currentLang = localStorage.getItem("lang");
+
+    if (!currentLang) {
+      axios(`${process.env.REACT_APP_SERVER}/api/support`).then((res) => {
+        setData(res.data.docs[0]);
+      });
+    } else {
+      axios(
+        `${process.env.REACT_APP_SERVER}/api/support?locale=${currentLang}`
+      ).then((res) => {
+        setData(res.data.docs[0]);
+      });
+    }
   }, []);
   return (
     <>

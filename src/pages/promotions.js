@@ -7,9 +7,19 @@ import axios from "axios";
 const Promotions = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios(`${process.env.REACT_APP_SERVER}/api/discount`).then((res) => {
-      setData(res.data.docs);
-    });
+    const currentLang = localStorage.getItem("lang");
+
+    if (!currentLang) {
+      axios(`${process.env.REACT_APP_SERVER}/api/discount`).then((res) => {
+        setData(res.data.docs);
+      });
+    } else {
+      axios(
+        `${process.env.REACT_APP_SERVER}/api/discount?locale=${currentLang}`
+      ).then((res) => {
+        setData(res.data.docs);
+      });
+    }
   }, []);
   return (
     <>

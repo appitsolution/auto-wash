@@ -16,9 +16,22 @@ const Payment = (props) => {
   const [dataWash, setDataWash] = useState({});
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER}/api/wash/${id}`).then((res) => {
-      setDataWash(res.data);
-    });
+    const currentLang = localStorage.getItem("lang");
+    if (!currentLang) {
+      axios
+        .get(`${process.env.REACT_APP_SERVER}/api/wash/${id}`)
+        .then((res) => {
+          setDataWash(res.data);
+        });
+    } else {
+      axios
+        .get(
+          `${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`
+        )
+        .then((res) => {
+          setDataWash(res.data);
+        });
+    }
   }, [id]);
   const [acceptNumber, setAcceptNumber] = useState(false);
   const [errorNumber, setErrorNumber] = useState(false);

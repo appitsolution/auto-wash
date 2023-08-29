@@ -4,7 +4,7 @@ import back from "../../assets/profile/back.svg";
 import phone from "../../assets/profile/phone.png";
 import { useTranslation } from "react-i18next";
 
-const Support = memo(({ data }) => {
+const Support = memo(({ data = [] }) => {
   const { t, i18n } = useTranslation();
   return (
     <section className="profile__support">

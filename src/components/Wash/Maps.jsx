@@ -145,7 +145,17 @@ const MapComponent = () => {
 
   useEffect(() => {
     const getWash = async () => {
-      const result = await axios(`${process.env.REACT_APP_SERVER}/api/wash`);
+      const requestWash = async () => {
+        const currentLang = localStorage.getItem("lang");
+        if (!currentLang) {
+          return await axios(`${process.env.REACT_APP_SERVER}/api/wash`);
+        } else {
+          return await axios(
+            `${process.env.REACT_APP_SERVER}/api/wash?locale=${currentLang}`
+          );
+        }
+      };
+      const result = await requestWash();
 
       const newWash = await Promise.all(
         result.data.docs.map(async (item) => {
@@ -161,13 +171,24 @@ const MapComponent = () => {
     };
 
     const getCategories = async () => {
-      const result = await axios(
-        `${process.env.REACT_APP_SERVER}/api/categories-wash`
-      );
-      const newCategories = result.data.docs.map((item) => {
-        return { ...item, used: false };
-      });
-      setCategoriesWash(newCategories);
+      const currentLang = localStorage.getItem("lang");
+      if (!currentLang) {
+        const result = await axios(
+          `${process.env.REACT_APP_SERVER}/api/categories-wash`
+        );
+        const newCategories = result.data.docs.map((item) => {
+          return { ...item, used: false };
+        });
+        setCategoriesWash(newCategories);
+      } else {
+        const result = await axios(
+          `${process.env.REACT_APP_SERVER}/api/categories-wash?locale=${currentLang}`
+        );
+        const newCategories = result.data.docs.map((item) => {
+          return { ...item, used: false };
+        });
+        setCategoriesWash(newCategories);
+      }
     };
     getCategories();
     getWash();
