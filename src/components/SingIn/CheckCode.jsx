@@ -292,13 +292,13 @@ const CheckCode = ({ setIsAuthenticated }) => {
               </div>
             </div>
             <div className="number-phone-desk-content">
-              <h1 className="number-phone-desk-content-title">Логін</h1>
+              <h1 className="number-phone-desk-content-title">{t("Логін")}</h1>
               <p className="number-phone-desk-content-second">
-                Вхід по номеру {number}
+                {t("Вхід по номеру")} {number}
               </p>
               <p className="number-phone-desk-content-notification">
-                SMS Пароль надіслано на Ваш мобільний пристрій {number}. Термін
-                дії одноразового пароля обмежений – 3 хв.
+                {t("SMS Пароль надіслано на Ваш мобільний пристрій")} {number}.
+                {t("Термін дії одноразового пароля обмежений – 3 хв.")}
               </p>
 
               <div className="number-phone-desk-content-password">
@@ -311,12 +311,12 @@ const CheckCode = ({ setIsAuthenticated }) => {
                     }}
                     value={allNumberValue}
                     className="number-phone-desk-content-password-block-input"
-                    placeholder="Пароль із SMS"
+                    placeholder={t("Пароль із SMS")}
                   />
                 </div>
                 <div className="number-phone-desk-content-password-again">
                   <p className="number-phone-desk-content-password-again-text">
-                    Ви можете повторно відправити через 0:45
+                    {t("Ви можете повторно відправити через")} 0:45
                   </p>
                 </div>
               </div>

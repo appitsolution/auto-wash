@@ -127,9 +127,9 @@ const NumberPhone = () => {
             </div>
           </div>
           <div className="number-phone-desk-content">
-            <h1 className="number-phone-desk-content-title">Логін</h1>
+            <h1 className="number-phone-desk-content-title">{t("Логін")}</h1>
             <p className="number-phone-desk-content-second">
-              Введіть номер телефону для входу в особистий кабінет
+              {t("Введіть номер телефону для входу в особистий кабінет")}
             </p>
 
             <Formik initialValues={{ phone: "" }}>
