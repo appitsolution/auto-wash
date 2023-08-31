@@ -56,7 +56,7 @@ const Info = memo(() => {
         <div className="info__header-desk">
           <div className="info__header-desk-block">
             <h1 className="info__header-desk-title">
-              Знайди собі найкращу мийку
+              {t("Знайди собі найкращу мийку")}
             </h1>
 
             <img
@@ -132,7 +132,7 @@ const Info = memo(() => {
               onClick={() => navigation("/info/my-cards")}
             >
               <p className="info__block-desk-button-title">
-                Ваші картки клієнта{" "}
+                {t("Ваші картки клієнта")}
               </p>
               <img className="info__block-desk-button-icon" src={cards} />
 
@@ -143,7 +143,7 @@ const Info = memo(() => {
               onClick={() => navigation("/wash")}
             >
               <p className="info__block-desk-button-title">
-                Знайди мийку поруч з тобою{" "}
+                {t("Знайди мийку поруч з тобою")}{" "}
               </p>
               <img className="info__block-desk-button-icon" src={car} />
 
@@ -151,7 +151,7 @@ const Info = memo(() => {
             </button>
             <button className="info__block-desk-button">
               <p className="info__block-desk-button-title">
-                Доглядай за авто як професіонал{" "}
+                {t("Доглядай за авто як професіонал")}{" "}
               </p>
               <img className="info__block-desk-button-icon" src={washing} />
 
@@ -161,10 +161,10 @@ const Info = memo(() => {
 
           <div className="info__block-desk-notification">
             <h2 className="info__block-desk-notification-title">
-              Акції для кожної мийки Знайди свою та заощаджуй
+              {t("Акції для кожної мийки Знайди свою та заощаджуй")}
             </h2>
             <p className="info__block-desk-notification-second">
-              Знижки від 10% до 50%
+              {t("Знижки від 10% до 50%")}
             </p>
           </div>
         </div>

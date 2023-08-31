@@ -79,7 +79,9 @@ const Page = () => {
             <div className="promotions-header">
               <img className="promotions-header-icon" src={historyDesk} />
 
-              <p className="promotions-header-text">Історія Ваших мийок</p>
+              <p className="promotions-header-text">
+                {t("Історія Ваших мийок")}
+              </p>
             </div>
             <div
               style={{
@@ -137,7 +139,7 @@ const Page = () => {
               }}
             >
               <p className="promotions__sidebar-nearby-text">
-                Знайди мийку поруч з тобою
+                {t("Знайди мийку поруч з тобою")}
               </p>
               <img
                 className="promotions__sidebar-nearby-icon"
@@ -148,7 +150,7 @@ const Page = () => {
 
             <button className="promotions__sidebar-notification">
               <p className="promotions__sidebar-notification-text">
-                Доглядай за авто як профі, обирай хімію від виробника
+                {t("Доглядай за авто як профі, обирай хімію від виробника")}
               </p>
               <img
                 className="promotions__sidebar-notification-img"

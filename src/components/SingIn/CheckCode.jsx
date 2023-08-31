@@ -6,10 +6,30 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
 import { useTranslation } from "react-i18next";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 import lang from "../../assets/icons/lang.svg";
 
 const CheckCode = ({ setIsAuthenticated }) => {
+  const [timer, setTimer] = useState(45);
+
+  useEffect(() => {
+    const startTimer = setInterval(() => {
+      if (timer > 0) {
+        React.startTransition(() => {
+          console.log(timer - 1);
+          setTimer(timer - 1);
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(startTimer);
+  }, [timer]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -315,12 +335,43 @@ const CheckCode = ({ setIsAuthenticated }) => {
                   />
                 </div>
                 <div className="number-phone-desk-content-password-again">
-                  <p className="number-phone-desk-content-password-again-text">
-                    {t("Ви можете повторно відправити через")} 0:45
-                  </p>
+                  {timer > 0 ? (
+                    <>
+                      <p className="number-phone-desk-content-password-again-text">
+                        {t("Ви можете повторно відправити через")} <br /> 0:
+                        {timer}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        style={{
+                          color: "#0F84F0",
+                          fontFamily: "Montserrat",
+                          fontSize: "15px",
+                          fontStyle: "normal",
+                          fontWeight: 500,
+                          lineHeight: "normal",
+                          textDecorationLine: "underline",
+                          textAlign: "left",
+                          cursor: "pointer",
+                        }}
+                        onClick={async () => {
+                          await againSendCode();
+                          NotificationManager.success(
+                            t("Код було відправлено"),
+                            t("Успіх")
+                          );
+                          setTimer(45);
+                        }}
+                      >
+                        {t("Відправити код ще раз")}
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
-
+              <NotificationContainer />
               <button
                 type="submit"
                 className={`number-phone__form-desk-button ${

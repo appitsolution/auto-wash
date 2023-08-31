@@ -150,7 +150,9 @@ const Page = ({ data }) => {
             <div className="promotions-header">
               <img className="promotions-header-icon" src={washCar} />
 
-              <p className="promotions-header-text">Обери мийку на свій смак</p>
+              <p className="promotions-header-text">
+                {t("Обери мийку на свій смак")}
+              </p>
             </div>
             <ul
               className="wash__list"
@@ -256,13 +258,13 @@ const Page = ({ data }) => {
             >
               <img className="promotions__sidebar-map-img" src={mapdesk} />
               <p className="promotions__sidebar-map-text">
-                Знайди найближчу мийку на мапі
+                {t("Знайди найближчу мийку на мапі")}
               </p>
             </button>
 
             <button className="promotions__sidebar-notification">
               <p className="promotions__sidebar-notification-text">
-                Доглядай за авто як профі, обирай хімію від виробника
+                {t("Доглядай за авто як профі, обирай хімію від виробника")}
               </p>
               <img
                 className="promotions__sidebar-notification-img"
