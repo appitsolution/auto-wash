@@ -26,7 +26,7 @@ const ProfileSettings = () => {
     <>
       <Support data={data} />
       <Footer current="profile" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

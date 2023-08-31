@@ -6,7 +6,7 @@ const PaymentPostPage = () => {
   return (
     <>
       <PaymentPost />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

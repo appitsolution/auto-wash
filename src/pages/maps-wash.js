@@ -8,7 +8,7 @@ const Maps = () => {
       <div>
         <MapComponent />
       </div>
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

@@ -46,6 +46,121 @@
     }
 }
 
+.info__header-desk {
+    display: none;
+}
+.info__block-desk {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .info {
+        padding-top: 100px;
+    }
+
+    .info__block {
+        display: none;
+    }
+    .info__header-desk {
+        display: flex;
+        border-radius: 15px;
+        background: #69bdf9;
+        box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+        padding: 0 30px;
+
+        &-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-title {
+            color: #fff;
+            font-family: Montserrat;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        &-icon {
+            max-width: 446px;
+        }
+    }
+
+    .info__block-desk {
+        display: flex;
+        flex-direction: column;
+        margin-top: 70px;
+
+        &-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 45px;
+        }
+
+        &-button {
+            position: relative;
+            display: flex;
+
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+            padding: 27px;
+            width: 100%;
+            cursor: pointer;
+
+            &-title {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                max-width: 204px;
+                text-align: left;
+            }
+
+            &-decor {
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+
+        &-notification {
+            margin-top: 70px;
+            display: flex;
+            justify-content: space-between;
+
+            align-items: center;
+            padding: 16px 48px;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+
+            &-title {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                max-width: 600px;
+            }
+
+            &-second {
+                color: #f00;
+                font-family: Montserrat;
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+            }
+        }
+    }
+}
+
 .info__cards-header {
     position: absolute;
     top: 0;

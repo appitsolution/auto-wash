@@ -1,17 +1,23 @@
 import { memo, useEffect, useState } from "react";
 import profileLogo from "../../assets/logo-profile.png";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import qrImg from "../../assets/profile/questions-1.png";
 import carInfo from "../../assets/carInfo.svg";
 import cardInfo from "../../assets/cardInfo.svg";
 import requestVerify from "../hooks/requestVerify";
 import { useTranslation } from "react-i18next";
+import infoHeader from "../../assets/infoHeader.png";
+import arrow from "../../assets/icons/arrow.svg";
+import cards from "../../assets/icons/cards.svg";
+import car from "../../assets/icons/car.svg";
+import washing from "../../assets/icons/washing.svg";
 
 const Info = memo(() => {
   const [data, setData] = useState({});
   const [lazyData, setLazyData] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigation = useNavigate();
 
   const token = useSelector((state) => state.user.token);
 
@@ -29,12 +35,7 @@ const Info = memo(() => {
   }, [token]);
   return (
     <section className="info">
-      <div
-        className="profile__header"
-        onClick={() => {
-          i18n.changeLanguage("en");
-        }}
-      >
+      <div className="profile__header">
         <h1
           className="profile__header-title"
           style={{ opacity: lazyData ? 1 : 0 }}
@@ -48,6 +49,22 @@ const Info = memo(() => {
             alt="profile-logo"
             src={profileLogo}
           />
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="info__header-desk">
+          <div className="info__header-desk-block">
+            <h1 className="info__header-desk-title">
+              Знайди собі найкращу мийку
+            </h1>
+
+            <img
+              className="info__header-desk-icon"
+              src={infoHeader}
+              alt="infoHeader"
+            />
+          </div>
         </div>
       </div>
 
@@ -106,6 +123,50 @@ const Info = memo(() => {
               </Link>
             </li>
           </ul>
+        </div>
+
+        <div className="info__block-desk">
+          <div className="info__block-desk-buttons">
+            <button
+              className="info__block-desk-button"
+              onClick={() => navigation("/info/my-cards")}
+            >
+              <p className="info__block-desk-button-title">
+                Ваші картки клієнта{" "}
+              </p>
+              <img className="info__block-desk-button-icon" src={cards} />
+
+              <img className="info__block-desk-button-decor" src={arrow} />
+            </button>
+            <button
+              className="info__block-desk-button"
+              onClick={() => navigation("/wash")}
+            >
+              <p className="info__block-desk-button-title">
+                Знайди мийку поруч з тобою{" "}
+              </p>
+              <img className="info__block-desk-button-icon" src={car} />
+
+              <img className="info__block-desk-button-decor" src={arrow} />
+            </button>
+            <button className="info__block-desk-button">
+              <p className="info__block-desk-button-title">
+                Доглядай за авто як професіонал{" "}
+              </p>
+              <img className="info__block-desk-button-icon" src={washing} />
+
+              <img className="info__block-desk-button-decor" src={arrow} />
+            </button>
+          </div>
+
+          <div className="info__block-desk-notification">
+            <h2 className="info__block-desk-notification-title">
+              Акції для кожної мийки Знайди свою та заощаджуй
+            </h2>
+            <p className="info__block-desk-notification-second">
+              Знижки від 10% до 50%
+            </p>
+          </div>
         </div>
       </div>
     </section>

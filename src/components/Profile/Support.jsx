@@ -9,6 +9,10 @@ const Support = memo(({ data = [] }) => {
   return (
     <section className="profile__support">
       <div className="container">
+        <Link to="/profile" className="profile__support-back-desk">
+          <img className="profile__support-back-icon" src={back} alt="back" />
+        </Link>
+
         <h1 className="profile__support-title">{t("Служба підтримки")}</h1>
         {Object.keys(data).length === 0 ? (
           <></>

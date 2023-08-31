@@ -60,6 +60,9 @@ const Settings = memo(() => {
   return (
     <section className="profile__settings">
       <div className="container">
+        <Link to="/profile" className="profile__settings-back-desk">
+          <img className="profile__settings-back-icon" src={back} alt="back" />
+        </Link>
         <h2 className="profile__settings-title">{t("Налаштування")}</h2>
         <button className="profile__settings-out" onClick={outProfileFunc}>
           <img

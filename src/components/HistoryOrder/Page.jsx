@@ -2,9 +2,16 @@ import axios from "axios";
 import React, { memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import smile from "../../assets/smile.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import requestVerify from "../hooks/requestVerify";
 import { useTranslation } from "react-i18next";
+import promotion from "../../assets/icons/promotion.svg";
+import mapdesk from "../../assets/map-desk.png";
+import notificationDesk from "../../assets/sidebar-img-desk.png";
+import logo from "../../assets/logo-cmb.png";
+import carHistory from "../../assets/car-history.svg";
+import arrow from "../../assets/arrow-history.svg";
+import historyDesk from "../../assets/history-desk.svg";
 
 // const dataTest = [
 //   {
@@ -46,6 +53,7 @@ import { useTranslation } from "react-i18next";
 // ];
 
 const Page = () => {
+  const navigation = useNavigate();
   const [lazyData, setLazyData] = useState(false);
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState([]);
@@ -66,50 +74,92 @@ const Page = () => {
     <section className="history-order">
       <div className="container">
         <h1 className="history-order__title">{t("Історія мийок")}</h1>
-        <div
-          style={{
-            transition: "opacity 250ms linear",
-            opacity: lazyData ? 1 : 0,
-          }}
-        >
-          {data.length === 0 ? (
-            <div className="history-order__null">
-              <div className="history-order__null-content">
-                <p className="history-order__null-content-text">
-                  {t("На жаль, у Вас ще немає історії мийок")}
-                </p>
-                <img
-                  className="history-order__null-content-icon"
-                  src={smile}
-                  alt="smile"
-                />
-              </div>
-              <Link className="history-order__null-button" to="/wash">
-                {t("Виправити це")}
-              </Link>
+        <div className="promotions__flex">
+          <div className="promotions__thoomb">
+            <div className="promotions-header">
+              <img className="promotions-header-icon" src={historyDesk} />
+
+              <p className="promotions-header-text">Історія Ваших мийок</p>
             </div>
-          ) : (
-            <ul className="history-order__list">
-              {data.reverse().map((item) => (
-                <li className="history-order__item">
-                  <h2 className="history-order__item-title">{item.title}</h2>
-                  <div className="history-order__item-block">
-                    <div className="history-order__item-text">
-                      <p className="history-order__item-text-address">
-                        {item.address}
-                      </p>
-                      <p className="history-order__item-text-date">
-                        {item.date}
-                      </p>
-                    </div>
-                    <p className="history-order__item-price">
-                      {item.balance} ₴
+            <div
+              style={{
+                transition: "opacity 250ms linear",
+                opacity: lazyData ? 1 : 0,
+              }}
+            >
+              {data.length === 0 ? (
+                <div className="history-order__null">
+                  <div className="history-order__null-content">
+                    <p className="history-order__null-content-text">
+                      {t("На жаль, у Вас ще немає історії мийок")}
                     </p>
+                    <img
+                      className="history-order__null-content-icon"
+                      src={smile}
+                      alt="smile"
+                    />
                   </div>
-                </li>
-              ))}
-            </ul>
-          )}
+                  <Link className="history-order__null-button" to="/wash">
+                    {t("Виправити це")}
+                  </Link>
+                </div>
+              ) : (
+                <ul className="history-order__list">
+                  {data.reverse().map((item) => (
+                    <li className="history-order__item">
+                      <h2 className="history-order__item-title">
+                        {item.title}
+                      </h2>
+                      <div className="history-order__item-block">
+                        <div className="history-order__item-text">
+                          <p className="history-order__item-text-address">
+                            {item.address}
+                          </p>
+                          <p className="history-order__item-text-date">
+                            {item.date}
+                          </p>
+                        </div>
+                        <p className="history-order__item-price">
+                          {item.price} ₴
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+          <div className="promotions__sidebar">
+            <button
+              className="promotions__sidebar-nearby"
+              onClick={() => {
+                navigation("/maps");
+              }}
+            >
+              <p className="promotions__sidebar-nearby-text">
+                Знайди мийку поруч з тобою
+              </p>
+              <img
+                className="promotions__sidebar-nearby-icon"
+                src={carHistory}
+              />
+              <img className="promotions__sidebar-nearby-decor" src={arrow} />
+            </button>
+
+            <button className="promotions__sidebar-notification">
+              <p className="promotions__sidebar-notification-text">
+                Доглядай за авто як профі, обирай хімію від виробника
+              </p>
+              <img
+                className="promotions__sidebar-notification-img"
+                src={notificationDesk}
+              />
+              <img
+                className="promotions__sidebar-notification-logo"
+                src={logo}
+              />
+            </button>
+          </div>
         </div>
       </div>
     </section>

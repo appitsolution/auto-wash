@@ -15,7 +15,7 @@ const MyCards = () => {
     <>
       <Cards />
       <Footer current="home" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

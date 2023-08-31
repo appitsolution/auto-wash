@@ -153,6 +153,10 @@
             gap: 12px;
             padding: 13px 27px;
 
+            @media screen and (min-width: 768px) {
+                justify-content: flex-start;
+            }
+
             &-button {
                 display: flex;
                 align-items: center;

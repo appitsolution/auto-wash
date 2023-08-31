@@ -25,7 +25,7 @@ const Wash = () => {
     <>
       <Page data={data} />
       <Footer current="wash" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

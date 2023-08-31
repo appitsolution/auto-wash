@@ -7,13 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/slice/sliceUser";
 import { useTranslation } from "react-i18next";
 
+import lang from "../../assets/icons/lang.svg";
+
 const CheckCode = ({ setIsAuthenticated }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   const [sendActive, setSendActive] = useState(false);
-
+  const [allNumberValue, setAllNumberValue] = useState("");
   const [numberOneValue, setNumberOneValue] = useState("");
   const [numberTwoValue, setNumberTwoValue] = useState("");
   const [numberThreeValue, setNumberThreeValue] = useState("");
@@ -44,6 +46,29 @@ const CheckCode = ({ setIsAuthenticated }) => {
           code: `${
             numberOneValue + numberTwoValue + numberThreeValue + numberFourValue
           }`,
+        }
+      );
+      setIsAuthenticated(true);
+      localStorage.setItem("token", result.data);
+      dispatch(setToken(result.data));
+
+      setTimeout(() => {
+        navigate("/info");
+      }, 150);
+    } catch (err) {
+      setErrorCode(true);
+      console.log(err);
+    }
+  };
+
+  const requestCodeDesk = async () => {
+    if (allNumberValue === "") return;
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/login`,
+        {
+          number,
+          code: `${allNumberValue}`,
         }
       );
       setIsAuthenticated(true);
@@ -247,6 +272,71 @@ const CheckCode = ({ setIsAuthenticated }) => {
                 alt="logo-cmb"
               />
             </a>
+          </div>
+          <div className="number-phone-desk__block">
+            <div className="number-phone-desk-head">
+              <img className="number-phone-desk-head-logo" src={logo} />
+
+              <div className="number-phone-desk-head-lang">
+                <button
+                  style={{
+                    borderRadius: 8,
+                    background: "#FFF",
+                    boxShadow: "3px 4px 4px 0px rgba(0, 0, 0, 0.40)",
+                  }}
+                  onClick={() => navigate("/lang")}
+                  className="number-phone-lang"
+                >
+                  <img className="number-phone-lang-icon" src={lang} />
+                </button>
+              </div>
+            </div>
+            <div className="number-phone-desk-content">
+              <h1 className="number-phone-desk-content-title">Логін</h1>
+              <p className="number-phone-desk-content-second">
+                Вхід по номеру {number}
+              </p>
+              <p className="number-phone-desk-content-notification">
+                SMS Пароль надіслано на Ваш мобільний пристрій {number}. Термін
+                дії одноразового пароля обмежений – 3 хв.
+              </p>
+
+              <div className="number-phone-desk-content-password">
+                <div className="number-phone-desk-content-password-block">
+                  <input
+                    type="text"
+                    onInput={({ target }) => {
+                      const value = target.value.replace(/[^\d]/g, "");
+                      setAllNumberValue(value);
+                    }}
+                    value={allNumberValue}
+                    className="number-phone-desk-content-password-block-input"
+                    placeholder="Пароль із SMS"
+                  />
+                </div>
+                <div className="number-phone-desk-content-password-again">
+                  <p className="number-phone-desk-content-password-again-text">
+                    Ви можете повторно відправити через 0:45
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className={`number-phone__form-desk-button ${
+                  allNumberValue === "" ? "" : "active"
+                }`}
+                onClick={() => {
+                  if (allNumberValue === "") {
+                    return;
+                  } else {
+                    requestCodeDesk();
+                  }
+                }}
+              >
+                {t("Далі")}
+              </button>
+            </div>
           </div>
         </div>
       </section>

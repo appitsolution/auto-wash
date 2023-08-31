@@ -24,6 +24,16 @@ const QuestionsItem = ({ data }) => {
         <></>
       ) : (
         <div className="container">
+          <Link
+            to="/profile/questions"
+            className="profile__questions-back-desk"
+          >
+            <img
+              className="profile__questions-back-icon"
+              src={back}
+              alt="back"
+            />
+          </Link>
           <div className="profile__questions-item-block">
             <div className="profile__questions-list-link">
               <div className="profile__questions-list-link-content">

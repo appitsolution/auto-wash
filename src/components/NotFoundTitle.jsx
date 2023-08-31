@@ -8,7 +8,7 @@ const NotFoundTitle = () => {
         <h1 className="not-found-title">404</h1>
         <h2 className="not-found-second">Page Not Found</h2>
       </div>
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

@@ -4,11 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import washIconRoad from "../../assets/wash/wash-item-icon.png";
 import backIcon from "../../assets/wash/back.svg";
 import { useTranslation } from "react-i18next";
+import Footer from "../Footer";
 
 // Import Swiper styles
 import "swiper/css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import MapComponent from "./Maps";
 
 const Item = ({ data }) => {
   const location = useLocation();
@@ -55,110 +57,230 @@ const Item = ({ data }) => {
 
   return (
     <section className="wash">
-      {Object.keys(data).length === 0 ? (
-        <></>
-      ) : (
-        <div className="wash__item-page">
-          <div className="wash__item-page-slider">
-            <Swiper
-              spaceBetween={1}
-              slidesPerView={1}
-              onSlideChange={() => console.log("slide change")}
-            >
-              {data.images.map((item) => (
-                <SwiperSlide>
-                  <img
-                    className="wash__item-page-slider-img"
-                    alt="icon-slide"
-                    src={item.image.url}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            <p className="wash__item-page-slider-text">{t("Гортай фото")}</p>
+      {window.innerWidth > 768 ? <Footer current="wash" /> : null}
+      <div className="container">
+        <div className="wash__flex">
+          <div className="wash__map">
+            <MapComponent />
           </div>
-          <div className="wash__item-page-info">
-            <div className="wash__item-page-info-balance">
-              <p className="wash__item-page-info-balance-text">
-                {t("Баланс на мийці")}
-              </p>
-              <p className="wash__item-page-info-balance-price">
-                {balanceCurrent} ₴
-              </p>
-            </div>
+          <div className="wash__thoomb">
+            {Object.keys(data).length === 0 ? (
+              <></>
+            ) : (
+              <div className="wash__item-page">
+                <div
+                  className="wash__item-page-slider"
+                  style={{ position: "relative" }}
+                >
+                  <Swiper
+                    spaceBetween={1}
+                    slidesPerView={1}
+                    onSlideChange={() => console.log("slide change")}
+                  >
+                    {data.images.map((item) => (
+                      <SwiperSlide>
+                        <img
+                          className="wash__item-page-slider-img"
+                          alt="icon-slide"
+                          src={item.image.url}
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <p className="wash__item-page-slider-text">
+                    {t("Гортай фото")}
+                  </p>
+                </div>
+                <div className="wash__item-page-info">
+                  <div className="wash__item-page-info-balance">
+                    <p className="wash__item-page-info-balance-text">
+                      {t("Баланс на мийці")}
+                    </p>
+                    <p className="wash__item-page-info-balance-price">
+                      {balanceCurrent} ₴
+                    </p>
+                  </div>
 
-            <div className="wash__item-page-info-content">
-              <div className="wash__item-page-info-content-block">
-                <div className="wash__item-page-info-content-description">
-                  <h2 className="wash__item-page-info-content-description-title">
-                    {data.title}
-                  </h2>
-                  <p className="wash__item-page-info-content-description-address">
-                    {data.address}
-                  </p>
+                  <div className="wash__item-page-info-content">
+                    <div className="wash__item-page-info-content-block">
+                      <div className="wash__item-page-info-content-description">
+                        <h2 className="wash__item-page-info-content-description-title">
+                          {data.title}
+                        </h2>
+                        <p className="wash__item-page-info-content-description-address">
+                          {data.address}
+                        </p>
+                      </div>
+                      <div className="wash__item-page-info-content-image">
+                        <img
+                          className="wash__item-page-info-content-image-img"
+                          src={washIconRoad}
+                          alt="washIconRoad"
+                        />
+                        <p className="wash__item-page-info-content-image-text">
+                          8,4 КМ
+                        </p>
+                      </div>
+                    </div>
+
+                    <p
+                      dangerouslySetInnerHTML={{ __html: parseDescription() }}
+                      className="wash__item-page-info-content-desc"
+                    ></p>
+
+                    <Link
+                      to={`/payment-post/${data.id}`}
+                      className="wash__item-page-info-content-deposit"
+                    >
+                      {t("Помити авто")}
+                    </Link>
+
+                    <Link
+                      to={`/payment/${data.id}`}
+                      className="wash__item-page-info-content-deposit"
+                    >
+                      {t("Поповнити баланс")}
+                    </Link>
+
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
+                      target="_blank"
+                      className="wash__item-page-info-content-road"
+                    >
+                      {t("Прокласти маршрут")}
+                    </a>
+
+                    <a
+                      href={`tel:${data.phoneWash}`}
+                      target="_blank"
+                      className="wash__item-page-info-content-road"
+                      style={{
+                        opacity: data.phoneWash ? 1 : 0.5,
+                        pointerEvents: data.phoneWash ? "all" : "none",
+                      }}
+                    >
+                      {t("Зателефонувати")}
+                    </a>
+                  </div>
                 </div>
-                <div className="wash__item-page-info-content-image">
+                <Link to="/wash" className="wash__item-page-back">
                   <img
-                    className="wash__item-page-info-content-image-img"
-                    src={washIconRoad}
-                    alt="washIconRoad"
+                    className="wash__item-page-back-icon"
+                    src={backIcon}
+                    alt="backIcon"
                   />
-                  <p className="wash__item-page-info-content-image-text">
-                    8,4 КМ
-                  </p>
-                </div>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="wash__mob">
+        {Object.keys(data).length === 0 ? (
+          <></>
+        ) : (
+          <div className="wash__item-page">
+            <div className="wash__item-page-slider">
+              <Swiper
+                spaceBetween={1}
+                slidesPerView={1}
+                onSlideChange={() => console.log("slide change")}
+              >
+                {data.images.map((item) => (
+                  <SwiperSlide>
+                    <img
+                      className="wash__item-page-slider-img"
+                      alt="icon-slide"
+                      src={item.image.url}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              <p className="wash__item-page-slider-text">{t("Гортай фото")}</p>
+            </div>
+            <div className="wash__item-page-info">
+              <div className="wash__item-page-info-balance">
+                <p className="wash__item-page-info-balance-text">
+                  {t("Баланс на мийці")}
+                </p>
+                <p className="wash__item-page-info-balance-price">
+                  {balanceCurrent} ₴
+                </p>
               </div>
 
-              <p
-                dangerouslySetInnerHTML={{ __html: parseDescription() }}
-                className="wash__item-page-info-content-desc"
-              ></p>
+              <div className="wash__item-page-info-content">
+                <div className="wash__item-page-info-content-block">
+                  <div className="wash__item-page-info-content-description">
+                    <h2 className="wash__item-page-info-content-description-title">
+                      {data.title}
+                    </h2>
+                    <p className="wash__item-page-info-content-description-address">
+                      {data.address}
+                    </p>
+                  </div>
+                  <div className="wash__item-page-info-content-image">
+                    <img
+                      className="wash__item-page-info-content-image-img"
+                      src={washIconRoad}
+                      alt="washIconRoad"
+                    />
+                    <p className="wash__item-page-info-content-image-text">
+                      8,4 КМ
+                    </p>
+                  </div>
+                </div>
 
-              <Link
-                to={`/payment-post/${data.id}`}
-                className="wash__item-page-info-content-deposit"
-              >
-                {t("Помити авто")}
-              </Link>
+                <p
+                  dangerouslySetInnerHTML={{ __html: parseDescription() }}
+                  className="wash__item-page-info-content-desc"
+                ></p>
 
-              <Link
-                to={`/payment/${data.id}`}
-                className="wash__item-page-info-content-deposit"
-              >
-                {t("Поповнити баланс")}
-              </Link>
+                <Link
+                  to={`/payment-post/${data.id}`}
+                  className="wash__item-page-info-content-deposit"
+                >
+                  {t("Помити авто")}
+                </Link>
 
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
-                target="_blank"
-                className="wash__item-page-info-content-road"
-              >
-                {t("Прокласти маршрут")}
-              </a>
+                <Link
+                  to={`/payment/${data.id}`}
+                  className="wash__item-page-info-content-deposit"
+                >
+                  {t("Поповнити баланс")}
+                </Link>
 
-              <a
-                href={`tel:${data.phoneWash}`}
-                target="_blank"
-                className="wash__item-page-info-content-road"
-                style={{
-                  opacity: data.phoneWash ? 1 : 0.5,
-                  pointerEvents: data.phoneWash ? "all" : "none",
-                }}
-              >
-                {t("Зателефонувати")}
-              </a>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
+                  target="_blank"
+                  className="wash__item-page-info-content-road"
+                >
+                  {t("Прокласти маршрут")}
+                </a>
+
+                <a
+                  href={`tel:${data.phoneWash}`}
+                  target="_blank"
+                  className="wash__item-page-info-content-road"
+                  style={{
+                    opacity: data.phoneWash ? 1 : 0.5,
+                    pointerEvents: data.phoneWash ? "all" : "none",
+                  }}
+                >
+                  {t("Зателефонувати")}
+                </a>
+              </div>
             </div>
+            <Link to="/wash" className="wash__item-page-back">
+              <img
+                className="wash__item-page-back-icon"
+                src={backIcon}
+                alt="backIcon"
+              />
+            </Link>
           </div>
-          <Link to="/wash" className="wash__item-page-back">
-            <img
-              className="wash__item-page-back-icon"
-              src={backIcon}
-              alt="backIcon"
-            />
-          </Link>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

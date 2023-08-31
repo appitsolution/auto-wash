@@ -108,6 +108,9 @@ const Data = memo(() => {
   return (
     <section className="profile__data">
       <div className="container">
+        <Link to="/profile" className="profile__questions-back-desk">
+          <img className="profile__questions-back-icon" src={back} alt="back" />
+        </Link>
         <h1 className="profile__data-title">{t("Особисті дані")}</h1>
 
         <div className="profile__data-content">
@@ -250,7 +253,19 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">{t("Ваш телефон")}</h3>
+            <div className="profile__data-change-block-back">
+              <button
+                className="profile__data-change-close-desk"
+                onClick={() => setChangePhone(false)}
+              >
+                <img
+                  className="profile__questions-back-icon"
+                  src={back}
+                  alt="back"
+                />
+              </button>
+              <h3 className="profile__data-change-title">{t("Ваш телефон")}</h3>
+            </div>
 
             <p className="profile__data-change-text">
               {t(
@@ -321,7 +336,19 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">{t("Ваші дані")}</h3>
+            <div className="profile__data-change-block-back">
+              <button
+                className="profile__data-change-close-desk"
+                onClick={() => setChangeName(false)}
+              >
+                <img
+                  className="profile__questions-back-icon"
+                  src={back}
+                  alt="back"
+                />
+              </button>
+              <h3 className="profile__data-change-title">{t("Ваші дані")}</h3>
+            </div>
 
             <p className="profile__data-change-text">
               {t("Введіть нові дані, щоб далі користуватися мийками")}
@@ -384,7 +411,19 @@ const Data = memo(() => {
       >
         <div className="container">
           <div className="profile__data-change-block">
-            <h3 className="profile__data-change-title">{t("Ваша пошта")}</h3>
+            <div className="profile__data-change-block-back">
+              <button
+                className="profile__data-change-close-desk"
+                onClick={() => setChangeEmail(false)}
+              >
+                <img
+                  className="profile__questions-back-icon"
+                  src={back}
+                  alt="back"
+                />
+              </button>
+              <h3 className="profile__data-change-title">{t("Ваша пошта")}</h3>
+            </div>
 
             <p className="profile__data-change-text">
               {t(

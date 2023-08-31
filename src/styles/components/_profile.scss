@@ -1,3 +1,94 @@
+.profile__flex {
+    flex-direction: column;
+}
+
+.profile__card {
+    display: none;
+}
+
+.profile__sidebar {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .profile {
+        padding-top: 100px;
+    }
+    .profile__flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 50px;
+    }
+    .profile__card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.25);
+        padding: 22px 28px;
+        min-width: 470px;
+        margin-bottom: 40px;
+
+        &-name {
+            color: #000;
+            font-family: Montserrat;
+            font-size: 35px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-bottom: 70px;
+            max-width: 250px;
+        }
+
+        &-number {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-id {
+                color: rgba(0, 0, 0, 0.5);
+                font-family: Montserrat;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+    }
+
+    .profile__sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        &-notification {
+            padding: 36px 46px 36px 34px;
+            position: relative;
+            color: #f00;
+            font-family: Montserrat;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+            &-decor {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                width: 72px;
+                height: 72px;
+                background: rgba(255, 0, 0, 0.2);
+                border-radius: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
+
 .profile__header {
     background: #ffffff;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
@@ -7,6 +98,10 @@
     flex-direction: column;
     gap: 40px;
     margin-bottom: 30px;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 
     &-title {
         max-width: 204px;
@@ -71,6 +166,12 @@
 .profile__data {
     padding: 22px 0;
 
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+        max-width: 345px;
+        margin: 0 auto;
+    }
+
     &-title {
         font-family: "Montserrat";
         font-style: normal;
@@ -88,6 +189,18 @@
         left: 22px;
         width: 22px;
         height: 22px;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        &-desk {
+            display: none;
+
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
     }
 
     &-content {
@@ -170,6 +283,17 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+
+            @media screen and (min-width: 768px) {
+                max-width: 345px;
+                margin: 0 auto;
+
+                &-back {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
         }
         &-title {
             font-family: "Montserrat";
@@ -277,6 +401,18 @@
             left: 22px;
             width: 20px;
             height: 20px;
+
+            @media screen and (min-width: 768px) {
+                display: none;
+            }
+
+            &-desk {
+                display: none;
+
+                @media screen and (min-width: 768px) {
+                    display: flex;
+                }
+            }
         }
 
         &-phone {
@@ -287,7 +423,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 3;
+            z-index: 4;
             background: #0f84f0;
 
             display: flex;
@@ -324,6 +460,12 @@
 
 .profile__settings {
     padding: 22px 0;
+
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+        max-width: 345px;
+        margin: 0 auto;
+    }
 
     &-title {
         font-family: "Montserrat";
@@ -380,6 +522,18 @@
         left: 22px;
         width: 20px;
         height: 20px;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        &-desk {
+            display: none;
+
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
     }
 
     &-accept-out {
@@ -556,6 +710,12 @@
 .profile__support {
     padding: 22px 0;
 
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+        max-width: 345px;
+        margin: 0 auto;
+    }
+
     &-title {
         font-family: "Montserrat";
         font-style: normal;
@@ -573,6 +733,18 @@
         left: 22px;
         width: 20px;
         height: 20px;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        &-desk {
+            display: none;
+
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
     }
 
     &-content {
@@ -654,6 +826,12 @@
 .profile__questions {
     padding: 22px 0;
 
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+        max-width: 345px;
+        margin: 0 auto;
+    }
+
     &-title {
         font-family: "Montserrat";
         font-style: normal;
@@ -671,6 +849,18 @@
         left: 22px;
         width: 20px;
         height: 20px;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        &-desk {
+            display: none;
+
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
     }
 
     &-list {
@@ -725,6 +915,11 @@
 
     &-item {
         padding: 80px 0;
+        @media screen and (min-width: 768px) {
+            padding-top: 100px;
+            max-width: 345px;
+            margin: 0 auto;
+        }
 
         &-description {
             font-family: "Montserrat";

@@ -13,6 +13,12 @@ import axios from "axios";
 import mapIcon from "../../assets/icons/map-icon.png";
 import { useTranslation } from "react-i18next";
 
+import promotion from "../../assets/icons/promotion.svg";
+import mapdesk from "../../assets/map-desk.png";
+import notificationDesk from "../../assets/sidebar-img-desk.png";
+import logo from "../../assets/logo-cmb.png";
+import washCar from "../../assets/wash-car.svg";
+
 const dataTest = [
   {
     id: "1",
@@ -139,100 +145,136 @@ const Page = ({ data }) => {
             <p className="wash__maps-text">{t("НА МАПІ")}</p>
           </button>
         </div>
-        <ul
-          className="wash__list"
-          style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
-        >
-          {filterList.length === 0 ? (
-            <>
-              {data.map((item) => (
-                <li className="wash__item" key={item.id}>
-                  <Link to={`/wash/${item.id}`} className="wash__item-link">
-                    <div className="wash__item-image">
-                      <img
-                        className="wash__item-image-img"
-                        alt="content"
-                        src={item.images[0].image.url}
-                      />
-                      <div className="wash__item-image-balance">
-                        <p className="wash__item-image-balance-text">
-                          {userBalanceWash.length === 0
-                            ? "0"
-                            : returnBalanceWash(item.id)}{" "}
-                          ₴
-                        </p>
-                      </div>
-                    </div>
-                    <div className="wash__item-content">
-                      <div className="wash__item-content-info">
-                        <h2 className="wash__item-content-info-title">
-                          {item.title}
-                        </h2>
-                        <p className="wash__item-content-info-address">
-                          {item.address}
-                        </p>
-                      </div>
-                      <div className="wash__item-content-addition">
-                        <img
-                          className="wash__item-content-addition-icon"
-                          alt="addition"
-                          src={washAdd}
-                        />
-                        <p className="wash__item-content-addition-text">
-                          {t("Пилосос")}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </>
-          ) : (
-            <>
-              {filterList.map((item) => (
-                <li className="wash__item" key={item.id}>
-                  <Link to={`/wash/${item.id}`} className="wash__item-link">
-                    <div className="wash__item-image">
-                      <img
-                        className="wash__item-image-img"
-                        alt="content"
-                        src={item.images[0].image.url}
-                      />
-                      <div className="wash__item-image-balance">
-                        <p className="wash__item-image-balance-text">
-                          {userBalanceWash.length === 0
-                            ? "0"
-                            : returnBalanceWash(item.id)}{" "}
-                          ₴
-                        </p>
-                      </div>
-                    </div>
-                    <div className="wash__item-content">
-                      <div className="wash__item-content-info">
-                        <h2 className="wash__item-content-info-title">
-                          {item.title}
-                        </h2>
-                        <p className="wash__item-content-info-address">
-                          {item.address}
-                        </p>
-                      </div>
-                      <div className="wash__item-content-addition">
-                        <img
-                          className="wash__item-content-addition-icon"
-                          alt="addition"
-                          src={washAdd}
-                        />
-                        <p className="wash__item-content-addition-text">
-                          {t("Пилосос")}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </>
-          )}
-        </ul>
+        <div className="promotions__flex">
+          <div className="promotions__thoomb">
+            <div className="promotions-header">
+              <img className="promotions-header-icon" src={washCar} />
+
+              <p className="promotions-header-text">Обери мийку на свій смак</p>
+            </div>
+            <ul
+              className="wash__list"
+              style={{ opacity: Object.keys(data).length === 0 ? 0 : 1 }}
+            >
+              {filterList.length === 0 ? (
+                <>
+                  {data.map((item) => (
+                    <li className="wash__item" key={item.id}>
+                      <Link to={`/wash/${item.id}`} className="wash__item-link">
+                        <div className="wash__item-image">
+                          <img
+                            className="wash__item-image-img"
+                            alt="content"
+                            src={item.images[0].image.url}
+                          />
+                          <div className="wash__item-image-balance">
+                            <p className="wash__item-image-balance-text">
+                              {userBalanceWash.length === 0
+                                ? "0"
+                                : returnBalanceWash(item.id)}{" "}
+                              ₴
+                            </p>
+                          </div>
+                        </div>
+                        <div className="wash__item-content">
+                          <div className="wash__item-content-info">
+                            <h2 className="wash__item-content-info-title">
+                              {item.title}
+                            </h2>
+                            <p className="wash__item-content-info-address">
+                              {item.address}
+                            </p>
+                          </div>
+                          <div className="wash__item-content-addition">
+                            <img
+                              className="wash__item-content-addition-icon"
+                              alt="addition"
+                              src={washAdd}
+                            />
+                            <p className="wash__item-content-addition-text">
+                              {t("Пилосос")}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {filterList.map((item) => (
+                    <li className="wash__item" key={item.id}>
+                      <Link to={`/wash/${item.id}`} className="wash__item-link">
+                        <div className="wash__item-image">
+                          <img
+                            className="wash__item-image-img"
+                            alt="content"
+                            src={item.images[0].image.url}
+                          />
+                          <div className="wash__item-image-balance">
+                            <p className="wash__item-image-balance-text">
+                              {userBalanceWash.length === 0
+                                ? "0"
+                                : returnBalanceWash(item.id)}{" "}
+                              ₴
+                            </p>
+                          </div>
+                        </div>
+                        <div className="wash__item-content">
+                          <div className="wash__item-content-info">
+                            <h2 className="wash__item-content-info-title">
+                              {item.title}
+                            </h2>
+                            <p className="wash__item-content-info-address">
+                              {item.address}
+                            </p>
+                          </div>
+                          <div className="wash__item-content-addition">
+                            <img
+                              className="wash__item-content-addition-icon"
+                              alt="addition"
+                              src={washAdd}
+                            />
+                            <p className="wash__item-content-addition-text">
+                              {t("Пилосос")}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              )}
+            </ul>
+          </div>
+          <div className="promotions__sidebar">
+            <button
+              className="promotions__sidebar-map"
+              onClick={() => {
+                navigation("/maps");
+              }}
+            >
+              <img className="promotions__sidebar-map-img" src={mapdesk} />
+              <p className="promotions__sidebar-map-text">
+                Знайди найближчу мийку на мапі
+              </p>
+            </button>
+
+            <button className="promotions__sidebar-notification">
+              <p className="promotions__sidebar-notification-text">
+                Доглядай за авто як профі, обирай хімію від виробника
+              </p>
+              <img
+                className="promotions__sidebar-notification-img"
+                src={notificationDesk}
+              />
+              <img
+                className="promotions__sidebar-notification-logo"
+                src={logo}
+              />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

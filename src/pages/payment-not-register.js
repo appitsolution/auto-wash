@@ -6,7 +6,7 @@ const PaymentNotRegisterPage = () => {
   return (
     <>
       <PaymentNotRegister />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

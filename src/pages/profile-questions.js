@@ -26,7 +26,7 @@ const ProfileQuestions = () => {
     <>
       <Questions data={data} />
       <Footer current="profile" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

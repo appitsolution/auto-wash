@@ -1,3 +1,134 @@
+.promotions-header {
+    display: none;
+}
+
+.promotions__sidebar {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .promotions {
+        padding-top: 100px;
+    }
+
+    .promotions-header {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+        width: 570px;
+
+        &-icon {
+            border-radius: 20px;
+            background: #0f84f0;
+            box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+            padding: 13px;
+        }
+
+        &-text {
+            color: #000;
+            font-family: Montserrat;
+            font-size: 35px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    .promotions__sidebar {
+        display: flex;
+        flex-direction: column;
+
+        &-map {
+            display: flex;
+            align-items: center;
+
+            border-radius: 20px;
+            border: 5px solid #183b6b;
+            background: #0f84f0;
+            cursor: pointer;
+
+            &-text {
+                padding: 10px 30px;
+                color: #fff;
+                font-family: Montserrat;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                text-align: left;
+            }
+        }
+
+        &-nearby {
+            position: relative;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+
+            display: flex;
+            justify-content: space-between;
+            min-width: 460px;
+            cursor: pointer;
+
+            &-text {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                text-align: left;
+                max-width: 221px;
+            }
+            &-decor {
+                position: absolute;
+                bottom: 27px;
+                left: 27px;
+            }
+        }
+
+        &-notification {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: 90px;
+
+            &-text {
+                position: sticky;
+                z-index: 1;
+                margin-bottom: -30px;
+                border-radius: 20px;
+                background: #fff;
+                box-shadow: 2px 5px 3px 3px rgba(0, 0, 0, 0.1);
+                padding: 23px 30px;
+
+                color: #000;
+                font-family: Montserrat;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                text-align: left;
+            }
+
+            &-img {
+                width: 100%;
+                border-radius: 20px;
+            }
+
+            &-logo {
+                position: absolute;
+                bottom: 11px;
+                right: 7px;
+            }
+        }
+    }
+}
+
 .promotions__notification {
     position: fixed;
     top: 0;
@@ -9,6 +140,10 @@
     padding: 13px 9px;
     overflow: hidden;
     z-index: 3;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 
     &-text {
         font-family: "Montserrat";
@@ -31,12 +166,26 @@
     }
 }
 
+.promotions__flex {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        gap: 50px;
+    }
+}
+
 .promotions__list {
     display: flex;
     flex-direction: column;
     gap: 30px;
     padding: 125px 0;
     transition: opacity 500ms linear;
+
+    @media screen and (min-width: 768px) {
+        padding: 0;
+    }
 }
 
 .promotions__item {
@@ -48,6 +197,11 @@
     &-page {
         padding: 24px 0;
         padding-bottom: 70px;
+
+        @media screen and (min-width: 768px) {
+            max-width: 345px;
+            margin: 0 auto;
+        }
 
         &-content {
             background: #ffffff;
@@ -105,6 +259,10 @@
         display: flex;
         align-items: center;
         padding-left: 15px;
+
+        @media screen and (min-width: 768px) {
+            justify-content: space-between;
+        }
     }
     &-content {
         display: flex;

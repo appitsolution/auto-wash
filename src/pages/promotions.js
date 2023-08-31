@@ -25,7 +25,7 @@ const Promotions = () => {
     <>
       <Page data={data} />
       <Footer current="promotions" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

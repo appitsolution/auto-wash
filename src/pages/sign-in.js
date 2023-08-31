@@ -6,7 +6,7 @@ const SignIn = ({ setIsAuthenticated }) => {
   return (
     <>
       <CheckCode setIsAuthenticated={setIsAuthenticated} />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

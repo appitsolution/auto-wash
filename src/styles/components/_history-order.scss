@@ -2,6 +2,10 @@
     padding: 22px 0;
     padding-bottom: 125px;
 
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+    }
+
     &__title {
         font-family: "Montserrat";
         font-style: normal;
@@ -12,6 +16,10 @@
 
         color: #ffffff;
         margin-bottom: 30px;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
     }
 
     &__list {
@@ -28,6 +36,12 @@
         padding-right: 13px;
         background: #ffffff;
         border-radius: 20px;
+
+        @media screen and (min-width: 768px) {
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+        }
 
         &-title {
             font-family: "Montserrat";

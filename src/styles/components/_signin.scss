@@ -1,6 +1,86 @@
 .number-phone {
     padding-top: 80px;
 
+    &__block {
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+    }
+
+    &-desk {
+        &__block {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        &-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-content {
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 1px 1px 7px 7px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+
+            &-title {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                margin-bottom: 23px;
+            }
+
+            &-second {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 32px;
+            }
+
+            &-notification {
+                border-radius: 12px;
+                background: #e9f5ff;
+                color: #000;
+                font-family: Montserrat;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                padding: 15px 18px;
+                margin-bottom: 18px;
+            }
+
+            &-password {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin-bottom: 20px;
+
+                &-block {
+                    &-input {
+                        color: #000;
+                        font-family: Montserrat;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+
+                        border-radius: 12px;
+                        border: 1px solid #9f9fa9;
+                        padding: 21px 50px 21px 16px;
+                    }
+                }
+            }
+        }
+    }
+
     &__title {
         font-family: "Montserrat";
         font-style: normal;
@@ -28,6 +108,69 @@
     &__form {
         display: flex;
         flex-direction: column;
+
+        &-desk {
+            &-phone {
+                border-radius: 12px;
+                border: 2px solid #9f9fa9;
+                background: #fff;
+                width: 100%;
+                padding: 19px 17px;
+                box-sizing: border-box;
+
+                color: #5c5c68;
+                font-family: Montserrat;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+
+                &:focus {
+                    outline: none;
+                    border: 2px solid #0f84f0;
+                }
+
+                &:focus {
+                    color: #0f84f0;
+                }
+            }
+
+            &-error {
+                opacity: 0;
+                color: #ff1313;
+                transition: opacity 250ms linear;
+                &.active {
+                    opacity: 1;
+                }
+            }
+
+            &-button {
+                border-radius: 40px;
+                background: #d9d9d9;
+                padding: 19px 0;
+                width: 100%;
+
+                color: #5c5c68;
+                font-family: Montserrat;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                cursor: pointer;
+                transition: background 250ms linear;
+                transition-property: color, background;
+
+                &.active {
+                    background: #0f84f0;
+                    color: #fff;
+                    font-family: Montserrat;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+            }
+        }
 
         &-numbers {
             display: flex;

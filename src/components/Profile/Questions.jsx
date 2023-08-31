@@ -91,6 +91,9 @@ const Questions = memo(({ data }) => {
   return (
     <section className="profile__questions">
       <div className="container">
+        <Link to="/profile" className="profile__questions-back-desk">
+          <img className="profile__questions-back-icon" src={back} alt="back" />
+        </Link>
         <h1 className="profile__questions-title">
           {t("Відповіді на запитання")}
         </h1>

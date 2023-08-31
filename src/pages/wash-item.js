@@ -10,13 +10,15 @@ const WashItem = () => {
   useEffect(() => {
     document.body.style.backgroundColor = "white";
 
-    const currentLang = localStorage.getItem('lang')
-    if(!currentLang){
+    const currentLang = localStorage.getItem("lang");
+    if (!currentLang) {
       axios(`${process.env.REACT_APP_SERVER}/api/wash/${id}`).then((res) => {
         setData(res.data);
       });
-    }else {
-      axios(`${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`).then((res) => {
+    } else {
+      axios(
+        `${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`
+      ).then((res) => {
         setData(res.data);
       });
     }
@@ -28,7 +30,7 @@ const WashItem = () => {
   return (
     <>
       <Item data={data} />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };

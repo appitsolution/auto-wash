@@ -223,6 +223,14 @@ const MapComponent = () => {
     return isOpenDay && isOpenTime;
   }
 
+  const test33 = useRef(null);
+
+  useEffect(() => {
+    if (!test33.current) {
+    } else {
+      console.log(test33.current);
+    }
+  });
   return (
     <>
       <div className="maps">
@@ -260,6 +268,7 @@ const MapComponent = () => {
                   key={index}
                   icon={customIcon}
                   position={[marker.coordinates.lat, marker.coordinates.lng]}
+                  ref={test33}
                 >
                   <Popup>
                     <div

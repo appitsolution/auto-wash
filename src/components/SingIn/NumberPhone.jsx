@@ -108,6 +108,64 @@ const NumberPhone = () => {
             />
           </a>
         </div>
+        <div className="number-phone-desk__block">
+          <div className="number-phone-desk-head">
+            <img className="number-phone-desk-head-logo" src={logo} />
+
+            <div className="number-phone-desk-head-lang">
+              <button
+                style={{
+                  borderRadius: 8,
+                  background: "#FFF",
+                  boxShadow: "3px 4px 4px 0px rgba(0, 0, 0, 0.40)",
+                }}
+                onClick={() => navigate("/lang")}
+                className="number-phone-lang"
+              >
+                <img className="number-phone-lang-icon" src={lang} />
+              </button>
+            </div>
+          </div>
+          <div className="number-phone-desk-content">
+            <h1 className="number-phone-desk-content-title">Логін</h1>
+            <p className="number-phone-desk-content-second">
+              Введіть номер телефону для входу в особистий кабінет
+            </p>
+
+            <Formik initialValues={{ phone: "" }}>
+              {() => (
+                <Form className="number-phone__form-desk">
+                  <Field
+                    className="number-phone__form-desk-phone"
+                    type="text"
+                    name="phone"
+                    placeholder={t("Номер телефону")}
+                    onInput={({ target }) =>
+                      setNumberInput(target.value.replace(/[^\d]/g, ""))
+                    }
+                    value={numberInput}
+                  />
+                  <p
+                    className={`number-phone__form-desk-error ${
+                      errorNumber ? "active" : ""
+                    }`}
+                  >
+                    {t("некоректні дані")}
+                  </p>
+                  <button
+                    className={`number-phone__form-desk-button ${
+                      numberInput === "" ? "" : "active"
+                    }`}
+                    type="button"
+                    onClick={submitNumber}
+                  >
+                    {t("Далі")}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
       </div>
     </section>
   );

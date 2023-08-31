@@ -8,7 +8,7 @@ const ProfileData = () => {
     <>
       <Data />
       <Footer current="profile" />
-      <OnlyMobile />
+      {/* <OnlyMobile /> */}
     </>
   );
 };
