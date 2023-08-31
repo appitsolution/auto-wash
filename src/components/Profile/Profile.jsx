@@ -118,7 +118,7 @@ const Profile = memo(() => {
               }}
             >
               <p className="promotions__sidebar-nearby-text">
-                Ваші картки клієнта
+                {t("Ваші картки клієнта")}
               </p>
               <img
                 className="promotions__sidebar-nearby-icon"
@@ -131,7 +131,7 @@ const Profile = memo(() => {
               onClick={() => navigation("/wash")}
             >
               <p className="promotions__sidebar-nearby-text">
-                Знайди мийку поруч з тобою
+                {t("Знайди мийку поруч з тобою")}
               </p>
               <img
                 className="promotions__sidebar-nearby-icon"
@@ -141,7 +141,7 @@ const Profile = memo(() => {
             </button>
 
             <button className="profile__sidebar-notification">
-              Знижки від 10% до 50%
+              {t("Знижки від 10% до 50%")}
               <div className="profile__sidebar-notification-decor"></div>
             </button>
           </div>
