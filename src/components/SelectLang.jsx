@@ -27,7 +27,7 @@ const SelectLang = () => {
   return (
     <section className="number-phone">
       <div className="container">
-        <div className="number-phone__block">
+        <div className="number-phone__block" style={{ display: "block" }}>
           <h1 className="number-phone__title">{t("Choose language")}</h1>
           <div className="select-lang">
             <button
