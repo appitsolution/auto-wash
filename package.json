@@ -23,6 +23,7 @@
     "react-qr-reader": "^3.0.0-beta-1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
+    "react-scan-qr-code": "^1.0.2",
     "react-scripts": "5.0.1",
     "sass": "^1.62.0",
     "swiper": "^9.2.4",
