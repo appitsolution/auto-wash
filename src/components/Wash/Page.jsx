@@ -87,7 +87,6 @@ const Page = ({ data }) => {
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    console.log(data);
     if (token !== "") {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })

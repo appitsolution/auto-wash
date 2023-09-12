@@ -23,11 +23,10 @@ const NumberPhone = () => {
 
     if (regex.test(phoneNumber)) {
       const formattedPhoneNumber = phoneNumber.replace(regex, "+38$2");
-      console.log(`Номер телефона: ${formattedPhoneNumber}`);
+
       setCurrentNumber(formattedPhoneNumber);
       setAcceptNumber(true);
     } else {
-      console.log("Неверный формат номера телефона");
       setAcceptNumber(false);
     }
   }, [numberInput]);

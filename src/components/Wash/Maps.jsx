@@ -103,7 +103,7 @@ const MapComponent = () => {
 
     const newFilter = wash.filter((item) => {
       let findCategory = false;
-      console.log(usedCategories);
+
       item.categories.forEach((category) => {
         if (usedCategories.includes(category.category.name)) {
           findCategory = true;
@@ -228,7 +228,6 @@ const MapComponent = () => {
   useEffect(() => {
     if (!test33.current) {
     } else {
-      console.log(test33.current);
     }
   });
   return (

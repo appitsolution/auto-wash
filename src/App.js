@@ -27,6 +27,7 @@ import PaymentNotRegisterPage from "./pages/payment-not-register";
 import MapsWash from "./pages/maps-wash";
 import Lang from "./pages/lang";
 import { useTranslation } from "react-i18next";
+import "webrtc-adapter";
 
 const Home = lazy(() => import("./pages/home"));
 
@@ -47,7 +48,6 @@ const App = () => {
     if (tokenLocal !== "") {
       dispatch(setToken(tokenLocal));
       try {
-        console.log("TESE");
         if (tokenLocal === null || tokenLocal === "") {
           setIsReady(true);
           return;
@@ -57,7 +57,6 @@ const App = () => {
             token: tokenLocal,
           })
           .then((res) => {
-            console.log(res.data);
             if (Object.keys(res.data).length !== 0) setIsAuthenticated(true);
             setIsReady(true);
           });

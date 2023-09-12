@@ -3,6 +3,7 @@ import { QrReader } from "react-qr-reader";
 import scan from "../assets/icons/scan.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "webrtc-adapter";
 
 const QRPage = () => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const QRPage = () => {
 
   const handleScan = async (data) => {
     if (data) {
-      // console.log(data);
       try {
         const dataWash = JSON.parse(data.text);
         const currentLang = localStorage.getItem("lang");

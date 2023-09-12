@@ -296,7 +296,6 @@ const Data = memo(() => {
                     setPhoneValueCorrect(formattedPhoneNumber);
                     setAcceptNumber(true);
                   } else {
-                    console.log("Неверный формат номера телефона");
                     setAcceptNumber(false);
                   }
                 }}

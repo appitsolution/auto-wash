@@ -14,7 +14,7 @@ const Item = ({ data }) => {
         if (index === data.description.length) return;
         htmlElements.push("<br/>");
       });
-      console.log(data.description);
+
       return htmlElements.join(" ");
     }
   };

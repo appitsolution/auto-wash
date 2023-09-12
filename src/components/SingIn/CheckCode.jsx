@@ -21,7 +21,6 @@ const CheckCode = ({ setIsAuthenticated }) => {
     const startTimer = setInterval(() => {
       if (timer > 0) {
         React.startTransition(() => {
-          console.log(timer - 1);
           setTimer(timer - 1);
         });
       }
