@@ -29,8 +29,8 @@ import Lang from "./pages/lang";
 import { useTranslation } from "react-i18next";
 import "webrtc-adapter";
 import SelectLogin from "./pages/select-login";
-
-const Home = lazy(() => import("./pages/home"));
+import Home from "./pages/home";
+// const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

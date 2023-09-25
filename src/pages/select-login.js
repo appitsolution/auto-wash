@@ -18,7 +18,6 @@ const SelectLogin = () => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
     // navigate("/");
-    return;
   };
 
   useEffect(() => {

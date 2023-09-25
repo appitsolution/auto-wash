@@ -262,7 +262,7 @@ const resources = {
       "Обери мийку на свій смак": "Choose a car wash to your liking",
       "Історія Ваших мийок": "History of Your Car Washes",
       "Вхід без реєстрації": "Login without registration",
-      Реєстрація: "Регистрация",
+      Реєстрація: "Registration",
       "Вибір мови": "Language selection",
     },
   },

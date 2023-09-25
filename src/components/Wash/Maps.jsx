@@ -19,16 +19,24 @@ import getCoordinates from "./getCoordinates";
 import mapPoint from "../../assets/icons/map-point.svg";
 import L from "leaflet";
 import { useTranslation } from "react-i18next";
+import me from "../../assets/icons/me.svg";
 
 const customIcon = new L.Icon({
   iconUrl: mapPoint, // Замените на путь к вашей иконке
   iconSize: [32, 32], // Размер иконки [ширина, высота]
 });
 
-function CurrentLocate() {
+const meIcon = new L.Icon({
+  iconUrl: me,
+  iconSize: [32, 32],
+});
+
+function CurrentLocate({ setMeShow, setMeMap }) {
   const map = useMap();
   useMapEvents({
     locationfound: (location) => {
+      setMeShow(true);
+      setMeMap({ lat: location.latlng.lat, lng: location.latlng.lng });
       map.setView({ lat: location.latlng.lat, lng: location.latlng.lng });
     },
   });
@@ -74,6 +82,8 @@ const MapComponent = () => {
   const navigation = useNavigate();
   const mapRef = useRef(null);
   const position = [50.447195, 30.534966]; // Начальные координаты карты
+  const [meShow, setMeShow] = useState(false);
+  const [meMap, setMeMap] = useState({ lat: 0, lng: 0 });
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const openFilter = () => {
@@ -223,13 +233,6 @@ const MapComponent = () => {
     return isOpenDay && isOpenTime;
   }
 
-  const test33 = useRef(null);
-
-  useEffect(() => {
-    if (!test33.current) {
-    } else {
-    }
-  });
   return (
     <>
       <div className="maps">
@@ -260,6 +263,14 @@ const MapComponent = () => {
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
+          {meShow ? (
+            <Marker icon={meIcon} position={[meMap.lat, meMap.lng]}>
+              {/* <img src={meIcon} /> */}
+            </Marker>
+          ) : (
+            <></>
+          )}
+
           {filterWash.length === 0 ? (
             <>
               {wash.map((marker, index) => (
@@ -267,7 +278,6 @@ const MapComponent = () => {
                   key={index}
                   icon={customIcon}
                   position={[marker.coordinates.lat, marker.coordinates.lng]}
-                  ref={test33}
                 >
                   <Popup>
                     <div
@@ -373,7 +383,7 @@ const MapComponent = () => {
             </>
           )}
 
-          <CurrentLocate />
+          <CurrentLocate setMeShow={setMeShow} setMeMap={setMeMap} />
           <MapControls />
         </MapContainer>
 
