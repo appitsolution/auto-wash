@@ -6,18 +6,18 @@ import backIcon from "../../assets/wash/back.svg";
 import { useTranslation } from "react-i18next";
 import Footer from "../Footer";
 
-// Import Swiper styles
 import "swiper/css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import MapComponent from "./Maps";
+import requestVerify from "../hooks/requestVerify";
 
 const Item = ({ data }) => {
   const location = useLocation();
   const [balanceCurrent, setBalanceCurrent] = useState("0");
-  const [switchWashButton, setSwitchButton] = useState(false);
+  // const [switchWashButton, setSwitchButton] = useState(false);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {
@@ -40,7 +40,7 @@ const Item = ({ data }) => {
       JSON.stringify({ path: location.pathname })
     );
 
-    if (token !== "") {
+    if (token) {
       axios
         .post(`${process.env.REACT_APP_SERVER}/user/verify`, { token })
         .then((res) => {
@@ -129,14 +129,14 @@ const Item = ({ data }) => {
                     ></p>
 
                     <Link
-                      to={`/payment-post/${data.id}`}
+                      to={token ? `/payment-post/${data.id}` : "/phone"}
                       className="wash__item-page-info-content-deposit"
                     >
                       {t("Помити авто")}
                     </Link>
 
                     <Link
-                      to={`/payment/${data.id}`}
+                      to={token ? `/payment/${data.id}` : "/phone"}
                       className="wash__item-page-info-content-deposit"
                     >
                       {t("Поповнити баланс")}
@@ -237,14 +237,14 @@ const Item = ({ data }) => {
                 ></p>
 
                 <Link
-                  to={`/payment-post/${data.id}`}
+                  to={token ? `/payment-post/${data.id}` : "/phone"}
                   className="wash__item-page-info-content-deposit"
                 >
                   {t("Помити авто")}
                 </Link>
 
                 <Link
-                  to={`/payment/${data.id}`}
+                  to={token ? `/payment/${data.id}` : "/phone"}
                   className="wash__item-page-info-content-deposit"
                 >
                   {t("Поповнити баланс")}

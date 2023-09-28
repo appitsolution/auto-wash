@@ -8,7 +8,7 @@ import notificationDesk from "../../assets/sidebar-img-desk.png";
 import logo from "../../assets/logo-cmb.png";
 
 const Page = ({ data }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigation = useNavigate();
 
   return (
@@ -28,7 +28,11 @@ const Page = ({ data }) => {
         <div className="promotions__flex">
           <div className="promotions__thoomb">
             <div className="promotions-header">
-              <img className="promotions-header-icon" src={promotion} />
+              <img
+                className="promotions-header-icon"
+                src={promotion}
+                alt="promotion"
+              />
 
               <p className="promotions-header-text">{t("Доступні акції")}</p>
             </div>
@@ -85,10 +89,12 @@ const Page = ({ data }) => {
               <img
                 className="promotions__sidebar-notification-img"
                 src={notificationDesk}
+                alt="notificationDesk"
               />
               <img
                 className="promotions__sidebar-notification-logo"
                 src={logo}
+                alt="logo"
               />
             </button>
           </div>

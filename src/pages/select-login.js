@@ -24,6 +24,8 @@ const SelectLogin = () => {
     const currentLang = localStorage.getItem("lang");
     if (!currentLang) return;
     setCurrentLang(currentLang);
+
+    document.body.style.backgroundColor = "#0F84F0";
   }, []);
   return (
     <>
@@ -47,7 +49,7 @@ const SelectLogin = () => {
                 padding: "6px 10px",
                 whiteSpace: "nowrap",
               }}
-              //   onClick={submitNumber}
+              onClick={() => navigate("/info")}
             >
               {t("Вхід без реєстрації")}
             </button>

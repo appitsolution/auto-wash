@@ -76,7 +76,7 @@ function MapControls() {
 }
 
 const MapComponent = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [categoriesWash, setCategoriesWash] = useState([]);
   const [wash, setWash] = useState([]);
   const navigation = useNavigate();
@@ -112,18 +112,12 @@ const MapComponent = () => {
     });
 
     const newFilter = wash.filter((item) => {
-      let findCategory = false;
-
-      item.categories.forEach((category) => {
-        if (usedCategories.includes(category.category.name)) {
-          findCategory = true;
-        }
-      });
+      const findCategory = item.categories.find((category) =>
+        usedCategories.includes(category.category.name)
+      );
 
       if (findCategory) {
         return item;
-      } else {
-        return;
       }
     });
 
@@ -139,8 +133,6 @@ const MapComponent = () => {
           )
         ) {
           return item;
-        } else {
-          return;
         }
       });
 

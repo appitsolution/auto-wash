@@ -16,17 +16,17 @@ import washing from "../../assets/icons/washing.svg";
 const Info = memo(() => {
   const [data, setData] = useState({});
   const [lazyData, setLazyData] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigation = useNavigate();
 
   const token = useSelector((state) => state.user.token);
 
   const getVerify = async () => {
-    if (token !== "") {
+    if (token) {
       const result = await requestVerify(token);
       setData(result.data);
-      setLazyData(true);
     }
+    setLazyData(true);
   };
 
   useEffect(() => {
@@ -40,7 +40,13 @@ const Info = memo(() => {
           className="profile__header-title"
           style={{ opacity: lazyData ? 1 : 0 }}
         >
-          {data.firstName !== "" ? data.firstName : t("Тут буде ваше Ім’я")}
+          {JSON.stringify(data) === "{}" ? (
+            <>{t("Тут буде ваше Ім’я")}</>
+          ) : (
+            <>
+              {data.firstName !== "" ? data.firstName : t("Тут буде ваше Ім’я")}
+            </>
+          )}
         </h1>
         <div className="profile__header-flex">
           <p className="profile__header-flex-id">#{data.idUser}</p>
@@ -106,7 +112,10 @@ const Info = memo(() => {
               </Link>
             </li>
             <li className="info__menu-item">
-              <Link to="my-cards" className="info__menu-item-link">
+              <Link
+                to={JSON.stringify(data) === "{}" ? "/phone" : "my-cards"}
+                className="info__menu-item-link"
+              >
                 <img
                   className="info__menu-item-link-img"
                   src={cardInfo}
@@ -129,14 +138,26 @@ const Info = memo(() => {
           <div className="info__block-desk-buttons">
             <button
               className="info__block-desk-button"
-              onClick={() => navigation("/info/my-cards")}
+              onClick={() =>
+                navigation(
+                  JSON.stringify(data) === "{}" ? "/phone" : "/info/my-cards"
+                )
+              }
             >
               <p className="info__block-desk-button-title">
                 {t("Ваші картки клієнта")}
               </p>
-              <img className="info__block-desk-button-icon" src={cards} />
+              <img
+                className="info__block-desk-button-icon"
+                src={cards}
+                alt="cards-icon"
+              />
 
-              <img className="info__block-desk-button-decor" src={arrow} />
+              <img
+                className="info__block-desk-button-decor"
+                src={arrow}
+                alt="arrow-icon"
+              />
             </button>
             <button
               className="info__block-desk-button"
@@ -145,17 +166,33 @@ const Info = memo(() => {
               <p className="info__block-desk-button-title">
                 {t("Знайди мийку поруч з тобою")}{" "}
               </p>
-              <img className="info__block-desk-button-icon" src={car} />
+              <img
+                className="info__block-desk-button-icon"
+                src={car}
+                alt="car-icon"
+              />
 
-              <img className="info__block-desk-button-decor" src={arrow} />
+              <img
+                className="info__block-desk-button-decor"
+                src={arrow}
+                alt="arrow-icon"
+              />
             </button>
             <button className="info__block-desk-button">
               <p className="info__block-desk-button-title">
                 {t("Доглядай за авто як професіонал")}{" "}
               </p>
-              <img className="info__block-desk-button-icon" src={washing} />
+              <img
+                className="info__block-desk-button-icon"
+                src={washing}
+                alt="washing-icon"
+              />
 
-              <img className="info__block-desk-button-decor" src={arrow} />
+              <img
+                className="info__block-desk-button-decor"
+                src={arrow}
+                alt="arrow-icon"
+              />
             </button>
           </div>
 

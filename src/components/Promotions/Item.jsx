@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const Item = ({ data }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const parseDescription = () => {
     if (Object.keys(data).length !== 0) {

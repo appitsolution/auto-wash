@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./components/PrivateRouter";
 import SignIn from "./pages/sign-in";
@@ -16,7 +16,6 @@ import ProfileQuestionsItem from "./pages/profile-questions-item";
 import ProfileData from "./pages/profile-data";
 import { useDispatch } from "react-redux";
 import { setToken } from "./redux/slice/sliceUser";
-import ProfileDataCars from "./pages/profile-data-cars";
 import InfoPage from "./pages/info";
 import MyCards from "./pages/my-cards";
 import PaymentPage from "./pages/payment";
@@ -36,7 +35,7 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const tokenLocal = localStorage.getItem("token");
@@ -136,15 +135,7 @@ const App = () => {
           />
         }
       />
-      <Route
-        path="/info"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<InfoPage />}
-          />
-        }
-      />
+      <Route path="/info" element={<InfoPage />} />
       <Route
         path="/signin/:number"
         element={
@@ -155,39 +146,10 @@ const App = () => {
           />
         }
       />
-      <Route
-        path="/promotions/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<PromotionsItem />}
-          />
-        }
-      />
-      <Route
-        path="/promotions"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<Promotions />}
-          />
-        }
-      />
-      <Route
-        path="/wash/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<WashItem />}
-          />
-        }
-      />
-      <Route
-        path="/wash"
-        element={
-          <PrivateRouter isAuthenticated={isAuthenticated} element={<Wash />} />
-        }
-      />
+      <Route path="/promotions/:id" element={<PromotionsItem />} />
+      <Route path="/promotions" element={<Promotions />} />
+      <Route path="/wash/:id" element={<WashItem />} />
+      <Route path="/wash" element={<Wash />} />
       <Route
         path="/history-order"
         element={
@@ -197,15 +159,7 @@ const App = () => {
           />
         }
       />
-      <Route
-        path="/profile"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<Profile />}
-          />
-        }
-      />
+      <Route path="/profile" element={<Profile />} />
       <Route
         path="/profile/data"
         element={
@@ -224,42 +178,10 @@ const App = () => {
           />
         }
       /> */}
-      <Route
-        path="/profile/settings"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileSettings />}
-          />
-        }
-      />
-      <Route
-        path="/profile/support"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileSupport />}
-          />
-        }
-      />
-      <Route
-        path="/profile/questions/:id"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileQuestionsItem />}
-          />
-        }
-      />
-      <Route
-        path="/profile/questions"
-        element={
-          <PrivateRouter
-            isAuthenticated={isAuthenticated}
-            element={<ProfileQuestions />}
-          />
-        }
-      />
+      <Route path="/profile/settings" element={<ProfileSettings />} />
+      <Route path="/profile/support" element={<ProfileSupport />} />
+      <Route path="/profile/questions/:id" element={<ProfileQuestionsItem />} />
+      <Route path="/profile/questions" element={<ProfileQuestions />} />
       <Route path="/qr-scan" element={<QR />} />
 
       <Route path="*" element={<NotFound />} />

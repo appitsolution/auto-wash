@@ -57,9 +57,15 @@ const Profile = memo(() => {
           <div className="profile__thoomb">
             <div className="profile__card">
               <p className="profile__card-name">
-                {data.firstName !== ""
-                  ? data.firstName
-                  : t("Тут буде ваше Ім’я")}
+                {JSON.stringify(data) === "{}" ? (
+                  <>{t("Тут буде ваше Ім’я")}</>
+                ) : (
+                  <>
+                    {data.firstName !== ""
+                      ? data.firstName
+                      : t("Тут буде ваше Ім’я")}
+                  </>
+                )}
               </p>
               <div className="profile__card-number">
                 <p className="profile__card-number-id">#{data.idUser}</p>

@@ -1,12 +1,9 @@
-import axios from "axios";
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import smile from "../../assets/smile.png";
 import { Link, useNavigate } from "react-router-dom";
 import requestVerify from "../hooks/requestVerify";
 import { useTranslation } from "react-i18next";
-import promotion from "../../assets/icons/promotion.svg";
-import mapdesk from "../../assets/map-desk.png";
 import notificationDesk from "../../assets/sidebar-img-desk.png";
 import logo from "../../assets/logo-cmb.png";
 import carHistory from "../../assets/car-history.svg";
@@ -57,7 +54,7 @@ const Page = () => {
   const [lazyData, setLazyData] = useState(false);
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const getData = async () => {
     const result = await requestVerify(token);
@@ -77,7 +74,11 @@ const Page = () => {
         <div className="promotions__flex">
           <div className="promotions__thoomb">
             <div className="promotions-header">
-              <img className="promotions-header-icon" src={historyDesk} />
+              <img
+                className="promotions-header-icon"
+                src={historyDesk}
+                alt="historyDesk"
+              />
 
               <p className="promotions-header-text">
                 {t("Історія Ваших мийок")}
@@ -144,8 +145,13 @@ const Page = () => {
               <img
                 className="promotions__sidebar-nearby-icon"
                 src={carHistory}
+                alt="carHistory"
               />
-              <img className="promotions__sidebar-nearby-decor" src={arrow} />
+              <img
+                className="promotions__sidebar-nearby-decor"
+                src={arrow}
+                alt="arrow-icon"
+              />
             </button>
 
             <button className="promotions__sidebar-notification">
@@ -155,10 +161,12 @@ const Page = () => {
               <img
                 className="promotions__sidebar-notification-img"
                 src={notificationDesk}
+                alt="notificationDesk-icon"
               />
               <img
                 className="promotions__sidebar-notification-logo"
                 src={logo}
+                alt="logo-icon"
               />
             </button>
           </div>

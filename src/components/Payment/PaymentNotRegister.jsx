@@ -1,5 +1,3 @@
-// import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
-
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
@@ -15,7 +13,7 @@ const PaymentNotRegister = () => {
   const navigation = useNavigate();
 
   const [sumValue, setSumValue] = useState("50");
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
@@ -38,8 +36,8 @@ const PaymentNotRegister = () => {
 
   const getWashPosts = async () => {
     try {
-      const currentLang = localStorage.getItem('lang')
-      if(!currentLang){
+      const currentLang = localStorage.getItem("lang");
+      if (!currentLang) {
         const result = await axios.get(
           `${process.env.REACT_APP_SERVER}/api/wash/${id}`
         );
@@ -48,7 +46,7 @@ const PaymentNotRegister = () => {
           return { ...item, selected: false };
         });
         setWashPosts(newPosts);
-      }else {
+      } else {
         const result = await axios.get(
           `${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`
         );

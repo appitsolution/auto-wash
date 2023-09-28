@@ -1,12 +1,7 @@
-// import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
-
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
+import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -23,7 +18,7 @@ const PaymentPost = () => {
   const [currentNumber, setCurrentNumber] = useState("");
 
   const token = useSelector((state) => state.user.token);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     try {
@@ -60,8 +55,8 @@ const PaymentPost = () => {
 
   const getWashPosts = async () => {
     try {
-      const currentLang = localStorage.getItem('lang')
-      if(!currentLang){
+      const currentLang = localStorage.getItem("lang");
+      if (!currentLang) {
         const result = await axios.get(
           `${process.env.REACT_APP_SERVER}/api/wash/${id}`
         );
@@ -70,11 +65,11 @@ const PaymentPost = () => {
           return { ...item, selected: false };
         });
         setWashPosts(newPosts);
-  
+
         if (result.response.status === 404) {
           return navigation("/404");
         }
-      }else {
+      } else {
         const result = await axios.get(
           `${process.env.REACT_APP_SERVER}/api/wash/${id}?locale=${currentLang}`
         );
@@ -83,12 +78,11 @@ const PaymentPost = () => {
           return { ...item, selected: false };
         });
         setWashPosts(newPosts);
-  
+
         if (result.response.status === 404) {
           return navigation("/404");
         }
       }
-     
     } catch (err) {
       console.log(err.response.status === 404);
       if (err.response.status === 404) {

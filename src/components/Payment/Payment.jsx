@@ -1,5 +1,3 @@
-// import LiqPay from "../../libs/sdk-nodejs/lib/liqpay";
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import back from "../../assets/profile/back.svg";
@@ -11,7 +9,7 @@ const CryptoJS = require("crypto-js");
 const publicKey = "sandbox_i98441757663";
 const privateKey = "sandbox_JaBwypsn5eGVcDIIgWDcElXJy6NwEoRXFmh7UuGR";
 
-const Payment = (props) => {
+const Payment = () => {
   const { id } = useParams();
   const [dataWash, setDataWash] = useState({});
 
@@ -38,7 +36,7 @@ const Payment = (props) => {
   const [numberValue, setNumberValue] = useState("");
   const [sumValue, setSumValue] = useState("50");
   const [currentNumber, setCurrentNumber] = useState("");
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const token = useSelector((state) => state.user.token);
 

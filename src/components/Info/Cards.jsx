@@ -12,7 +12,7 @@ const Cards = () => {
   const [lazyData, setLazyData] = useState(false);
   const [acceptShow, setAcceptShow] = useState(false);
   const token = useSelector((state) => state.user.token);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (token !== "") {
@@ -67,7 +67,11 @@ const Cards = () => {
                 className="info__cards-remove"
                 onClick={() => setAcceptShow(true)}
               >
-                <img className="info__cards-remove-icon" src={removeCard} />
+                <img
+                  className="info__cards-remove-icon"
+                  src={removeCard}
+                  alt="removeCard-icon"
+                />
               </button>
             </li>
           ))}

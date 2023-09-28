@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const Settings = memo(() => {
   const token = useSelector((state) => state.user.token);
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -81,7 +81,16 @@ const Settings = memo(() => {
           <img className="profile__settings-back-icon" src={back} alt="back" />
         </Link>
         <h2 className="profile__settings-title">{t("Налаштування")}</h2>
-        <button className="profile__settings-out" onClick={outProfileFunc}>
+        <button
+          className="profile__settings-out"
+          onClick={
+            JSON.stringify(data) === "{}"
+              ? () => {
+                  navigate("/phone");
+                }
+              : () => outProfileFunc()
+          }
+        >
           <img
             className="profile__settings-out-icon"
             alt="out-icon"
@@ -103,7 +112,13 @@ const Settings = memo(() => {
         </button>
         <button
           className="profile__settings-delete"
-          onClick={deleteProfileFunc}
+          onClick={
+            JSON.stringify(data) === "{}"
+              ? () => {
+                  navigate("/phone");
+                }
+              : () => deleteProfileFunc()
+          }
         >
           <img
             className="profile__settings-out-icon"
